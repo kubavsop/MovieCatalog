@@ -1,6 +1,6 @@
 package com.example.domain.usecase
 
-class ValidatePassword {
+class ValidatePasswordUseCase {
     operator fun invoke(password: String): Boolean {
         if (password.length < 5) {
             return false

@@ -1,7 +1,7 @@
 package com.example.domain.usecase
 
-class ValidateRepeatedPassword {
+class ValidateRepeatedPasswordUseCase {
     operator fun invoke(password: String, repeatedPassword: String): Boolean {
-        return password == repeatedPassword
+        return password == repeatedPassword && password.isBlank()
     }
 }
