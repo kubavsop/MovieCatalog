@@ -3,6 +3,10 @@ package com.example.moviescatalog.di
 import com.example.domain.repositroy.UserAuthRepository
 import com.example.domain.usecase.LoginUserUseCase
 import com.example.domain.usecase.RegisterUserUseCase
+import com.example.domain.usecase.ValidateEmailUseCase
+import com.example.domain.usecase.ValidatePasswordUseCase
+import com.example.domain.usecase.ValidateRepeatedPasswordUseCase
+import com.example.domain.validator.EmailPatternValidator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,4 +25,15 @@ class DomainModule {
     fun provideRegisterUserUseCase(repository: UserAuthRepository): RegisterUserUseCase {
         return RegisterUserUseCase(repository = repository)
     }
+
+    @Provides
+    fun provideValidateEmailUseCase(emailPatternValidatorImpl: EmailPatternValidator): ValidateEmailUseCase {
+        return ValidateEmailUseCase(validator = emailPatternValidatorImpl)
+    }
+
+    @Provides
+    fun provideValidatePasswordUseCase() = ValidatePasswordUseCase()
+
+    @Provides
+    fun provideValidateRepeatedPasswordUseCase() = ValidateRepeatedPasswordUseCase()
 }

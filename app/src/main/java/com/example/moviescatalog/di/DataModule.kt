@@ -2,7 +2,9 @@ package com.example.moviescatalog.di
 
 import com.example.data.remote.UserAuthApi
 import com.example.data.repository.UserAuthRepositoryImpl
+import com.example.data.validator.EmailPatternValidatorImpl
 import com.example.domain.repositroy.UserAuthRepository
+import com.example.domain.validator.EmailPatternValidator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,5 +31,11 @@ class DataModule {
     @Provides
     fun provideUserAuthRepository(userAuthApi: UserAuthApi): UserAuthRepository {
         return UserAuthRepositoryImpl(userAuthApi = userAuthApi)
+    }
+
+    @Singleton
+    @Provides
+    fun provideEmailPatternValidator(): EmailPatternValidator {
+        return EmailPatternValidatorImpl()
     }
 }
