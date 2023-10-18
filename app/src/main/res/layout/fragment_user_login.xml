@@ -106,7 +106,7 @@
 
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/no_account"
         style="@style/sub_title_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -114,12 +114,12 @@
         android:textSize="@dimen/text_size_14"
         android:textColor="@color/gray_200"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintEnd_toStartOf="@+id/register"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/register"
         style="@style/sub_title_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -129,6 +129,6 @@
         android:textColor="@color/accent_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView1" />
+        app:layout_constraintStart_toEndOf="@+id/no_account" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
