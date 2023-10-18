@@ -12,10 +12,9 @@
         style="@style/label_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FИЛЬМус"
+        android:text="@string/filmus"
         android:textColor="@color/accent_color"
         android:textSize="@dimen/text_size_17"
-        app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -41,13 +40,9 @@
 
     <TextView
         android:id="@+id/login"
-        style="@style/sub_title_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_15"
+        style="@style/hint_text_style"
         android:text="@string/login"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent    "
         app:layout_constraintTop_toBottomOf="@id/entrance" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -71,12 +66,8 @@
 
     <TextView
         android:id="@+id/password"
-        style="@style/sub_title_text_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_15"
+        style="@style/hint_text_style"
         android:text="@string/password"
-        android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_edit_text" />
 

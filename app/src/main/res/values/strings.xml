@@ -12,4 +12,6 @@
     <string name="login">Логин</string>
     <string name="password">Пароль</string>
     <string name="entrance">Вход</string>
+    <string name="filmus">FИЛЬМус</string>
+    <string name="first_name">Имя</string>
 </resources>
