@@ -19,8 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_32"
         android:text="@string/cinema_world"
-        android:textAlignment="center"
-        android:textColor="@android:color/white" />
+        android:textAlignment="center" />
 
     <TextView
         style="@style/body_text_style"
@@ -41,5 +40,5 @@
         style="@style/auth_selection_login_button_style"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/margin_16"
-        android:text="@string/login" />
+        android:text="@string/login_to" />
 </LinearLayout>
