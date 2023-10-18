@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/userLoginFragment">
+    app:startDestination="@id/registrationDetailsFragment">
 
     <fragment
         android:id="@+id/authSelectionFragment"
@@ -15,4 +15,14 @@
         android:name="com.example.moviescatalog.presentation.user_login.UserLoginFragment"
         android:label="fragment_user_login"
         tools:layout="@layout/fragment_user_login" />
+    <fragment
+        android:id="@+id/passwordRegistrationFragment"
+        android:name="com.example.moviescatalog.presentation.password_registration.PasswordRegistrationFragment"
+        android:label="fragment_password_registration"
+        tools:layout="@layout/fragment_password_registration" />
+    <fragment
+        android:id="@+id/registrationDetailsFragment"
+        android:name="com.example.moviescatalog.presentation.registration_details.RegistrationDetailsFragment"
+        android:label="fragment_registration_details"
+        tools:layout="@layout/fragment_registration_details" />
 </navigation>
