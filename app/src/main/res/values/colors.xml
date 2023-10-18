@@ -9,4 +9,5 @@
     <color name="edit_text_stroke_color">#5E5E5E</color>
     <color name="edit_text_error_stroke_color">#E64646</color>
     <color name="edit_text_icon_color">#909499</color>
+    <color name="gray_200">#C4C8CC</color>
 </resources>

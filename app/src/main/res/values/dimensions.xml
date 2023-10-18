@@ -15,7 +15,9 @@
     <dimen name="edit_text_stroke_width">1dp</dimen>
     <dimen name="edit_text_height">42dp</dimen>
     <dimen name="edit_text_padding">12dp</dimen>
+    <dimen name="space">3dp</dimen>
 
+    <dimen name="text_size_14">14sp</dimen>
     <dimen name="text_size_15">15sp</dimen>
     <dimen name="text_size_17">17sp</dimen>
     <dimen name="text_size_20">20sp</dimen>
