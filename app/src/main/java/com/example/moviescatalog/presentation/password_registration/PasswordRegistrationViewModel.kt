@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PasswordRegistrationViewModel @Inject constructor(
-    validatePasswordUseCase: ValidatePasswordUseCase
+    private val validatePasswordUseCase: ValidatePasswordUseCase
 ) : ViewModel() {
 
 }

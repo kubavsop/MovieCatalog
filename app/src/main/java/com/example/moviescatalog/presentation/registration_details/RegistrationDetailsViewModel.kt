@@ -1,17 +1,96 @@
 package com.example.moviescatalog.presentation.registration_details
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.domain.usecase.ValidateEmailUseCase
 import com.example.domain.usecase.ValidateFirstNameUseCase
 import com.example.domain.usecase.ValidateLoginUseCase
+import com.example.moviescatalog.R
+import com.example.moviescatalog.presentation.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class RegistrationDetailsViewModel @Inject constructor(
-    validateEmailUseCase: ValidateEmailUseCase,
-    validateFirstNameUseCase: ValidateFirstNameUseCase,
-    validateLoginUseCase: ValidateLoginUseCase
+    private val validateEmailUseCase: ValidateEmailUseCase,
+    private val validateFirstNameUseCase: ValidateFirstNameUseCase,
+    private val validateLoginUseCase: ValidateLoginUseCase
 ) : ViewModel() {
 
+    private val _state = MutableLiveData(RegistrationDetailsFormState())
+    val state: LiveData<RegistrationDetailsFormState> = _state
+
+    fun onEvent(event: RegistrationDetailsEvent) {
+        when (event) {
+            is RegistrationDetailsEvent.BirthdayChanged -> birthdayChanged(event.birthday)
+            is RegistrationDetailsEvent.LoginChanged -> loginChanged(event.login)
+            is RegistrationDetailsEvent.EmailChanged -> emailChanged(event.email)
+            is RegistrationDetailsEvent.GenderChanged -> genderChanged(event.gender)
+            is RegistrationDetailsEvent.FirstNameChanged -> firstNameChanged(event.firstName)
+        }
+    }
+
+    private fun birthdayChanged(birthday: String) {
+        _state.value = _state.value?.copy(birthday = birthday)
+    }
+
+    private fun genderChanged(gender: String) {
+        _state.value = _state.value?.copy(
+            gender = gender
+        )
+    }
+
+    private fun firstNameChanged(firstName: String) {
+        val isSuccess = validateFirstNameUseCase(firstName)
+        _state.value = _state.value?.copy(
+            firstNameError = if (isSuccess) null else UiText.StringResource(
+                R.string.min_first_name_length_error,
+                MIN_FIRST_NAME_LENGTH
+            ),
+            success = isSuccess
+        )
+        if (isSuccess) checkError()
+    }
+
+    private fun loginChanged(login: String) {
+        val isSuccess = validateLoginUseCase(login)
+        _state.value = _state.value?.copy(
+            loginError = if (isSuccess) null else UiText.StringResource(
+                R.string.min_login_length_error,
+                MIN_LOGIN_LENGTH
+            ),
+            success = isSuccess
+        )
+        if (isSuccess) checkError()
+    }
+
+    private fun emailChanged(email: String) {
+        val isSuccess = validateEmailUseCase(email)
+        _state.value = _state.value?.copy(
+            emailError = if (isSuccess) null else UiText.StringResource(
+                R.string.email_error
+            ),
+            success = isSuccess
+        )
+        if (isSuccess) checkError()
+    }
+
+    private fun checkError() {
+        val hasError = listOf(
+            _state.value?.emailError,
+            _state.value?.loginError,
+        ).any { it != null } && !state.value?.gender.isNullOrEmpty()
+
+        if (!hasError) {
+            _state.value = _state.value?.copy(
+                success = true
+            )
+        }
+    }
+
+    private companion object {
+        const val MIN_LOGIN_LENGTH = 2
+        const val MIN_FIRST_NAME_LENGTH = 2
+    }
 }

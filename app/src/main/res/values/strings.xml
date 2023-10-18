@@ -24,4 +24,7 @@
     <string name="have_account">Уже есть аккаунт?</string>
     <string name="sign_in">Войдите</string>
     <string name="repeat_password">Повторите пароль</string>
+    <string name="min_login_length_error">Логин должен состоять не менее чем из %d символов</string>
+    <string name="min_first_name_length_error">Имя должно состоять не менее чем из %d символов</string>
+    <string name="email_error">Некорректный адрес электронной почты</string>
 </resources>
