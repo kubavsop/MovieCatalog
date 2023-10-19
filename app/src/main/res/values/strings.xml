@@ -15,8 +15,8 @@
     <string name="entrance">Вход</string>
     <string name="filmus">FИЛЬМУС</string>
     <string name="first_name">Имя</string>
-    <string name="male">Мужской</string>
-    <string name="female">Женский</string>
+    <string name="male">Мужчина</string>
+    <string name="female">Женщина</string>
     <string name="gender">Пол</string>
     <string name="email">Электронная почта</string>
     <string name="birthday">Дата рождения</string>
@@ -24,4 +24,9 @@
     <string name="have_account">Уже есть аккаунт?</string>
     <string name="sign_in">Войдите</string>
     <string name="repeat_password">Повторите пароль</string>
+    <string name="min_login_length_error">Логин содержит не менее %d символов</string>
+    <string name="min_first_name_length_error">Имя содержит не менее %d символов</string>
+    <string name="email_error">Некорректный адрес электронной почты</string>
+    <string name="password_error">Некорректный пароль</string>
+    <string name="repeated_password_error">Пароли не совпадают</string>
 </resources>

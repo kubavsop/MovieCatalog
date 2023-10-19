@@ -27,8 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8"
         android:text="@string/enjoy_movies_on_mobile"
-        android:textAlignment="center"
-        android:textColor="@color/white" />
+        android:textAlignment="center" />
 
     <Button
         style="@style/accent_button_style"

@@ -46,21 +46,24 @@
         app:layout_constraintTop_toBottomOf="@id/entrance" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/login_edit_text"
+        android:id="@+id/login_edit_text_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8"
         android:theme="@style/text_layout_style"
+        app:errorIconDrawable="@null"
+        app:errorTextAppearance="@style/error_text_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/login_edit_text"
             style="@style/body_text_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:padding="@dimen/edit_text_padding"
+            android:padding="@dimen/padding_12"
             android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -69,26 +72,29 @@
         style="@style/hint_text_style"
         android:text="@string/password"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_edit_text" />
+        app:layout_constraintTop_toBottomOf="@+id/login_edit_text_container" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password_edit_text"
+        android:id="@+id/password_edit_text_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8"
         android:theme="@style/text_layout_style"
         app:endIconMode="password_toggle"
         app:endIconTint="@color/gray_400"
+        app:errorIconDrawable="@null"
+        app:errorTextAppearance="@style/error_text_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password_edit_text"
             style="@style/body_text_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:padding="@dimen/edit_text_padding"
+            android:padding="@dimen/padding_12"
             android:singleLine="true"
             android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -102,7 +108,7 @@
         android:text="@string/login_to"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_edit_text" />
+        app:layout_constraintTop_toBottomOf="@id/password_edit_text_container" />
 
 
     <TextView
@@ -111,8 +117,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_account"
-        android:textSize="@dimen/text_size_14"
         android:textColor="@color/gray_200"
+        android:textSize="@dimen/text_size_14"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/register"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -123,10 +129,10 @@
         style="@style/sub_title_text_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_14"
         android:layout_marginStart="@dimen/space"
         android:text="@string/register"
         android:textColor="@color/accent_color"
+        android:textSize="@dimen/text_size_14"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/no_account" />
