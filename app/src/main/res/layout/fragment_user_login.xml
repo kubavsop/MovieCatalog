@@ -46,12 +46,13 @@
         app:layout_constraintTop_toBottomOf="@id/entrance" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/login_edit_text"
+        android:id="@+id/login_edit_text_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8"
         android:theme="@style/text_layout_style"
         app:errorIconDrawable="@null"
+        app:errorTextAppearance="@style/error_text_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login">
@@ -61,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:padding="@dimen/edit_text_padding"
+            android:padding="@dimen/padding_12"
             android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,10 +71,10 @@
         style="@style/hint_text_style"
         android:text="@string/password"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_edit_text" />
+        app:layout_constraintTop_toBottomOf="@+id/login_edit_text_container" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password_edit_text"
+        android:id="@+id/password_edit_text_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8"
@@ -81,6 +82,7 @@
         app:endIconMode="password_toggle"
         app:endIconTint="@color/gray_400"
         app:errorIconDrawable="@null"
+        app:errorTextAppearance="@style/error_text_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password">
@@ -90,7 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
-            android:padding="@dimen/edit_text_padding"
+            android:padding="@dimen/padding_12"
             android:singleLine="true"
             android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -104,7 +106,7 @@
         android:text="@string/login_to"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_edit_text" />
+        app:layout_constraintTop_toBottomOf="@id/password_edit_text_container" />
 
 
     <TextView

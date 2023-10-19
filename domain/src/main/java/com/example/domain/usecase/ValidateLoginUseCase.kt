@@ -5,6 +5,6 @@ class ValidateLoginUseCase {
         if (firstName.length < 2) {
             return false
         }
-        return false
+        return true
     }
 }

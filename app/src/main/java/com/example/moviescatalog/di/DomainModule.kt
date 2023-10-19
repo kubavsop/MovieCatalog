@@ -1,6 +1,7 @@
 package com.example.moviescatalog.di
 
 import com.example.domain.repositroy.UserAuthRepository
+import com.example.domain.usecase.FormatDateUseCase
 import com.example.domain.usecase.LoginUserUseCase
 import com.example.domain.usecase.RegisterUserUseCase
 import com.example.domain.usecase.ValidateEmailUseCase
@@ -43,4 +44,7 @@ class DomainModule {
 
     @Provides
     fun provideValidateLoginUseCase() = ValidateLoginUseCase()
+
+    @Provides
+    fun provideDateUseCase() = FormatDateUseCase()
 }

@@ -3,7 +3,7 @@ package com.example.moviescatalog.presentation.registration_details
 import com.example.moviescatalog.presentation.UiText
 
 private const val EMPTY_STRING = ""
-private const val MALE = "Мужской"
+private const val MALE = "Мужчина"
 
 data class RegistrationDetailsFormState(
     val birthday: String = EMPTY_STRING,
@@ -11,5 +11,5 @@ data class RegistrationDetailsFormState(
     val loginError: UiText? = null,
     val emailError: UiText? = null,
     val firstNameError: UiText? = null,
-    val success: Boolean = false,
+    val isValid: Boolean = false,
 )

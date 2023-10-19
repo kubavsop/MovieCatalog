@@ -3,12 +3,12 @@ package com.example.moviescatalog.presentation
 import android.content.Context
 import androidx.annotation.StringRes
 
-sealed class UiText {
-    data class DynamicString(val value: String) : UiText()
+sealed interface UiText {
+    data class DynamicString(val value: String) : UiText
     class StringResource(
         @StringRes val resId: Int,
         vararg val args: Any
-    ): UiText()
+    ): UiText
 
     fun asString(context: Context): String {
         return when (this) {

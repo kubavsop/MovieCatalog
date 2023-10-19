@@ -46,22 +46,24 @@
         app:layout_constraintTop_toBottomOf="@id/registration" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/first_name_edit_text"
+        android:id="@+id/first_name_edit_text_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8"
         android:theme="@style/text_layout_style"
         app:errorIconDrawable="@null"
+        app:errorTextAppearance="@style/error_text_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/first_name">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/first_name_edit_text"
             style="@style/body_text_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:padding="@dimen/edit_text_padding"
+            android:padding="@dimen/padding_12"
             android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -71,7 +73,7 @@
         style="@style/hint_text_style"
         android:text="@string/gender"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/first_name_edit_text" />
+        app:layout_constraintTop_toBottomOf="@id/first_name_edit_text_container" />
 
     <com.google.android.material.button.MaterialButtonToggleGroup
         android:id="@+id/genderToggleGroup"
@@ -89,7 +91,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/male" />
+            android:text="@string/male"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/femaleButton"
@@ -97,7 +100,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/female" />
+            android:text="@string/female"
+            android:textColor="@color/white" />
 
     </com.google.android.material.button.MaterialButtonToggleGroup>
 
@@ -109,22 +113,24 @@
         app:layout_constraintTop_toBottomOf="@id/genderToggleGroup" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/login_edit_text"
+        android:id="@+id/login_edit_text_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8"
         android:theme="@style/text_layout_style"
         app:errorIconDrawable="@null"
+        app:errorTextAppearance="@style/error_text_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/login_edit_text"
             style="@style/body_text_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:padding="@dimen/edit_text_padding"
+            android:padding="@dimen/padding_12"
             android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -134,25 +140,27 @@
         style="@style/hint_text_style"
         android:text="@string/email"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_edit_text" />
+        app:layout_constraintTop_toBottomOf="@id/login_edit_text_container" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/email_edit_text"
+        android:id="@+id/email_edit_text_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8"
         android:theme="@style/text_layout_style"
         app:errorIconDrawable="@null"
+        app:errorTextAppearance="@style/error_text_style"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email_edit_text"
             style="@style/body_text_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:padding="@dimen/edit_text_padding"
+            android:padding="@dimen/padding_12"
             android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -162,30 +170,22 @@
         style="@style/hint_text_style"
         android:text="@string/birthday"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email_edit_text" />
+        app:layout_constraintTop_toBottomOf="@id/email_edit_text_container" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/birthday_edit_text"
+    <TextView
+        android:id="@+id/birthday_text"
+        style="@style/body_text_style"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8"
-        android:theme="@style/text_layout_style"
-        app:endIconDrawable="@drawable/calendar_icon"
-        app:endIconMode="custom"
-        app:endIconTint="@color/gray_400"
-        app:errorIconDrawable="@null"
+        android:background="@drawable/birthday_tv_background"
+        android:gravity="start|center"
+        android:padding="@dimen/padding_12"
+        app:drawableEndCompat="@drawable/calendar_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/birthday">
-
-        <com.google.android.material.textfield.TextInputEditText
-            style="@style/body_text_style"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:padding="@dimen/edit_text_padding"
-            android:textColor="@color/white" />
-    </com.google.android.material.textfield.TextInputLayout>
+    </TextView>
 
     <Button
         android:id="@+id/continue_registration"
@@ -195,7 +195,7 @@
         android:text="@string/continue_registration"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/birthday_edit_text" />
+        app:layout_constraintTop_toBottomOf="@id/birthday_text" />
 
 
     <TextView
