@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/authSelectionFragment">
+
+    <fragment
+        android:id="@+id/authSelectionFragment"
+        android:name="com.example.moviescatalog.presentation.auth_selection.AuthSelectionFragment"
+        android:label="fragment_auth_selection"
+        tools:layout="@layout/fragment_auth_selection" >
+        <action
+            android:id="@+id/action_authSelectionFragment_to_userLoginFragment"
+            app:destination="@id/userLoginFragment" />
+        <action
+            android:id="@+id/action_authSelectionFragment_to_registrationDetailsFragment"
+            app:destination="@id/registrationDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userLoginFragment"
+        android:name="com.example.moviescatalog.presentation.user_login.UserLoginFragment"
+        android:label="fragment_user_login"
+        tools:layout="@layout/fragment_user_login" >
+        <action
+            android:id="@+id/action_userLoginFragment_to_authSelectionFragment"
+            app:destination="@id/authSelectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/passwordRegistrationFragment"
+        android:name="com.example.moviescatalog.presentation.password_registration.PasswordRegistrationFragment"
+        android:label="fragment_password_registration"
+        tools:layout="@layout/fragment_password_registration" >
+        <argument
+            android:name="userName"
+            app:argType="string" />
+
+        <argument
+            android:name="name"
+            app:argType="string" />
+
+        <argument
+            android:name="email"
+            app:argType="string" />
+
+        <argument
+            android:name="birthDate"
+            app:argType="string" />
+
+        <argument
+            android:name="gender"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_passwordRegistrationFragment_to_registrationDetailsFragment"
+            app:destination="@id/registrationDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationDetailsFragment"
+        android:name="com.example.moviescatalog.presentation.registration_details.RegistrationDetailsFragment"
+        android:label="fragment_registration_details"
+        tools:layout="@layout/fragment_registration_details" >
+        <action
+            android:id="@+id/action_registrationDetailsFragment_to_passwordRegistrationFragment"
+            app:destination="@id/passwordRegistrationFragment" />
+        <action
+            android:id="@+id/action_registrationDetailsFragment_to_authSelectionFragment"
+            app:destination="@id/authSelectionFragment" />
+    </fragment>
+</navigation>
