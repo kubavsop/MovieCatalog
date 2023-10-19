@@ -32,9 +32,9 @@ class RegistrationDetailsFragment : Fragment() {
 
         val datePicker = createDatePickerDialog()
 
-        binding.emailEditText.addTextChangedListener(getAfterTextChangedListener(EditTextChanged.EmailChanged))
-        binding.firstNameEditText.addTextChangedListener(getAfterTextChangedListener(EditTextChanged.FirstNameChanged))
-        binding.loginEditText.addTextChangedListener(getAfterTextChangedListener(EditTextChanged.LoginChanged))
+        binding.emailEditText.addTextChangedListener(getAfterTextChangedListener(DetailsEditTextChanged.EMAIL_CHANGED))
+        binding.firstNameEditText.addTextChangedListener(getAfterTextChangedListener(DetailsEditTextChanged.FIRST_NAME_CHANGED))
+        binding.loginEditText.addTextChangedListener(getAfterTextChangedListener(DetailsEditTextChanged.LOGIN_CHANGED))
         binding.birthdayText.setOnClickListener { datePicker.show() }
     }
 
@@ -46,9 +46,9 @@ class RegistrationDetailsFragment : Fragment() {
         binding.birthdayText.text = state.birthday
 
         val hasEmpty = listOf(
-            binding.loginEditText.toString(),
-            binding.emailEditText.toString(),
-            binding.loginEditText.toString()
+            binding.loginEditText.text.toString(),
+            binding.emailEditText.text.toString(),
+            binding.loginEditText.text.toString()
         ).any { it.isEmpty() }
         binding.continueRegistration.isEnabled = state.isValid && !hasEmpty
     }
@@ -82,7 +82,7 @@ class RegistrationDetailsFragment : Fragment() {
         return datePickerDialog
     }
 
-    private fun getAfterTextChangedListener(editTextChanged: EditTextChanged) =
+    private fun getAfterTextChangedListener(editTextChanged: DetailsEditTextChanged) =
         object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
@@ -91,19 +91,19 @@ class RegistrationDetailsFragment : Fragment() {
             override fun afterTextChanged(s: Editable) {
                 val value = s.toString()
                 when (editTextChanged) {
-                    EditTextChanged.EmailChanged -> viewModel.onEvent(
+                    DetailsEditTextChanged.EMAIL_CHANGED -> viewModel.onEvent(
                         RegistrationDetailsEvent.EmailChanged(
                             value
                         )
                     )
 
-                    EditTextChanged.FirstNameChanged -> viewModel.onEvent(
+                    DetailsEditTextChanged.FIRST_NAME_CHANGED -> viewModel.onEvent(
                         RegistrationDetailsEvent.FirstNameChanged(
                             value
                         )
                     )
 
-                    EditTextChanged.LoginChanged -> viewModel.onEvent(
+                    DetailsEditTextChanged.LOGIN_CHANGED -> viewModel.onEvent(
                         RegistrationDetailsEvent.LoginChanged(
                             value
                         )

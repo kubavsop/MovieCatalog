@@ -6,8 +6,8 @@ class ValidatePasswordUseCase {
             return false
         }
         if (password.any { it.isDigit() } && password.any { it.isLetter() }) {
-            return false
+            return true
         }
-        return true
+        return false
     }
 }

@@ -21,6 +21,7 @@ class UserLoginViewModel @Inject constructor(
 
     fun login(username: String, password: String) {
         viewModelScope.launch {
+            _state.value = UserLoginState.Loading
             try {
                 val loginRequest = LoginRequest(
                     username = username,

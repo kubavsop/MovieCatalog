@@ -50,7 +50,7 @@ class RegistrationDetailsViewModel @Inject constructor(
                 R.string.min_first_name_length_error,
                 MIN_FIRST_NAME_LENGTH
             ),
-            isValid = isSuccess
+            isValid = false
         )
         if (isSuccess) checkError()
     }
@@ -62,7 +62,7 @@ class RegistrationDetailsViewModel @Inject constructor(
                 R.string.min_login_length_error,
                 MIN_LOGIN_LENGTH
             ),
-            isValid = isSuccess
+            isValid = false
         )
         if (isSuccess) checkError()
     }
@@ -73,7 +73,7 @@ class RegistrationDetailsViewModel @Inject constructor(
             emailError = if (isSuccess) null else UiText.StringResource(
                 R.string.email_error
             ),
-            isValid = isSuccess
+            isValid = false
         )
         if (isSuccess) checkError()
     }
