@@ -27,8 +27,19 @@ class PasswordRegistrationViewModel @Inject constructor(
 
     fun onEvent(event: PasswordRegistrationEvent) {
         when (event) {
-            PasswordRegistrationEvent.Register -> Unit
-            is PasswordRegistrationEvent.PasswordChanged -> passwordChanged(event.password, event.repeatedPassword)
+            is PasswordRegistrationEvent.Register -> register(
+                event.userName,
+                event.name,
+                event.password,
+                event.email,
+                event.birthDate,
+                event.gender
+            )
+
+            is PasswordRegistrationEvent.PasswordChanged -> passwordChanged(
+                event.password,
+                event.repeatedPassword
+            )
         }
     }
 
@@ -38,7 +49,7 @@ class PasswordRegistrationViewModel @Inject constructor(
         password: String,
         email: String,
         birthDate: String,
-        gender: Int
+        gender: String
     ) {
         viewModelScope.launch {
             _state.value = _state.value?.copy(isLoading = true)
@@ -49,16 +60,16 @@ class PasswordRegistrationViewModel @Inject constructor(
                     password,
                     email,
                     birthDate,
-                    gender
+                    if (gender == MALE) 0 else 1
                 )
-                registerUserUseCase(profile)
+                val tokenResponse = registerUserUseCase(profile)
                 _state.value = _state.value?.copy(isLoading = false)
-                _state.value = _state.value?.copy(isRegistered = true)
+                _state.value = _state.value?.copy(isRegistered = true, test = tokenResponse.token)
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
                 _state.value = _state.value?.copy(isLoading = false)
-                _state.value = _state.value?.copy(registrationError = e.message.toString())
+                _state.value = _state.value?.copy(registrationError = e.message.toString(), test = e.message.toString())
             }
         }
     }
@@ -76,5 +87,9 @@ class PasswordRegistrationViewModel @Inject constructor(
             ),
             isValid = isPasswordSuccess && isRepeatedPasswordSuccess
         )
+    }
+
+    private companion object {
+        const val MALE = "Mужской"
     }
 }

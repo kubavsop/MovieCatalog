@@ -5,4 +5,5 @@ sealed interface UserLoginState {
     data object Loading : UserLoginState
     data object Success : UserLoginState
     data class Error(val msg: String) : UserLoginState
+    data class Test(val msg: String): UserLoginState
 }

@@ -8,15 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.navArgs
 import com.example.moviescatalog.databinding.FragmentPasswordRegistrationBinding
-import com.example.moviescatalog.presentation.registration_details.DetailsEditTextChanged
-import com.example.moviescatalog.presentation.registration_details.RegistrationDetailsEvent
+import com.example.moviescatalog.presentation.util.mainActivity
 
 class PasswordRegistrationFragment : Fragment() {
     private var _binding: FragmentPasswordRegistrationBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: PasswordRegistrationViewModel by activityViewModels()
+    private val args: PasswordRegistrationFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,16 +31,29 @@ class PasswordRegistrationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.state.observe(viewLifecycleOwner, ::handleState)
 
-
         val afterTextPasswordChangedListener = getAfterTextPasswordChangedListener()
         binding.passwordEditText.addTextChangedListener(afterTextPasswordChangedListener)
         binding.repeatedPasswordEditText.addTextChangedListener(afterTextPasswordChangedListener)
+        binding.backspace.setOnClickListener { mainActivity.openDetailedUserRegistrationFromPasswordRegistration() }
+        binding.register.setOnClickListener {
+            viewModel.onEvent(
+                PasswordRegistrationEvent.Register(
+                    userName = args.userName,
+                    name = args.name,
+                    email = args.email,
+                    password = binding.passwordEditText.text.toString(),
+                    birthDate = args.birthDate,
+                    gender = args.gender
+                )
+            )
+        }
     }
 
     private fun handleState(state: PasswordRegistrationState) {
         binding.passwordEditTextContainer.error = state.passwordError?.asString(requireContext())
         binding.repeatedPasswordEditTextContainer.error =
             state.repeatedPasswordError?.asString(requireContext())
+        binding.test.text = state.test
 
         val hasEmpty = listOf(
             binding.passwordEditText.text.toString(),

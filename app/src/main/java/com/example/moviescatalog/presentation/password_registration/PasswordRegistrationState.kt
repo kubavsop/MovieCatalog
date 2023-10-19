@@ -8,5 +8,6 @@ data class PasswordRegistrationState(
     val registrationError: String? = null,
     val isLoading: Boolean = false,
     val isRegistered: Boolean = false,
-    val isValid: Boolean = false
+    val isValid: Boolean = false,
+    val test: String = ""
 )

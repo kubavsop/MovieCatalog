@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.moviescatalog.databinding.FragmentUserLoginBinding
+import com.example.moviescatalog.presentation.util.mainActivity
 
 class UserLoginFragment : Fragment() {
     private var _binding: FragmentUserLoginBinding? = null
@@ -33,6 +34,7 @@ class UserLoginFragment : Fragment() {
                 password = binding.passwordEditText.text.toString()
             )
         }
+        binding.backspace.setOnClickListener { mainActivity.openAuthSelectionFromLogin() }
     }
 
     private fun handleState(state: UserLoginState) {
@@ -41,6 +43,7 @@ class UserLoginFragment : Fragment() {
             UserLoginState.Success -> Unit
             UserLoginState.Loading -> Unit
             is UserLoginState.Error -> Unit
+            is UserLoginState.Test -> binding.test.text = state.msg
         }
     }
 

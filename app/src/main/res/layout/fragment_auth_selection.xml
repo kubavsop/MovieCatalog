@@ -30,12 +30,14 @@
         android:textAlignment="center" />
 
     <Button
+        android:id="@+id/registration"
         style="@style/accent_button_style"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/margin_32"
         android:text="@string/registration" />
 
     <Button
+        android:id="@+id/login_to"
         style="@style/auth_selection_login_button_style"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/margin_16"

@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.moviescatalog.databinding.FragmentRegistrationDetailsBinding
+import com.example.moviescatalog.presentation.util.mainActivity
 
 class RegistrationDetailsFragment : Fragment() {
 
@@ -36,6 +37,14 @@ class RegistrationDetailsFragment : Fragment() {
         binding.firstNameEditText.addTextChangedListener(getAfterTextChangedListener(DetailsEditTextChanged.FIRST_NAME_CHANGED))
         binding.loginEditText.addTextChangedListener(getAfterTextChangedListener(DetailsEditTextChanged.LOGIN_CHANGED))
         binding.birthdayText.setOnClickListener { datePicker.show() }
+        binding.backspace.setOnClickListener { mainActivity.openAuthSelectionFromRegistration() }
+        binding.continueRegistration.setOnClickListener { mainActivity.openPasswordRegistration(
+            userName = binding.loginEditText.text.toString(),
+            name = binding.firstNameEditText.text.toString(),
+            email =binding.emailEditText.text.toString(),
+            birthDate = binding.birthdayText.text.toString(),
+            gender = "Мужской", // TODO
+        ) }
     }
 
 

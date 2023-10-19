@@ -11,5 +11,5 @@ data class RegistrationDetailsFormState(
     val loginError: UiText? = null,
     val emailError: UiText? = null,
     val firstNameError: UiText? = null,
-    val isValid: Boolean = false,
+    val isValid: Boolean = false
 )

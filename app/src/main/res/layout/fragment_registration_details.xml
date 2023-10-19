@@ -20,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/backspace"
         android:layout_width="@dimen/backspace_icon_size"
         android:layout_height="@dimen/backspace_icon_size"
         android:adjustViewBounds="true"
