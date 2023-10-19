@@ -9,7 +9,14 @@
         android:id="@+id/authSelectionFragment"
         android:name="com.example.moviescatalog.presentation.auth_selection.AuthSelectionFragment"
         android:label="fragment_auth_selection"
-        tools:layout="@layout/fragment_auth_selection" />
+        tools:layout="@layout/fragment_auth_selection" >
+        <action
+            android:id="@+id/action_authSelectionFragment_to_userLoginFragment"
+            app:destination="@id/userLoginFragment" />
+        <action
+            android:id="@+id/action_authSelectionFragment_to_registrationDetailsFragment"
+            app:destination="@id/registrationDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userLoginFragment"
         android:name="com.example.moviescatalog.presentation.user_login.UserLoginFragment"
@@ -24,5 +31,9 @@
         android:id="@+id/registrationDetailsFragment"
         android:name="com.example.moviescatalog.presentation.registration_details.RegistrationDetailsFragment"
         android:label="fragment_registration_details"
-        tools:layout="@layout/fragment_registration_details" />
+        tools:layout="@layout/fragment_registration_details" >
+        <action
+            android:id="@+id/action_registrationDetailsFragment_to_passwordRegistrationFragment"
+            app:destination="@id/passwordRegistrationFragment" />
+    </fragment>
 </navigation>
