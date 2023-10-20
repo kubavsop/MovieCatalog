@@ -1,7 +1,6 @@
 package com.example.moviescatalog.presentation
 
 import android.os.Bundle
-import android.text.Layout.Directions
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment

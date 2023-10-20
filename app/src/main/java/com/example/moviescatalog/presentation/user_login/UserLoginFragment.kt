@@ -43,7 +43,6 @@ class UserLoginFragment : Fragment() {
             UserLoginState.Success -> Unit
             UserLoginState.Loading -> Unit
             is UserLoginState.Error -> Unit
-            is UserLoginState.Test -> binding.test.text = state.msg
         }
     }
 

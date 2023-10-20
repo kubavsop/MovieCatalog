@@ -29,12 +29,10 @@ class UserLoginViewModel @Inject constructor(
                 )
                 val tokenResponse = loginUserUseCase(loginRequest)
                 _state.value = UserLoginState.Success
-                _state.value = UserLoginState.Test(tokenResponse.token)
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
                 _state.value = UserLoginState.Error(msg = e.message.toString())
-                _state.value = UserLoginState.Test(e.message.toString())
             }
         }
     }

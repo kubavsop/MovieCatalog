@@ -48,7 +48,7 @@ class RegistrationDetailsFragment : Fragment() {
     }
 
 
-    private fun handleState(state: RegistrationDetailsFormState) {
+    private fun handleState(state: RegistrationDetailsState) {
         binding.loginEditTextContainer.error = state.loginError?.asString(requireContext())
         binding.emailEditTextContainer.error = state.emailError?.asString(requireContext())
         binding.firstNameEditTextContainer.error = state.firstNameError?.asString(requireContext())

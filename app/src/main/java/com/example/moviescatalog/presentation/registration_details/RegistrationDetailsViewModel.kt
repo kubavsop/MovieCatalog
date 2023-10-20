@@ -20,8 +20,8 @@ class RegistrationDetailsViewModel @Inject constructor(
     private val formatDateUseCase: FormatDateUseCase
 ) : ViewModel() {
 
-    private val _state = MutableLiveData(RegistrationDetailsFormState())
-    val state: LiveData<RegistrationDetailsFormState> = _state
+    private val _state = MutableLiveData(RegistrationDetailsState())
+    val state: LiveData<RegistrationDetailsState> = _state
 
     fun onEvent(event: RegistrationDetailsEvent) {
         when (event) {

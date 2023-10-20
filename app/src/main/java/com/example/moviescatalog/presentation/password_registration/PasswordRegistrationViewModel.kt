@@ -64,12 +64,10 @@ class PasswordRegistrationViewModel @Inject constructor(
                 )
                 val tokenResponse = registerUserUseCase(profile)
                 _state.value = _state.value?.copy(isLoading = false)
-                _state.value = _state.value?.copy(isRegistered = true, test = tokenResponse.token)
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
                 _state.value = _state.value?.copy(isLoading = false)
-                _state.value = _state.value?.copy(registrationError = e.message.toString(), test = e.message.toString())
             }
         }
     }

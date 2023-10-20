@@ -53,7 +53,6 @@ class PasswordRegistrationFragment : Fragment() {
         binding.passwordEditTextContainer.error = state.passwordError?.asString(requireContext())
         binding.repeatedPasswordEditTextContainer.error =
             state.repeatedPasswordError?.asString(requireContext())
-        binding.test.text = state.test
 
         val hasEmpty = listOf(
             binding.passwordEditText.text.toString(),
