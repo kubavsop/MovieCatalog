@@ -1,10 +1,10 @@
 package com.example.moviescatalog.di
 
-import com.example.data.remote.UserAuthApi
-import com.example.data.repository.UserAuthRepositoryImpl
-import com.example.data.validator.EmailPatternValidatorImpl
-import com.example.domain.repositroy.UserAuthRepository
-import com.example.domain.validator.EmailPatternValidator
+import com.example.data.feature_user_auth.remote.UserAuthApi
+import com.example.data.feature_user_auth.repository.UserAuthRepositoryImpl
+import com.example.data.feature_user_auth.validator.EmailPatternValidatorImpl
+import com.example.domain.feature_user_auth.repositroy.UserAuthRepository
+import com.example.domain.feature_user_auth.validator.EmailPatternValidator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

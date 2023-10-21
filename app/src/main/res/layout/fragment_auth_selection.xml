@@ -6,7 +6,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="@dimen/padding_16"
-    tools:context=".presentation.auth_selection.AuthSelectionFragment">
+    tools:context=".presentation.feature_user_auth.auth_selection.AuthSelectionFragment">
 
     <ImageView
         android:layout_width="match_parent"

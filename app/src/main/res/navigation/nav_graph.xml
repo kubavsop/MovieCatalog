@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/authSelectionFragment"
-        android:name="com.example.moviescatalog.presentation.auth_selection.AuthSelectionFragment"
+        android:name="com.example.moviescatalog.presentation.feature_user_auth.auth_selection.AuthSelectionFragment"
         android:label="fragment_auth_selection"
         tools:layout="@layout/fragment_auth_selection" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/userLoginFragment"
-        android:name="com.example.moviescatalog.presentation.user_login.UserLoginFragment"
+        android:name="com.example.moviescatalog.presentation.feature_user_auth.user_login.UserLoginFragment"
         android:label="fragment_user_login"
         tools:layout="@layout/fragment_user_login" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/passwordRegistrationFragment"
-        android:name="com.example.moviescatalog.presentation.password_registration.PasswordRegistrationFragment"
+        android:name="com.example.moviescatalog.presentation.feature_user_auth.password_registration.PasswordRegistrationFragment"
         android:label="fragment_password_registration"
         tools:layout="@layout/fragment_password_registration" >
         <argument
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/registrationDetailsFragment"
-        android:name="com.example.moviescatalog.presentation.registration_details.RegistrationDetailsFragment"
+        android:name="com.example.moviescatalog.presentation.feature_user_auth.registration_details.RegistrationDetailsFragment"
         android:label="fragment_registration_details"
         tools:layout="@layout/fragment_registration_details" >
         <action
