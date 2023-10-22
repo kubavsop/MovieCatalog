@@ -50,8 +50,7 @@
         android:id="@+id/first_name_edit_text_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_8"
-        android:theme="@style/TextLayoutStyle"
+        style="@style/TextLayoutStyle"
         app:errorIconDrawable="@null"
         app:errorTextAppearance="@style/ErrorTextStyle"
         app:layout_constraintEnd_toEndOf="parent"
@@ -120,8 +119,7 @@
         android:id="@+id/login_edit_text_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_8"
-        android:theme="@style/TextLayoutStyle"
+        style="@style/TextLayoutStyle"
         app:errorIconDrawable="@null"
         app:errorTextAppearance="@style/ErrorTextStyle"
         app:layout_constraintEnd_toEndOf="parent"
@@ -150,8 +148,7 @@
         android:id="@+id/email_edit_text_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_8"
-        android:theme="@style/TextLayoutStyle"
+        style="@style/TextLayoutStyle"
         app:errorIconDrawable="@null"
         app:errorTextAppearance="@style/ErrorTextStyle"
         app:layout_constraintEnd_toEndOf="parent"
@@ -188,7 +185,7 @@
         app:drawableEndCompat="@drawable/calendar_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/birthday"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/birthday"/>
 
     <Button
         android:id="@+id/continue_registration"

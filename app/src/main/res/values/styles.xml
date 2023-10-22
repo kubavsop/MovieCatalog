@@ -32,6 +32,7 @@
         <item name="boxCornerRadiusTopStart">@dimen/edit_text_radius</item>
         <item name="boxStrokeColor">@color/stroke_color</item>
         <item name="boxStrokeWidth">@dimen/stroke_width</item>
+        <item name="android:layout_marginTop">@dimen/margin_8</item>
         <item name="boxStrokeErrorColor">@color/error_color</item>
     </style>
 
