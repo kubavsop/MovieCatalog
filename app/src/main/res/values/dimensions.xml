@@ -16,6 +16,11 @@
     <dimen name="stroke_width">1dp</dimen>
     <dimen name="edit_text_height">42dp</dimen>
     <dimen name="space">3dp</dimen>
+    <dimen name="toggle_group_radius">8dp</dimen>
+    <dimen name="toggle_button_radius">7dp</dimen>
+    <dimen name="toggle_group_height">42dp</dimen>
+    <dimen name="toggle_button_height">38dp</dimen>
+    <dimen name="toggle_group_padding">2dp</dimen>
 
     <dimen name="text_size_14">14sp</dimen>
     <dimen name="text_size_15">15sp</dimen>

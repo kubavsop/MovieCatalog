@@ -5,9 +5,11 @@ import android.icu.util.Calendar
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.moviescatalog.databinding.FragmentRegistrationDetailsBinding
@@ -33,24 +35,24 @@ class RegistrationDetailsFragment : Fragment() {
 
         val datePicker = createDatePickerDialog()
 
-        binding.emailEditText.addTextChangedListener(getAfterTextChangedListener(
-            DetailsEditTextChanged.EMAIL_CHANGED
-        ))
-        binding.firstNameEditText.addTextChangedListener(getAfterTextChangedListener(
-            DetailsEditTextChanged.FIRST_NAME_CHANGED
-        ))
-        binding.loginEditText.addTextChangedListener(getAfterTextChangedListener(
-            DetailsEditTextChanged.LOGIN_CHANGED
-        ))
-        binding.birthdayText.setOnClickListener { datePicker.show() }
-        binding.backspace.setOnClickListener { mainActivity.openAuthSelectionFromRegistration() }
-        binding.continueRegistration.setOnClickListener { mainActivity.openPasswordRegistration(
-            userName = binding.loginEditText.text.toString(),
-            name = binding.firstNameEditText.text.toString(),
-            email =binding.emailEditText.text.toString(),
-            birthDate = binding.birthdayText.text.toString(),
-            gender = "Мужской", // TODO
-        ) }
+        with(binding) {
+            emailEditText.addTextChangedListener(getAfterTextChangedListener(DetailsEditTextChanged.EMAIL_CHANGED))
+            firstNameEditText.addTextChangedListener(getAfterTextChangedListener(DetailsEditTextChanged.FIRST_NAME_CHANGED))
+            loginEditText.addTextChangedListener(getAfterTextChangedListener(DetailsEditTextChanged.LOGIN_CHANGED))
+            birthdayText.setOnClickListener { datePicker.show() }
+            backspace.setOnClickListener { mainActivity.openAuthSelectionFromRegistration() }
+            continueRegistration.setOnClickListener {
+                mainActivity.openPasswordRegistration(
+                    userName = loginEditText.text.toString(),
+                    name = firstNameEditText.text.toString(),
+                    email = emailEditText.text.toString(),
+                    birthDate = birthdayText.text.toString(),
+                    gender = if (maleButton.isChecked) maleButton.textOn.toString() else femaleButton.textOn.toString()
+                )
+            }
+            maleButton.setOnClickListener { toggleButtonOnClickListener(maleButton, femaleButton) }
+            femaleButton.setOnClickListener { toggleButtonOnClickListener(femaleButton, maleButton) }
+        }
     }
 
 
@@ -126,6 +128,15 @@ class RegistrationDetailsFragment : Fragment() {
                 }
             }
         }
+
+    private fun toggleButtonOnClickListener(firstButton: ToggleButton, secondButton: ToggleButton) {
+        if (firstButton.isChecked && secondButton.isChecked) {
+            secondButton.isChecked = false
+            firstButton.isChecked = true
+        } else {
+            firstButton.isChecked = true
+        }
+    }
 
     private companion object {
         const val MIN_YEAR = 1880

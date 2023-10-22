@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="title_text_style">
+
+    <style name="TitleTextStyle">
         <item name="android:textSize">@dimen/text_size_20</item>
         <item name="android:fontFamily">@font/inter_bold</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="sub_title_text_style">
+    <style name="SubTitleTextStyle">
         <item name="android:textSize">@dimen/text_size_15</item>
         <item name="android:fontFamily">@font/inter_medium</item>
     </style>
 
 
-    <style name="body_text_style">
+    <style name="BodyTextStyle">
         <item name="android:textSize">@dimen/text_size_15</item>
         <item name="android:fontFamily">@font/inter_regular</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="label_text_style">
+    <style name="LabelTextStyle">
         <item name="android:fontFamily">@font/inter_semi_bold</item>
     </style>
 
 
-    <style name="text_layout_style" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="TextLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="hintEnabled">false</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/edit_text_radius</item>
         <item name="boxCornerRadiusBottomStart">@dimen/edit_text_radius</item>
@@ -34,30 +35,37 @@
         <item name="boxStrokeErrorColor">@color/error_color</item>
     </style>
 
-    <style name="error_text_style" parent="body_text_style">
+    <style name="ErrorTextStyle" parent="BodyTextStyle">
         <item name="android:textSize">@dimen/text_size_14</item>
         <item name="android:textColor">@color/error_color</item>
     </style>
-    
-    <style name="hint_text_style" parent="sub_title_text_style">
+
+    <style name="HintTextStyle" parent="SubTitleTextStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:layout_marginTop">@dimen/margin_15</item>
     </style>
 
-    <style name="button_style" parent="label_text_style">
+    <style name="ToggleButtonStyle" parent="BodyTextStyle">
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:background">@drawable/toggle_background_selector</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@drawable/toggle_text_color_selector</item>
+    </style>
+
+    <style name="ButtonStyle" parent="LabelTextStyle">
         <item name="android:textSize">@dimen/text_size_15</item>
         <item name="android:layout_height">@dimen/button_height</item>
         <item name="android:background">@drawable/button_background</item>
     </style>
 
-    <style name="accent_button_style" parent="button_style">
+    <style name="AccentButtonStyle" parent="ButtonStyle">
         <item name="android:textColor">@color/white</item>
         <item name="backgroundTint">@color/accent_color</item>
     </style>
 
-    <style name="auth_selection_login_button_style" parent="button_style">
+    <style name="AuthSelectionLoginButtonStyle" parent="ButtonStyle">
         <item name="android:textColor">@color/accent_color</item>
         <item name="backgroundTint">@color/auth_selection_login_button_color</item>
     </style>

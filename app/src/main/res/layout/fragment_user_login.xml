@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/label"
-        style="@style/label_text_style"
+        style="@style/LabelTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/filmus"
@@ -30,7 +30,7 @@
 
     <TextView
         android:id="@+id/entrance"
-        style="@style/title_text_style"
+        style="@style/TitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_20"
@@ -41,7 +41,7 @@
 
     <TextView
         android:id="@+id/login"
-        style="@style/hint_text_style"
+        style="@style/HintTextStyle"
         android:text="@string/login"
         app:layout_constraintStart_toStartOf="parent    "
         app:layout_constraintTop_toBottomOf="@id/entrance" />
@@ -51,16 +51,16 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8"
-        android:theme="@style/text_layout_style"
+        android:theme="@style/TextLayoutStyle"
         app:errorIconDrawable="@null"
-        app:errorTextAppearance="@style/error_text_style"
+        app:errorTextAppearance="@style/ErrorTextStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/login_edit_text"
-            style="@style/body_text_style"
+            style="@style/BodyTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -70,7 +70,7 @@
 
     <TextView
         android:id="@+id/password"
-        style="@style/hint_text_style"
+        style="@style/HintTextStyle"
         android:text="@string/password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_edit_text_container" />
@@ -80,18 +80,18 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8"
-        android:theme="@style/text_layout_style"
+        android:theme="@style/TextLayoutStyle"
         app:endIconMode="password_toggle"
         app:endIconTint="@color/gray_400"
         app:errorIconDrawable="@null"
-        app:errorTextAppearance="@style/error_text_style"
+        app:errorTextAppearance="@style/ErrorTextStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/password_edit_text"
-            style="@style/body_text_style"
+            style="@style/BodyTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
@@ -103,7 +103,7 @@
 
     <Button
         android:id="@+id/login_to"
-        style="@style/accent_button_style"
+        style="@style/AccentButtonStyle"
         android:layout_width="0dp"
         android:layout_marginTop="@dimen/margin_20"
         android:text="@string/login_to"
@@ -114,7 +114,7 @@
 
     <TextView
         android:id="@+id/no_account"
-        style="@style/sub_title_text_style"
+        style="@style/SubTitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_account"
@@ -127,7 +127,7 @@
 
     <TextView
         android:id="@+id/register"
-        style="@style/sub_title_text_style"
+        style="@style/SubTitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space"
