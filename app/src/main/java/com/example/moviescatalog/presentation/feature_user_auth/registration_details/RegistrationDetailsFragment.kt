@@ -1,11 +1,11 @@
 package com.example.moviescatalog.presentation.feature_user_auth.registration_details
 
 import android.app.DatePickerDialog
+import android.content.Context
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +13,6 @@ import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.moviescatalog.databinding.FragmentRegistrationDetailsBinding
-import com.example.moviescatalog.presentation.util.mainActivity
 import com.example.moviescatalog.presentation.util.setContainerError
 
 class RegistrationDetailsFragment : Fragment() {
@@ -21,11 +20,28 @@ class RegistrationDetailsFragment : Fragment() {
     private var _binding: FragmentRegistrationDetailsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: RegistrationDetailsViewModel by activityViewModels()
+    private var fragmentCallBack: FragmentCallBack? = null
+    interface FragmentCallBack {
+        fun openUserLoginFromRegistrationDetails()
+        fun openAuthSelectionFromRegistration()
+        fun openPasswordRegistration(
+            userName: String,
+            name: String,
+            email: String,
+            birthDate: String,
+            gender: String
+        )
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        fragmentCallBack = context as FragmentCallBack
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentRegistrationDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -41,9 +57,9 @@ class RegistrationDetailsFragment : Fragment() {
             firstNameEditText.addTextChangedListener(getAfterTextChangedListener(DetailsEditTextChanged.FIRST_NAME_CHANGED))
             loginEditText.addTextChangedListener(getAfterTextChangedListener(DetailsEditTextChanged.LOGIN_CHANGED))
             birthdayText.setOnClickListener { datePicker.show() }
-            backspace.setOnClickListener { mainActivity.openAuthSelectionFromRegistration() }
+            backspace.setOnClickListener { fragmentCallBack?.openAuthSelectionFromRegistration() }
             continueRegistration.setOnClickListener {
-                mainActivity.openPasswordRegistration(
+                fragmentCallBack?.openPasswordRegistration(
                     userName = loginEditText.text.toString(),
                     name = firstNameEditText.text.toString(),
                     email = emailEditText.text.toString(),
@@ -53,6 +69,7 @@ class RegistrationDetailsFragment : Fragment() {
             }
             maleButton.setOnClickListener { toggleButtonOnClickListener(maleButton, femaleButton) }
             femaleButton.setOnClickListener { toggleButtonOnClickListener(femaleButton, maleButton) }
+            singIn.setOnClickListener { fragmentCallBack?.openUserLoginFromRegistrationDetails() }
         }
     }
 

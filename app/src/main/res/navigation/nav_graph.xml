@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_userLoginFragment_to_authSelectionFragment"
             app:destination="@id/authSelectionFragment" />
+        <action
+            android:id="@+id/action_userLoginFragment_to_registrationDetailsFragment"
+            app:destination="@id/registrationDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/passwordRegistrationFragment"
@@ -53,6 +56,9 @@
         <action
             android:id="@+id/action_passwordRegistrationFragment_to_registrationDetailsFragment"
             app:destination="@id/registrationDetailsFragment" />
+        <action
+            android:id="@+id/action_passwordRegistrationFragment_to_userLoginFragment"
+            app:destination="@id/userLoginFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationDetailsFragment"
@@ -65,5 +71,8 @@
         <action
             android:id="@+id/action_registrationDetailsFragment_to_authSelectionFragment"
             app:destination="@id/authSelectionFragment" />
+        <action
+            android:id="@+id/action_registrationDetailsFragment_to_userLoginFragment"
+            app:destination="@id/userLoginFragment" />
     </fragment>
 </navigation>

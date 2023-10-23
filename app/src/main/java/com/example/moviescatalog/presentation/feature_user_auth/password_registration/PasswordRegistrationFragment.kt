@@ -1,5 +1,6 @@
 package com.example.moviescatalog.presentation.feature_user_auth.password_registration
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,7 +13,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.moviescatalog.databinding.FragmentPasswordRegistrationBinding
 import com.example.moviescatalog.presentation.UiText
-import com.example.moviescatalog.presentation.util.mainActivity
 import com.example.moviescatalog.presentation.util.setContainerError
 
 class PasswordRegistrationFragment : Fragment() {
@@ -21,11 +21,22 @@ class PasswordRegistrationFragment : Fragment() {
 
     private val viewModel: PasswordRegistrationViewModel by activityViewModels()
     private val args: PasswordRegistrationFragmentArgs by navArgs()
+    private var fragmentCallBack: FragmentCallBack? = null
+
+    interface FragmentCallBack {
+        fun openUserLoginFromPasswordRegistration()
+        fun openDetailedUserRegistrationFromPasswordRegistration()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        fragmentCallBack = context as FragmentCallBack
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentPasswordRegistrationBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -37,7 +48,7 @@ class PasswordRegistrationFragment : Fragment() {
         val afterTextPasswordChangedListener = getAfterTextPasswordChangedListener()
         binding.passwordEditText.addTextChangedListener(afterTextPasswordChangedListener)
         binding.repeatedPasswordEditText.addTextChangedListener(afterTextPasswordChangedListener)
-        binding.backspace.setOnClickListener { mainActivity.openDetailedUserRegistrationFromPasswordRegistration() }
+        binding.backspace.setOnClickListener { fragmentCallBack?.openDetailedUserRegistrationFromPasswordRegistration() }
         binding.register.setOnClickListener {
             viewModel.onEvent(
                 PasswordRegistrationEvent.Register(
@@ -50,6 +61,7 @@ class PasswordRegistrationFragment : Fragment() {
                 )
             )
         }
+        binding.signIn.setOnClickListener { fragmentCallBack?.openUserLoginFromPasswordRegistration() }
     }
 
     private fun handleState(state: PasswordRegistrationState) {
