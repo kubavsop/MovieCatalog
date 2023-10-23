@@ -7,7 +7,6 @@ private const val MALE = "Мужчина"
 
 data class RegistrationDetailsState(
     val birthday: String = EMPTY_STRING,
-    val gender: String = MALE,
     val loginError: UiText? = null,
     val emailError: UiText? = null,
     val firstNameError: UiText? = null,

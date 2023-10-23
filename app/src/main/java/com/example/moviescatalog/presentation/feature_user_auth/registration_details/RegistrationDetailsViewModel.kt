@@ -28,19 +28,12 @@ class RegistrationDetailsViewModel @Inject constructor(
             is RegistrationDetailsEvent.BirthdayChanged -> birthdayChanged(event.year, event.monthOfYear, event.dayOfMonth)
             is RegistrationDetailsEvent.LoginChanged -> loginChanged(event.login)
             is RegistrationDetailsEvent.EmailChanged -> emailChanged(event.email)
-            is RegistrationDetailsEvent.GenderChanged -> genderChanged(event.gender)
             is RegistrationDetailsEvent.FirstNameChanged -> firstNameChanged(event.firstName)
         }
     }
 
     private fun birthdayChanged(year: Int, monthOfYear: Int, dayOfMonth: Int) {
         _state.value = _state.value?.copy(birthday = formatDateUseCase(year, monthOfYear, dayOfMonth))
-    }
-
-    private fun genderChanged(gender: String) {
-        _state.value = _state.value?.copy(
-            gender = gender
-        )
     }
 
     private fun firstNameChanged(firstName: String) {
@@ -82,7 +75,7 @@ class RegistrationDetailsViewModel @Inject constructor(
         val hasError = listOf(
             _state.value?.emailError,
             _state.value?.loginError,
-        ).any { it != null } && !state.value?.gender.isNullOrEmpty()
+        ).any { it != null }
 
         if (!hasError) {
             _state.value = _state.value?.copy(
