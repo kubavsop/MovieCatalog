@@ -14,4 +14,5 @@
     <color name="gray_400">#909499</color>
     <color name="gray_200">#C4C8CC</color>
     <color name="toggle_background_color">#1F767680</color>
+    <color name="bottom_nav_color">#161616</color>
 </resources>

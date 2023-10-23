@@ -23,6 +23,10 @@
         <item name="android:fontFamily">@font/inter_semi_bold</item>
     </style>
 
+    <style name="BottomNavTextStyle" parent="BodyTextStyle">
+        <item name="android:textSize">@dimen/text_size_11</item>
+    </style>
+
 
     <style name="TextLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="hintEnabled">false</item>
@@ -30,7 +34,7 @@
         <item name="boxCornerRadiusBottomStart">@dimen/edit_text_radius</item>
         <item name="boxCornerRadiusTopEnd">@dimen/edit_text_radius</item>
         <item name="boxCornerRadiusTopStart">@dimen/edit_text_radius</item>
-        <item name="boxStrokeColor">@color/stroke_color</item>
+        <item name="boxStrokeColor">@color/stroke_selector</item>
         <item name="boxStrokeWidth">@dimen/stroke_width</item>
         <item name="android:layout_marginTop">@dimen/margin_8</item>
         <item name="boxStrokeErrorColor">@color/error_color</item>
@@ -62,8 +66,8 @@
     </style>
 
     <style name="AccentButtonStyle" parent="ButtonStyle">
-        <item name="android:textColor">@color/accent_text_color</item>
-        <item name="backgroundTint">@color/accent_background_tint_color</item>
+        <item name="android:textColor">@color/accent_text_selector</item>
+        <item name="backgroundTint">@color/accent_background_selector</item>
     </style>
 
     <style name="AuthSelectionLoginButtonStyle" parent="ButtonStyle">

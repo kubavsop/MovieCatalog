@@ -1,9 +1,11 @@
 package com.example.moviescatalog.presentation
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.ActivityMainBinding
 import com.example.moviescatalog.presentation.feature_user_auth.auth_selection.AuthSelectionFragment
@@ -30,8 +32,21 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when(destination.id) {
+                R.id.mainFragment -> showBottomNav()
+                R.id.favoriteFragment -> showBottomNav()
+                R.id.profileFragment -> showBottomNav()
+                else -> hideBottomNav()
+            }
+        }
+
         setContentView(binding.root)
+
+        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
     }
 
 
@@ -98,5 +113,13 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
                 gender = gender
             )
         navController.navigate(action)
+    }
+
+
+    private fun showBottomNav() {
+        binding.bottomNavigationView.visibility = View.VISIBLE
+    }
+    private fun hideBottomNav() {
+        binding.bottomNavigationView.visibility = View.GONE
     }
 }

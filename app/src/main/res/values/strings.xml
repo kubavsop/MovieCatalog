@@ -31,4 +31,7 @@
     <string name="repeated_password_error">Пароли не совпадают.</string>
     <string name="login_failed">Неверный логин или пароль.</string>
     <string name="registration_error">Такой пользователь уже существует.</string>
+    <string name="main">Главная</string>
+    <string name="favorite">Любимое</string>
+    <string name="profile">Профиль</string>
 </resources>
