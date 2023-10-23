@@ -13,6 +13,7 @@ import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.moviescatalog.databinding.FragmentRegistrationDetailsBinding
+import com.example.moviescatalog.presentation.util.setClearFocusOnDoneClick
 import com.example.moviescatalog.presentation.util.setContainerError
 
 class RegistrationDetailsFragment : Fragment() {
@@ -70,6 +71,7 @@ class RegistrationDetailsFragment : Fragment() {
             maleButton.setOnClickListener { toggleButtonOnClickListener(maleButton, femaleButton) }
             femaleButton.setOnClickListener { toggleButtonOnClickListener(femaleButton, maleButton) }
             singIn.setOnClickListener { fragmentCallBack?.openUserLoginFromRegistrationDetails() }
+            emailEditText.setClearFocusOnDoneClick()
         }
     }
 

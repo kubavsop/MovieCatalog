@@ -2,6 +2,7 @@
 <resources>
     <dimen name="padding_16">16dp</dimen>
     <dimen name="padding_12">12dp</dimen>
+    <dimen name="margin_56">56dp</dimen>
     <dimen name="margin_32">32dp</dimen>
     <dimen name="margin_20">20dp</dimen>
     <dimen name="margin_16">16dp</dimen>
@@ -21,7 +22,11 @@
     <dimen name="toggle_group_height">42dp</dimen>
     <dimen name="toggle_button_height">38dp</dimen>
     <dimen name="toggle_group_padding">2dp</dimen>
+    <dimen name="calendar_icon_size">20dp</dimen>
+    <dimen name="bottom_nav_icon_size">28dp</dimen>
+    <dimen name="bottom_nav_height">67dp</dimen>
 
+    <dimen name="text_size_11">11sp</dimen>
     <dimen name="text_size_14">14sp</dimen>
     <dimen name="text_size_15">15sp</dimen>
     <dimen name="text_size_17">17sp</dimen>

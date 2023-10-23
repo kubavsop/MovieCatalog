@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_userLoginFragment_to_registrationDetailsFragment"
             app:destination="@id/registrationDetailsFragment" />
+        <action
+            android:id="@+id/action_userLoginFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/passwordRegistrationFragment"
@@ -59,6 +62,9 @@
         <action
             android:id="@+id/action_passwordRegistrationFragment_to_userLoginFragment"
             app:destination="@id/userLoginFragment" />
+        <action
+            android:id="@+id/action_passwordRegistrationFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationDetailsFragment"
@@ -75,4 +81,19 @@
             android:id="@+id/action_registrationDetailsFragment_to_userLoginFragment"
             app:destination="@id/userLoginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.moviescatalog.presentation.feature_profile_screen.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.moviescatalog.presentation.feature_main_screen.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.moviescatalog.presentation.feature_favorite_screen.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
 </navigation>
