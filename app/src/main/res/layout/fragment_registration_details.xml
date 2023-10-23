@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/label"
-        style="@style/label_text_style"
+        style="@style/LabelTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/filmus"
@@ -30,7 +30,7 @@
 
     <TextView
         android:id="@+id/registration"
-        style="@style/title_text_style"
+        style="@style/TitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_20"
@@ -41,7 +41,7 @@
 
     <TextView
         android:id="@+id/first_name"
-        style="@style/hint_text_style"
+        style="@style/HintTextStyle"
         android:text="@string/first_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/registration" />
@@ -50,17 +50,16 @@
         android:id="@+id/first_name_edit_text_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_8"
-        android:theme="@style/text_layout_style"
+        style="@style/TextLayoutStyle"
         app:errorIconDrawable="@null"
-        app:errorTextAppearance="@style/error_text_style"
+        app:errorTextAppearance="@style/ErrorTextStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/first_name">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/first_name_edit_text"
-            style="@style/body_text_style"
+            style="@style/BodyTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -68,47 +67,49 @@
             android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <TextView
         android:id="@+id/gender"
-        style="@style/hint_text_style"
+        style="@style/HintTextStyle"
         android:text="@string/gender"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/first_name_edit_text_container" />
 
-    <com.google.android.material.button.MaterialButtonToggleGroup
+    <LinearLayout
         android:id="@+id/genderToggleGroup"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/toggle_group_height"
         android:layout_marginTop="@dimen/margin_8"
+        android:background="@drawable/toggle_group_background"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/toggle_group_padding"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gender"
-        app:singleSelection="true">
+        app:layout_constraintTop_toBottomOf="@id/gender">
 
-        <Button
+        <ToggleButton
             android:id="@+id/maleButton"
-            style="@style/Widget.Material3.Button.OutlinedButton"
+            style="@style/ToggleButtonStyle"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/toggle_button_height"
             android:layout_weight="1"
-            android:text="@string/male"
-            android:textColor="@color/white" />
+            android:checked="true"
+            android:textOff="@string/male"
+            android:textOn="@string/male" />
 
-        <Button
+        <ToggleButton
             android:id="@+id/femaleButton"
-            style="@style/Widget.Material3.Button.OutlinedButton"
+            style="@style/ToggleButtonStyle"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/toggle_button_height"
             android:layout_weight="1"
-            android:text="@string/female"
-            android:textColor="@color/white" />
-
-    </com.google.android.material.button.MaterialButtonToggleGroup>
+            android:textOff="@string/female"
+            android:textOn="@string/female" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/login"
-        style="@style/hint_text_style"
+        style="@style/HintTextStyle"
         android:text="@string/login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/genderToggleGroup" />
@@ -117,17 +118,16 @@
         android:id="@+id/login_edit_text_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_8"
-        android:theme="@style/text_layout_style"
+        style="@style/TextLayoutStyle"
         app:errorIconDrawable="@null"
-        app:errorTextAppearance="@style/error_text_style"
+        app:errorTextAppearance="@style/ErrorTextStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/login_edit_text"
-            style="@style/body_text_style"
+            style="@style/BodyTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -138,7 +138,7 @@
 
     <TextView
         android:id="@+id/email"
-        style="@style/hint_text_style"
+        style="@style/HintTextStyle"
         android:text="@string/email"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/login_edit_text_container" />
@@ -147,17 +147,16 @@
         android:id="@+id/email_edit_text_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_8"
-        android:theme="@style/text_layout_style"
+        style="@style/TextLayoutStyle"
         app:errorIconDrawable="@null"
-        app:errorTextAppearance="@style/error_text_style"
+        app:errorTextAppearance="@style/ErrorTextStyle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/email_edit_text"
-            style="@style/body_text_style"
+            style="@style/BodyTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
@@ -168,14 +167,14 @@
 
     <TextView
         android:id="@+id/birthday"
-        style="@style/hint_text_style"
+        style="@style/HintTextStyle"
         android:text="@string/birthday"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/email_edit_text_container" />
 
     <TextView
         android:id="@+id/birthday_text"
-        style="@style/body_text_style"
+        style="@style/BodyTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8"
@@ -185,12 +184,11 @@
         app:drawableEndCompat="@drawable/calendar_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/birthday">
-    </TextView>
+        app:layout_constraintTop_toBottomOf="@+id/birthday"/>
 
     <Button
         android:id="@+id/continue_registration"
-        style="@style/accent_button_style"
+        style="@style/AccentButtonStyle"
         android:layout_width="0dp"
         android:layout_marginTop="@dimen/margin_20"
         android:text="@string/continue_registration"
@@ -201,20 +199,20 @@
 
     <TextView
         android:id="@+id/no_account"
-        style="@style/sub_title_text_style"
+        style="@style/SubTitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/have_account"
         android:textColor="@color/gray_200"
         android:textSize="@dimen/text_size_14"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/register"
+        app:layout_constraintEnd_toStartOf="@+id/sing_in"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/register"
-        style="@style/sub_title_text_style"
+        android:id="@+id/sing_in"
+        style="@style/SubTitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/space"

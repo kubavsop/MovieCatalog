@@ -14,7 +14,7 @@
         android:src="@drawable/auth_selection_image" />
 
     <TextView
-        style="@style/title_text_style"
+        style="@style/TitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_32"
@@ -22,7 +22,7 @@
         android:textAlignment="center" />
 
     <TextView
-        style="@style/body_text_style"
+        style="@style/BodyTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8"
@@ -31,14 +31,14 @@
 
     <Button
         android:id="@+id/registration"
-        style="@style/accent_button_style"
+        style="@style/AccentButtonStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/margin_32"
         android:text="@string/registration" />
 
     <Button
-        android:id="@+id/login_to"
-        style="@style/auth_selection_login_button_style"
+        android:id="@+id/loginTo"
+        style="@style/AuthSelectionLoginButtonStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/margin_16"
         android:text="@string/login_to" />

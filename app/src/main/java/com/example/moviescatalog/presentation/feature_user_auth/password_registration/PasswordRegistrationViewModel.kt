@@ -37,8 +37,7 @@ class PasswordRegistrationViewModel @Inject constructor(
             )
 
             is PasswordRegistrationEvent.PasswordChanged -> passwordChanged(
-                event.password,
-                event.repeatedPassword
+                event.password, event.repeatedPassword
             )
         }
     }
@@ -55,19 +54,19 @@ class PasswordRegistrationViewModel @Inject constructor(
             _state.value = _state.value?.copy(isLoading = true)
             try {
                 val profile = Profile(
-                    userName,
-                    name,
-                    password,
-                    email,
-                    birthDate,
-                    if (gender == MALE) 0 else 1
+                    userName, name, password, email, birthDate, if (gender == MALE) 0 else 1
                 )
                 val tokenResponse = registerUserUseCase(profile)
-                _state.value = _state.value?.copy(isLoading = false)
+                _state.value = _state.value?.copy(
+                    isLoading = false,
+                    isRegistered = true
+                )
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                _state.value = _state.value?.copy(isLoading = false)
+                _state.value = _state.value?.copy(
+                    registrationError = UiText(R.string.registration_error), isLoading = false
+                )
             }
         }
     }
@@ -77,13 +76,14 @@ class PasswordRegistrationViewModel @Inject constructor(
         val isPasswordSuccess = validatePasswordUseCase(password)
         val isRepeatedPasswordSuccess = validateRepeatedPasswordUseCase(password, repeatedPassword)
         _state.value = _state.value?.copy(
-            repeatedPasswordError = if (isRepeatedPasswordSuccess) null else UiText.StringResource(
+            repeatedPasswordError = if (isRepeatedPasswordSuccess) null else UiText(
                 R.string.repeated_password_error
             ),
-            passwordError = if (isPasswordSuccess) null else UiText.StringResource(
+            passwordError = if (isPasswordSuccess) null else UiText(
                 R.string.password_error
             ),
-            isValid = isPasswordSuccess && isRepeatedPasswordSuccess
+            isValid = isPasswordSuccess && isRepeatedPasswordSuccess,
+            registrationError = if (_state.value?.registrationError != null && isPasswordSuccess && isRepeatedPasswordSuccess) _state.value?.registrationError else null
         )
     }
 

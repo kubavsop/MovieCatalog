@@ -1,6 +1,7 @@
 package com.example.moviescatalog.presentation.feature_user_auth.registration_details
 
 import android.app.DatePickerDialog
+import android.content.Context
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.text.Editable
@@ -8,21 +9,39 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.moviescatalog.databinding.FragmentRegistrationDetailsBinding
-import com.example.moviescatalog.presentation.util.mainActivity
+import com.example.moviescatalog.presentation.util.setContainerError
 
 class RegistrationDetailsFragment : Fragment() {
 
     private var _binding: FragmentRegistrationDetailsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: RegistrationDetailsViewModel by activityViewModels()
+    private var fragmentCallBack: FragmentCallBack? = null
+    interface FragmentCallBack {
+        fun openUserLoginFromRegistrationDetails()
+        fun openAuthSelectionFromRegistration()
+        fun openPasswordRegistration(
+            userName: String,
+            name: String,
+            email: String,
+            birthDate: String,
+            gender: String
+        )
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        fragmentCallBack = context as FragmentCallBack
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentRegistrationDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -33,37 +52,39 @@ class RegistrationDetailsFragment : Fragment() {
 
         val datePicker = createDatePickerDialog()
 
-        binding.emailEditText.addTextChangedListener(getAfterTextChangedListener(
-            DetailsEditTextChanged.EMAIL_CHANGED
-        ))
-        binding.firstNameEditText.addTextChangedListener(getAfterTextChangedListener(
-            DetailsEditTextChanged.FIRST_NAME_CHANGED
-        ))
-        binding.loginEditText.addTextChangedListener(getAfterTextChangedListener(
-            DetailsEditTextChanged.LOGIN_CHANGED
-        ))
-        binding.birthdayText.setOnClickListener { datePicker.show() }
-        binding.backspace.setOnClickListener { mainActivity.openAuthSelectionFromRegistration() }
-        binding.continueRegistration.setOnClickListener { mainActivity.openPasswordRegistration(
-            userName = binding.loginEditText.text.toString(),
-            name = binding.firstNameEditText.text.toString(),
-            email =binding.emailEditText.text.toString(),
-            birthDate = binding.birthdayText.text.toString(),
-            gender = "Мужской", // TODO
-        ) }
+        with(binding) {
+            emailEditText.addTextChangedListener(getAfterTextChangedListener(DetailsEditTextChanged.EMAIL_CHANGED))
+            firstNameEditText.addTextChangedListener(getAfterTextChangedListener(DetailsEditTextChanged.FIRST_NAME_CHANGED))
+            loginEditText.addTextChangedListener(getAfterTextChangedListener(DetailsEditTextChanged.LOGIN_CHANGED))
+            birthdayText.setOnClickListener { datePicker.show() }
+            backspace.setOnClickListener { fragmentCallBack?.openAuthSelectionFromRegistration() }
+            continueRegistration.setOnClickListener {
+                fragmentCallBack?.openPasswordRegistration(
+                    userName = loginEditText.text.toString(),
+                    name = firstNameEditText.text.toString(),
+                    email = emailEditText.text.toString(),
+                    birthDate = birthdayText.text.toString(),
+                    gender = if (maleButton.isChecked) maleButton.textOn.toString() else femaleButton.textOn.toString()
+                )
+            }
+            maleButton.setOnClickListener { toggleButtonOnClickListener(maleButton, femaleButton) }
+            femaleButton.setOnClickListener { toggleButtonOnClickListener(femaleButton, maleButton) }
+            singIn.setOnClickListener { fragmentCallBack?.openUserLoginFromRegistrationDetails() }
+        }
     }
 
 
     private fun handleState(state: RegistrationDetailsState) {
-        binding.loginEditTextContainer.error = state.loginError?.asString(requireContext())
-        binding.emailEditTextContainer.error = state.emailError?.asString(requireContext())
-        binding.firstNameEditTextContainer.error = state.firstNameError?.asString(requireContext())
+        binding.loginEditTextContainer.setContainerError(state.loginError, requireContext())
+        binding.emailEditTextContainer.setContainerError(state.emailError, requireContext())
+        binding.firstNameEditTextContainer.setContainerError(state.firstNameError, requireContext())
         binding.birthdayText.text = state.birthday
 
         val hasEmpty = listOf(
             binding.loginEditText.text.toString(),
             binding.emailEditText.text.toString(),
-            binding.loginEditText.text.toString()
+            binding.loginEditText.text.toString(),
+            state.birthday
         ).any { it.isEmpty() }
         binding.continueRegistration.isEnabled = state.isValid && !hasEmpty
     }
@@ -126,6 +147,15 @@ class RegistrationDetailsFragment : Fragment() {
                 }
             }
         }
+
+    private fun toggleButtonOnClickListener(firstButton: ToggleButton, secondButton: ToggleButton) {
+        if (firstButton.isChecked && secondButton.isChecked) {
+            secondButton.isChecked = false
+            firstButton.isChecked = true
+        } else {
+            firstButton.isChecked = true
+        }
+    }
 
     private companion object {
         const val MIN_YEAR = 1880

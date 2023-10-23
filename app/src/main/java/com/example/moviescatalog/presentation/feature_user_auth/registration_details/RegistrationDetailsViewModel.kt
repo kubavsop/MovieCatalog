@@ -28,7 +28,6 @@ class RegistrationDetailsViewModel @Inject constructor(
             is RegistrationDetailsEvent.BirthdayChanged -> birthdayChanged(event.year, event.monthOfYear, event.dayOfMonth)
             is RegistrationDetailsEvent.LoginChanged -> loginChanged(event.login)
             is RegistrationDetailsEvent.EmailChanged -> emailChanged(event.email)
-            is RegistrationDetailsEvent.GenderChanged -> genderChanged(event.gender)
             is RegistrationDetailsEvent.FirstNameChanged -> firstNameChanged(event.firstName)
         }
     }
@@ -37,16 +36,10 @@ class RegistrationDetailsViewModel @Inject constructor(
         _state.value = _state.value?.copy(birthday = formatDateUseCase(year, monthOfYear, dayOfMonth))
     }
 
-    private fun genderChanged(gender: String) {
-        _state.value = _state.value?.copy(
-            gender = gender
-        )
-    }
-
     private fun firstNameChanged(firstName: String) {
         val isSuccess = validateFirstNameUseCase(firstName)
         _state.value = _state.value?.copy(
-            firstNameError = if (isSuccess) null else UiText.StringResource(
+            firstNameError = if (isSuccess) null else UiText(
                 R.string.min_first_name_length_error,
                 MIN_FIRST_NAME_LENGTH
             ),
@@ -58,7 +51,7 @@ class RegistrationDetailsViewModel @Inject constructor(
     private fun loginChanged(login: String) {
         val isSuccess = validateLoginUseCase(login)
         _state.value = _state.value?.copy(
-            loginError = if (isSuccess) null else UiText.StringResource(
+            loginError = if (isSuccess) null else UiText(
                 R.string.min_login_length_error,
                 MIN_LOGIN_LENGTH
             ),
@@ -70,7 +63,7 @@ class RegistrationDetailsViewModel @Inject constructor(
     private fun emailChanged(email: String) {
         val isSuccess = validateEmailUseCase(email)
         _state.value = _state.value?.copy(
-            emailError = if (isSuccess) null else UiText.StringResource(
+            emailError = if (isSuccess) null else UiText(
                 R.string.email_error
             ),
             isValid = false
@@ -82,7 +75,7 @@ class RegistrationDetailsViewModel @Inject constructor(
         val hasError = listOf(
             _state.value?.emailError,
             _state.value?.loginError,
-        ).any { it != null } && !state.value?.gender.isNullOrEmpty()
+        ).any { it != null }
 
         if (!hasError) {
             _state.value = _state.value?.copy(
