@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.moviescatalog.databinding.FragmentRegistrationDetailsBinding
 import com.example.moviescatalog.presentation.util.mainActivity
+import com.example.moviescatalog.presentation.util.setContainerError
 
 class RegistrationDetailsFragment : Fragment() {
 
@@ -57,15 +58,16 @@ class RegistrationDetailsFragment : Fragment() {
 
 
     private fun handleState(state: RegistrationDetailsState) {
-        binding.loginEditTextContainer.error = state.loginError?.asString(requireContext())
-        binding.emailEditTextContainer.error = state.emailError?.asString(requireContext())
-        binding.firstNameEditTextContainer.error = state.firstNameError?.asString(requireContext())
+        binding.loginEditTextContainer.setContainerError(state.loginError, requireContext())
+        binding.emailEditTextContainer.setContainerError(state.emailError, requireContext())
+        binding.firstNameEditTextContainer.setContainerError(state.firstNameError, requireContext())
         binding.birthdayText.text = state.birthday
 
         val hasEmpty = listOf(
             binding.loginEditText.text.toString(),
             binding.emailEditText.text.toString(),
-            binding.loginEditText.text.toString()
+            binding.loginEditText.text.toString(),
+            state.birthday
         ).any { it.isEmpty() }
         binding.continueRegistration.isEnabled = state.isValid && !hasEmpty
     }

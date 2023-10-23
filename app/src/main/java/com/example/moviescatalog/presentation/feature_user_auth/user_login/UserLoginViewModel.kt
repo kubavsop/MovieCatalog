@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.feature_user_auth.model.LoginRequest
 import com.example.domain.feature_user_auth.usecase.LoginUserUseCase
+import com.example.moviescatalog.R
+import com.example.moviescatalog.presentation.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
@@ -32,7 +34,7 @@ class UserLoginViewModel @Inject constructor(
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                _state.value = UserLoginState.Error(msg = e.message.toString())
+                _state.value = UserLoginState.Error(msg = UiText(R.string.login_failed))
             }
         }
     }

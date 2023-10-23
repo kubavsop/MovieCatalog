@@ -46,7 +46,7 @@ class RegistrationDetailsViewModel @Inject constructor(
     private fun firstNameChanged(firstName: String) {
         val isSuccess = validateFirstNameUseCase(firstName)
         _state.value = _state.value?.copy(
-            firstNameError = if (isSuccess) null else UiText.StringResource(
+            firstNameError = if (isSuccess) null else UiText(
                 R.string.min_first_name_length_error,
                 MIN_FIRST_NAME_LENGTH
             ),
@@ -58,7 +58,7 @@ class RegistrationDetailsViewModel @Inject constructor(
     private fun loginChanged(login: String) {
         val isSuccess = validateLoginUseCase(login)
         _state.value = _state.value?.copy(
-            loginError = if (isSuccess) null else UiText.StringResource(
+            loginError = if (isSuccess) null else UiText(
                 R.string.min_login_length_error,
                 MIN_LOGIN_LENGTH
             ),
@@ -70,7 +70,7 @@ class RegistrationDetailsViewModel @Inject constructor(
     private fun emailChanged(email: String) {
         val isSuccess = validateEmailUseCase(email)
         _state.value = _state.value?.copy(
-            emailError = if (isSuccess) null else UiText.StringResource(
+            emailError = if (isSuccess) null else UiText(
                 R.string.email_error
             ),
             isValid = false

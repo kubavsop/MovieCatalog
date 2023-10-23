@@ -7,10 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.moviescatalog.databinding.FragmentPasswordRegistrationBinding
+import com.example.moviescatalog.presentation.UiText
 import com.example.moviescatalog.presentation.util.mainActivity
+import com.example.moviescatalog.presentation.util.setContainerError
 
 class PasswordRegistrationFragment : Fragment() {
     private var _binding: FragmentPasswordRegistrationBinding? = null
@@ -50,9 +53,8 @@ class PasswordRegistrationFragment : Fragment() {
     }
 
     private fun handleState(state: PasswordRegistrationState) {
-        binding.passwordEditTextContainer.error = state.passwordError?.asString(requireContext())
-        binding.repeatedPasswordEditTextContainer.error =
-            state.repeatedPasswordError?.asString(requireContext())
+        binding.passwordEditTextContainer.setContainerError(state.passwordError, requireContext())
+        binding.repeatedPasswordEditTextContainer.setContainerError(state.repeatedPasswordError, requireContext())
 
         val hasEmpty = listOf(
             binding.passwordEditText.text.toString(),
@@ -60,8 +62,30 @@ class PasswordRegistrationFragment : Fragment() {
         ).any { it.isEmpty() }
 
         binding.register.isEnabled = state.isValid && !hasEmpty
+
+        if (state.isLoading) showProgressBar()
+        if (state.isRegistered) goToMainScreen()
+        if (state.registrationError != null) showError(state.registrationError)
     }
 
+    private fun goToMainScreen() {
+        binding.progressBar.isVisible = false
+        // TODO()
+    }
+
+    private fun showError(msg: UiText) {
+        with(binding) {
+            progressBar.isVisible = false
+            passwordEditTextContainer.error = EMPTY_ERROR
+            if (passwordEditTextContainer.childCount == 2) {
+                passwordEditTextContainer.getChildAt(ERROR_MESSAGE_INDEX).visibility = View.GONE;
+            }
+            repeatedPasswordEditTextContainer.error = msg.asString(requireContext())
+        }
+    }
+    private fun showProgressBar() {
+        binding.progressBar.isVisible = true
+    }
 
     private fun getAfterTextPasswordChangedListener() =
         object : TextWatcher {
@@ -79,6 +103,10 @@ class PasswordRegistrationFragment : Fragment() {
             }
         }
 
+    private companion object {
+        const val EMPTY_ERROR = " "
+        const val ERROR_MESSAGE_INDEX = 1
+    }
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()

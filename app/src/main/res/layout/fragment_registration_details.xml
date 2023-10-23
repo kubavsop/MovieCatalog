@@ -67,7 +67,6 @@
             android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <TextView
         android:id="@+id/gender"
         style="@style/HintTextStyle"
@@ -207,12 +206,12 @@
         android:textColor="@color/gray_200"
         android:textSize="@dimen/text_size_14"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/register"
+        app:layout_constraintEnd_toStartOf="@+id/sing_in"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/register"
+        android:id="@+id/sing_in"
         style="@style/SubTitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

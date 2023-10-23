@@ -37,7 +37,7 @@
         android:text="@string/registration" />
 
     <Button
-        android:id="@+id/login_to"
+        android:id="@+id/loginTo"
         style="@style/AuthSelectionLoginButtonStyle"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/margin_16"

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.moviescatalog.databinding.FragmentUserLoginBinding
@@ -40,10 +41,38 @@ class UserLoginFragment : Fragment() {
     private fun handleState(state: UserLoginState) {
         when(state) {
             UserLoginState.Initial -> Unit
-            UserLoginState.Success -> Unit
-            UserLoginState.Loading -> Unit
-            is UserLoginState.Error -> Unit
+            UserLoginState.Success -> goToMainScreen()
+            UserLoginState.Loading -> showProgressBar()
+            is UserLoginState.Error -> showError(state)
         }
+    }
+
+    private fun goToMainScreen() {
+        binding.progressBar.isVisible = false
+    }
+
+    private fun showProgressBar() {
+        with(binding) {
+            loginEditTextContainer.error = null
+            passwordEditTextContainer.error = null
+            progressBar.isVisible = true
+        }
+    }
+
+    private fun showError(state: UserLoginState.Error) {
+        with(binding) {
+            progressBar.isVisible = false
+            loginEditTextContainer.error = EMPTY_ERROR
+            if (loginEditTextContainer.childCount == 2) {
+                loginEditTextContainer.getChildAt(ERROR_MESSAGE_INDEX).visibility = View.GONE;
+            }
+            passwordEditTextContainer.error = state.msg.asString(requireContext())
+        }
+    }
+
+    private companion object {
+        const val EMPTY_ERROR = " "
+        const val ERROR_MESSAGE_INDEX = 1
     }
 
     override fun onDestroyView() {
