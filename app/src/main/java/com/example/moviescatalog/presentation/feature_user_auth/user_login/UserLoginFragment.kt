@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.moviescatalog.databinding.FragmentUserLoginBinding
+import com.example.moviescatalog.presentation.util.setClearFocusOnDoneClick
 
 class UserLoginFragment : Fragment() {
     private var _binding: FragmentUserLoginBinding? = null
@@ -19,6 +20,8 @@ class UserLoginFragment : Fragment() {
     interface FragmentCallBack {
         fun openAuthSelectionFromLogin()
         fun openRegistrationDetailsFromUserLogin()
+
+        fun openMainFromUserLogin()
     }
 
     override fun onAttach(context: Context) {
@@ -46,6 +49,7 @@ class UserLoginFragment : Fragment() {
         }
         binding.backspace.setOnClickListener { fragmentCallBack?.openAuthSelectionFromLogin() }
         binding.register.setOnClickListener { fragmentCallBack?.openRegistrationDetailsFromUserLogin() }
+        binding.passwordEditText.setClearFocusOnDoneClick()
     }
 
     private fun handleState(state: UserLoginState) {
@@ -59,6 +63,7 @@ class UserLoginFragment : Fragment() {
 
     private fun goToMainScreen() {
         binding.progressBar.isVisible = false
+        fragmentCallBack?.openMainFromUserLogin()
     }
 
     private fun showProgressBar() {

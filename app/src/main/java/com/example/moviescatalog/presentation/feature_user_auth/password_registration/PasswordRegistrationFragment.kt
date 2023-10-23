@@ -13,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.moviescatalog.databinding.FragmentPasswordRegistrationBinding
 import com.example.moviescatalog.presentation.UiText
+import com.example.moviescatalog.presentation.util.setClearFocusOnDoneClick
 import com.example.moviescatalog.presentation.util.setContainerError
 
 class PasswordRegistrationFragment : Fragment() {
@@ -26,6 +27,7 @@ class PasswordRegistrationFragment : Fragment() {
     interface FragmentCallBack {
         fun openUserLoginFromPasswordRegistration()
         fun openDetailedUserRegistrationFromPasswordRegistration()
+        fun openMainFromPasswordRegistration()
     }
 
     override fun onAttach(context: Context) {
@@ -62,6 +64,7 @@ class PasswordRegistrationFragment : Fragment() {
             )
         }
         binding.signIn.setOnClickListener { fragmentCallBack?.openUserLoginFromPasswordRegistration() }
+        binding.repeatedPasswordEditText.setClearFocusOnDoneClick()
     }
 
     private fun handleState(state: PasswordRegistrationState) {
@@ -82,7 +85,7 @@ class PasswordRegistrationFragment : Fragment() {
 
     private fun goToMainScreen() {
         binding.progressBar.isVisible = false
-        // TODO()
+        fragmentCallBack?.openMainFromPasswordRegistration()
     }
 
     private fun showError(msg: UiText) {

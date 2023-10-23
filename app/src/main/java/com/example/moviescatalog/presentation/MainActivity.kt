@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            when(destination.id) {
+            when (destination.id) {
                 R.id.mainFragment -> showBottomNav()
                 R.id.favoriteFragment -> showBottomNav()
                 R.id.profileFragment -> showBottomNav()
@@ -58,6 +58,11 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
     override fun openRegistrationDetailsFromUserLogin() {
         val action =
             UserLoginFragmentDirections.actionUserLoginFragmentToRegistrationDetailsFragment()
+        navController.navigate(action)
+    }
+
+    override fun openMainFromUserLogin() {
+        val action = UserLoginFragmentDirections.actionUserLoginFragmentToMainFragment()
         navController.navigate(action)
     }
 
@@ -97,6 +102,12 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
         navController.navigate(action)
     }
 
+    override fun openMainFromPasswordRegistration() {
+        val action =
+            PasswordRegistrationFragmentDirections.actionPasswordRegistrationFragmentToMainFragment()
+        navController.navigate(action)
+    }
+
     override fun openPasswordRegistration(
         userName: String,
         name: String,
@@ -119,6 +130,7 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
     private fun showBottomNav() {
         binding.bottomNavigationView.visibility = View.VISIBLE
     }
+
     private fun hideBottomNav() {
         binding.bottomNavigationView.visibility = View.GONE
     }
