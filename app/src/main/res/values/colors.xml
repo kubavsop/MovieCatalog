@@ -10,9 +10,17 @@
     <color name="status_bar_color">#0F0F0F</color>
     <color name="default_stroke_color">#5E5E5E</color>
     <color name="error_color">#E64646</color>
+    <color name="gray_900">#1D1D1D</color>
     <color name="gray_750">#404040</color>
     <color name="gray_400">#909499</color>
     <color name="gray_200">#C4C8CC</color>
     <color name="toggle_background_color">#1F767680</color>
     <color name="bottom_nav_color">#161616</color>
+
+    <color name="color_rating_9_to">#4BB34B</color>
+    <color name="color_rating_8_to_9">#A3CD4A</color>
+    <color name="color_rating_6_to_8">#FFD54F</color>
+    <color name="color_rating_4_to_6">#FFA000</color>
+    <color name="color_rating_3_to_4">#F05C44</color>
+    <color name="color_rating_to_3">#E64646</color>
 </resources>

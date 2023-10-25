@@ -5,14 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.FragmentMainBinding
 import com.example.moviescatalog.databinding.FragmentProfileBinding
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
 class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,7 +27,18 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.moviesList.adapter = MovieListAdapter()
+        lifecycleScope.launch {
+            viewModel.moviePagingFlow.collectLatest { pagingData ->
+                (binding.moviesList.adapter as? MovieListAdapter)?.submitData(pagingData)
+            }
+        }
+    }
+
     override fun onDestroyView() {
+        binding.moviesList.adapter = null
         _binding = null
         super.onDestroyView()
     }

@@ -27,6 +27,29 @@
         <item name="android:textSize">@dimen/text_size_11</item>
     </style>
 
+    <style name="UserTextStyle" parent="SubTitleTextStyle">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="AverageRatingStyle" parent="TitleTextStyle">
+        <item name="android:textColor">@color/gray_900</item>
+        <item name="android:textSize">@dimen/text_size_13</item>
+        <item name="android:layout_height">@dimen/average_rating_height</item>
+        <item name="android:layout_width">@dimen/average_rating_width</item>
+    </style>
+
+    <style name="GenreStyle" parent="BodyTextStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:background">@drawable/genre_background</item>
+        <item name="android:textSize">@dimen/text_size_13</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:paddingBottom">@dimen/padding_2</item>
+        <item name="android:paddingTop">@dimen/padding_2</item>
+        <item name="android:paddingStart">@dimen/padding_8</item>
+        <item name="android:paddingEnd">@dimen/padding_8</item>
+    </style>
+
 
     <style name="TextLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="hintEnabled">false</item>

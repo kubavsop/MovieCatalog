@@ -3,7 +3,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
-    id ("androidx.navigation.safeargs.kotlin")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -68,6 +68,20 @@ dependencies {
     //Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+
+    //Flex box
+    implementation("com.google.android.flexbox:flexbox:3.0.0")
+
+    //Image loading
+    implementation("io.coil-kt:coil:2.4.0")
+
+    //Paging
+    implementation("androidx.paging:paging-runtime:3.2.1")
+
+    //Room
+    implementation("androidx.room:room-ktx:2.6.0")
+    kapt("androidx.room:room-compiler:2.6.0")
+    implementation("androidx.room:room-paging:2.6.0")
 }
 
 kapt {
