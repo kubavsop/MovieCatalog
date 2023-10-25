@@ -1,45 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
     android:padding="@dimen/padding_16"
-    tools:context=".presentation.auth_selection.AuthSelectionFragment">
+    tools:context=".presentation.feature_user_auth.auth_selection.AuthSelectionFragment">
 
     <ImageView
-        android:layout_width="match_parent"
+        android:id="@+id/movie_night"
+        android:layout_width="0dp"
         android:layout_height="@dimen/auth_selection_image_height"
-        android:src="@drawable/auth_selection_image" />
+        android:src="@drawable/auth_selection_image"
+        app:layout_constraintBottom_toTopOf="@id/title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        style="@style/title_text_style"
+        android:id="@+id/title"
+        style="@style/TitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_32"
         android:text="@string/cinema_world"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@id/body_movie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/movie_night" />
 
     <TextView
-        style="@style/body_text_style"
+        android:id="@+id/body_movie"
+        style="@style/BodyTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8"
         android:text="@string/enjoy_movies_on_mobile"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@id/registration"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
 
     <Button
         android:id="@+id/registration"
-        style="@style/accent_button_style"
-        android:layout_width="match_parent"
+        style="@style/AccentButtonStyle"
+        android:layout_width="0dp"
         android:layout_marginTop="@dimen/margin_32"
-        android:text="@string/registration" />
+        android:text="@string/registration"
+        app:layout_constraintBottom_toTopOf="@id/loginTo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/body_movie" />
 
     <Button
-        android:id="@+id/login_to"
-        style="@style/auth_selection_login_button_style"
-        android:layout_width="match_parent"
+        android:id="@+id/loginTo"
+        style="@style/AuthSelectionLoginButtonStyle"
+        android:layout_width="0dp"
         android:layout_marginTop="@dimen/margin_16"
-        android:text="@string/login_to" />
-</LinearLayout>
+        android:text="@string/login_to"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registration" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,20 +1,27 @@
 package com.example.moviescatalog.presentation
 
 import android.os.Bundle
-import android.text.Layout.Directions
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.ActivityMainBinding
-import com.example.moviescatalog.presentation.auth_selection.AuthSelectionFragmentDirections
-import com.example.moviescatalog.presentation.password_registration.PasswordRegistrationFragmentDirections
-import com.example.moviescatalog.presentation.registration_details.RegistrationDetailsFragmentDirections
-import com.example.moviescatalog.presentation.user_login.UserLoginFragmentDirections
+import com.example.moviescatalog.presentation.feature_user_auth.auth_selection.AuthSelectionFragment
+import com.example.moviescatalog.presentation.feature_user_auth.auth_selection.AuthSelectionFragmentDirections
+import com.example.moviescatalog.presentation.feature_user_auth.password_registration.PasswordRegistrationFragment
+import com.example.moviescatalog.presentation.feature_user_auth.user_login.UserLoginFragmentDirections
+import com.example.moviescatalog.presentation.feature_user_auth.password_registration.PasswordRegistrationFragmentDirections
+import com.example.moviescatalog.presentation.feature_user_auth.registration_details.RegistrationDetailsFragment
+import com.example.moviescatalog.presentation.feature_user_auth.registration_details.RegistrationDetailsFragmentDirections
+import com.example.moviescatalog.presentation.feature_user_auth.user_login.UserLoginFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
+    RegistrationDetailsFragment.FragmentCallBack, PasswordRegistrationFragment.FragmentCallBack,
+    AuthSelectionFragment.FragmentCallBack {
     private lateinit var binding: ActivityMainBinding
     private val navController: NavController
         get() {
@@ -25,41 +32,83 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.mainFragment -> showBottomNav()
+                R.id.favoriteFragment -> showBottomNav()
+                R.id.profileFragment -> showBottomNav()
+                else -> hideBottomNav()
+            }
+        }
+
         setContentView(binding.root)
+
+        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
     }
 
 
-    fun openAuthSelectionFromLogin() {
+    override fun openAuthSelectionFromLogin() {
         val action = UserLoginFragmentDirections.actionUserLoginFragmentToAuthSelectionFragment()
         navController.navigate(action)
     }
 
-    fun openAuthSelectionFromRegistration() {
+    override fun openRegistrationDetailsFromUserLogin() {
+        val action =
+            UserLoginFragmentDirections.actionUserLoginFragmentToRegistrationDetailsFragment()
+        navController.navigate(action)
+    }
+
+    override fun openMainFromUserLogin() {
+        val action = UserLoginFragmentDirections.actionUserLoginFragmentToMainFragment()
+        navController.navigate(action)
+    }
+
+    override fun openUserLoginFromRegistrationDetails() {
+        val action =
+            RegistrationDetailsFragmentDirections.actionRegistrationDetailsFragmentToUserLoginFragment()
+        navController.navigate(action)
+    }
+
+    override fun openAuthSelectionFromRegistration() {
         val action =
             RegistrationDetailsFragmentDirections.actionRegistrationDetailsFragmentToAuthSelectionFragment()
         navController.navigate(action)
     }
 
-    fun openUserAuthorization() {
+    override fun openUserAuthorization() {
         val action =
             AuthSelectionFragmentDirections.actionAuthSelectionFragmentToUserLoginFragment()
         navController.navigate(action)
     }
 
-    fun openDetailedUserRegistrationFromSelection() {
+    override fun openDetailedUserRegistrationFromSelection() {
         val action =
             AuthSelectionFragmentDirections.actionAuthSelectionFragmentToRegistrationDetailsFragment()
         navController.navigate(action)
     }
 
-    fun openDetailedUserRegistrationFromPasswordRegistration() {
+    override fun openUserLoginFromPasswordRegistration() {
+        val action =
+            PasswordRegistrationFragmentDirections.actionPasswordRegistrationFragmentToUserLoginFragment()
+        navController.navigate(action)
+    }
+
+    override fun openDetailedUserRegistrationFromPasswordRegistration() {
         val action =
             PasswordRegistrationFragmentDirections.actionPasswordRegistrationFragmentToRegistrationDetailsFragment()
         navController.navigate(action)
     }
 
-    fun openPasswordRegistration(
+    override fun openMainFromPasswordRegistration() {
+        val action =
+            PasswordRegistrationFragmentDirections.actionPasswordRegistrationFragmentToMainFragment()
+        navController.navigate(action)
+    }
+
+    override fun openPasswordRegistration(
         userName: String,
         name: String,
         email: String,
@@ -75,5 +124,14 @@ class MainActivity : AppCompatActivity() {
                 gender = gender
             )
         navController.navigate(action)
+    }
+
+
+    private fun showBottomNav() {
+        binding.bottomNavigationView.visibility = View.VISIBLE
+    }
+
+    private fun hideBottomNav() {
+        binding.bottomNavigationView.visibility = View.GONE
     }
 }

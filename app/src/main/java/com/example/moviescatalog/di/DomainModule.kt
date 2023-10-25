@@ -1,15 +1,18 @@
 package com.example.moviescatalog.di
 
-import com.example.domain.repositroy.UserAuthRepository
-import com.example.domain.usecase.FormatDateUseCase
-import com.example.domain.usecase.LoginUserUseCase
-import com.example.domain.usecase.RegisterUserUseCase
-import com.example.domain.usecase.ValidateEmailUseCase
-import com.example.domain.usecase.ValidateFirstNameUseCase
-import com.example.domain.usecase.ValidateLoginUseCase
-import com.example.domain.usecase.ValidatePasswordUseCase
-import com.example.domain.usecase.ValidateRepeatedPasswordUseCase
-import com.example.domain.validator.EmailPatternValidator
+import com.example.domain.feature_main_screen.repository.MoviesRepository
+import com.example.domain.feature_main_screen.usecase.GetMovieDetailsByIdUseCase
+import com.example.domain.feature_main_screen.usecase.GetMoviesByPageUseCase
+import com.example.domain.feature_user_auth.repositroy.UserAuthRepository
+import com.example.domain.feature_user_auth.usecase.FormatDateUseCase
+import com.example.domain.feature_user_auth.usecase.LoginUserUseCase
+import com.example.domain.feature_user_auth.usecase.RegisterUserUseCase
+import com.example.domain.feature_user_auth.usecase.ValidateEmailUseCase
+import com.example.domain.feature_user_auth.usecase.ValidateFirstNameUseCase
+import com.example.domain.feature_user_auth.usecase.ValidateLoginUseCase
+import com.example.domain.feature_user_auth.usecase.ValidatePasswordUseCase
+import com.example.domain.feature_user_auth.usecase.ValidateRepeatedPasswordUseCase
+import com.example.domain.feature_user_auth.validator.EmailPatternValidator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,4 +50,14 @@ class DomainModule {
 
     @Provides
     fun provideDateUseCase() = FormatDateUseCase()
+
+    @Provides
+    fun provideGetMoviesByPageUseCase(repository: MoviesRepository): GetMoviesByPageUseCase {
+        return GetMoviesByPageUseCase(repository = repository)
+    }
+
+    @Provides
+    fun provideGetMovieDetailsByIdUseCase(repository: MoviesRepository): GetMovieDetailsByIdUseCase {
+        return GetMovieDetailsByIdUseCase(repository = repository)
+    }
 }

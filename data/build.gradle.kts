@@ -1,4 +1,5 @@
 plugins {
+    kotlin("kapt")
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
 }
@@ -35,6 +36,14 @@ dependencies {
     //Retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    //Paging
+    implementation("androidx.paging:paging-runtime:3.2.1")
+
+    //Room
+    implementation("androidx.room:room-ktx:2.6.0")
+    kapt("androidx.room:room-compiler:2.6.0")
+    implementation("androidx.room:room-paging:2.6.0")
 
     implementation(project(":domain"))
     testImplementation("junit:junit:4.13.2")

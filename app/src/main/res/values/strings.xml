@@ -24,9 +24,15 @@
     <string name="have_account">Уже есть аккаунт?</string>
     <string name="sign_in">Войдите</string>
     <string name="repeat_password">Повторите пароль</string>
-    <string name="min_login_length_error">Логин содержит не менее %d символов</string>
-    <string name="min_first_name_length_error">Имя содержит не менее %d символов</string>
+    <string name="min_login_length_error">Логин содержит не менее %d символов.</string>
+    <string name="min_first_name_length_error">Имя содержит не менее %d символов.</string>
     <string name="email_error">Некорректный адрес электронной почты</string>
-    <string name="password_error">Некорректный пароль</string>
-    <string name="repeated_password_error">Пароли не совпадают</string>
+    <string name="password_error">Некорректный пароль.</string>
+    <string name="repeated_password_error">Пароли не совпадают.</string>
+    <string name="login_failed">Неверный логин или пароль.</string>
+    <string name="registration_error">Такой пользователь уже существует.</string>
+    <string name="main">Главная</string>
+    <string name="favorite">Любимое</string>
+    <string name="profile">Профиль</string>
+    <string name="catalog">Каталог</string>
 </resources>
