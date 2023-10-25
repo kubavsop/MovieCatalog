@@ -25,5 +25,4 @@ class MainViewModel @Inject constructor(
         .flow
         .map { value -> value.map { it.toMovieElement()} }
         .cachedIn(viewModelScope)
-
 }

@@ -38,6 +38,7 @@ class MainFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        binding.moviesList.adapter = null
         _binding = null
         super.onDestroyView()
     }

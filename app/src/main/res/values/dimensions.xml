@@ -2,13 +2,21 @@
 <resources>
     <dimen name="padding_16">16dp</dimen>
     <dimen name="padding_12">12dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
+    <dimen name="padding_4">4dp</dimen>
+    <dimen name="padding_2">2dp</dimen>
     <dimen name="margin_56">56dp</dimen>
     <dimen name="margin_32">32dp</dimen>
     <dimen name="margin_20">20dp</dimen>
     <dimen name="margin_16">16dp</dimen>
     <dimen name="margin_15">15dp</dimen>
+    <dimen name="margin_105">105dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
     <dimen name="margin_8">8dp</dimen>
+    <dimen name="margin_4">4dp</dimen>
+    <dimen name="margin_2">2dp</dimen>
 
+    <dimen name="movie_image_width">95dp</dimen>
     <dimen name="auth_selection_image_height">338dp</dimen>
     <dimen name="button_height">42dp</dimen>
     <dimen name="button_radius">10dp</dimen>
@@ -25,10 +33,24 @@
     <dimen name="calendar_icon_size">20dp</dimen>
     <dimen name="bottom_nav_icon_size">28dp</dimen>
     <dimen name="bottom_nav_height">67dp</dimen>
+    <dimen name="movie_image_item_width">95dp</dimen>
+    <dimen name="movie_list_item_height">130dp</dimen>
+    <dimen name="average_rating_radius">35dp</dimen>
+    <dimen name="average_rating_height">20dp</dimen>
+    <dimen name="average_rating_width">37dp</dimen>
+    <dimen name="user_rating_radius">35dp</dimen>
+    <dimen name="user_rating_height">26dp</dimen>
+    <dimen name="user_rating_width">45dp</dimen>
+    <dimen name="star_size">12dp</dimen>
+    <dimen name="genre_background_radius">5dp</dimen>
 
     <dimen name="text_size_11">11sp</dimen>
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_13">13sp</dimen>
     <dimen name="text_size_14">14sp</dimen>
     <dimen name="text_size_15">15sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
     <dimen name="text_size_17">17sp</dimen>
     <dimen name="text_size_20">20sp</dimen>
+    <dimen name="text_size_24">24sp</dimen>
 </resources>

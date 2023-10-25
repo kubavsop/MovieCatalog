@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="@dimen/margin_16"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/film_image"
+        android:layout_width="@dimen/movie_image_item_width"
+        android:layout_height="wrap_content"
+        android:src="@drawable/main_image"
+        android:adjustViewBounds="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/average_rating"
+        style="@style/AverageRatingStyle"
+        android:layout_marginStart="@dimen/margin_2"
+        android:layout_marginTop="@dimen/margin_2"
+        android:background="@drawable/average_rating_background"
+        android:text="9.0"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@id/film_image"
+        app:layout_constraintTop_toTopOf="@id/film_image" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/content_start"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/margin_105" />
+
+    <TextView
+        android:id="@+id/movie_title"
+        style="@style/TitleTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Название фильма"
+        android:textSize="@dimen/text_size_16"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toStartOf="@id/user_rating"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@+id/content_start"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/user_rating"
+        android:layout_width="@dimen/user_rating_width"
+        android:layout_height="@dimen/user_rating_height"
+        android:background="@drawable/user_rating"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/user_rating_text"
+        style="@style/UserTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_4"
+        android:text="10"
+        app:layout_constraintBottom_toBottomOf="@id/user_rating"
+        app:layout_constraintEnd_toEndOf="@+id/user_rating"
+        app:layout_constraintTop_toTopOf="@+id/user_rating" />
+
+    <ImageView
+        android:layout_width="@dimen/star_size"
+        android:layout_height="@dimen/star_size"
+        android:src="@drawable/star_image"
+        app:layout_constraintBottom_toBottomOf="@id/user_rating"
+        app:layout_constraintEnd_toStartOf="@id/user_rating_text"
+        app:layout_constraintStart_toStartOf="@id/user_rating"
+        app:layout_constraintTop_toTopOf="@id/user_rating" />
+
+    <TextView
+        android:id="@+id/date"
+        style="@style/BodyTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_4"
+        android:text="2013 · США"
+        android:textSize="@dimen/text_size_12"
+        app:layout_constraintStart_toStartOf="@+id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/movie_title" />
+
+<!--    <com.google.android.flexbox.FlexboxLayout-->
+<!--        android:id="@+id/genre_container"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constrainedHeight="true"-->
+<!--        app:flexWrap="wrap"-->
+<!--        android:layout_marginTop="@dimen/margin_10"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="@id/content_start"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/date"-->
+<!--        app:layout_constraintVertical_bias="0">-->
+<!--    </com.google.android.flexbox.FlexboxLayout>-->
+
+    <TextView
+        android:id="@+id/genre_1"
+        android:visibility="gone"
+        style="@style/GenreStyle"/>
+
+    <TextView
+        android:id="@+id/genre_2"
+        android:visibility="gone"
+        style="@style/GenreStyle"/>
+
+    <TextView
+        android:id="@+id/genre_3"
+        android:visibility="gone"
+        style="@style/GenreStyle"/>
+
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/genres"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/date"
+        app:constraint_referenced_ids="genre_1,genre_2,genre_3"
+        app:flow_wrapMode="chain"
+        app:flow_horizontalBias="0"
+        app:flow_horizontalStyle="packed"
+        app:flow_verticalStyle="packed"
+        app:flow_verticalGap="@dimen/margin_4"
+        app:flow_horizontalGap="@dimen/margin_4"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

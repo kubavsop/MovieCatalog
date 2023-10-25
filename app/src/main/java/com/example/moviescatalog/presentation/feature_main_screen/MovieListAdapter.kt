@@ -1,23 +1,67 @@
 package com.example.moviescatalog.presentation.feature_main_screen
 
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.ViewCompat.generateViewId
+import androidx.core.widget.TextViewCompat
 import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.domain.feature_main_screen.model.MovieElement
+import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.MovieListItemBinding
+import com.google.android.flexbox.FlexboxLayout
 
-class MovieListAdapter : PagingDataAdapter<MovieElement, MovieListAdapter.MovieViewHolder>(MOVIE_COMPARATOR) {
+class MovieListAdapter :
+    PagingDataAdapter<MovieElement, MovieListAdapter.MovieViewHolder>(MOVIE_COMPARATOR) {
 
     class MovieViewHolder(private val binding: MovieListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movieElement: MovieElement) {
+
+            val context = binding.root.context
+            val averageRatingBackground =
+                AppCompatResources.getDrawable(context, R.drawable.average_rating_background)
+
+            val ratingColor = when (movieElement.averageRating) {
+                in 9.0..10.0 -> R.color.color_rating_9_to
+                in 8.0..8.9 -> R.color.color_rating_8_to_9
+                in 6.0..7.9 -> R.color.color_rating_6_to_8
+                in 4.0..5.9 -> R.color.color_rating_4_to_6
+                in 3.0..3.9 -> R.color.color_rating_3_to_4
+                in 0.0..2.9 -> R.color.color_rating_to_3
+                else -> R.color.color_rating_9_to
+            }
+
+            averageRatingBackground?.colorFilter =
+                PorterDuffColorFilter(context.getColor(ratingColor), PorterDuff.Mode.SRC_IN)
+
+            val genreTextViews = listOf(
+                binding.genre1,
+                binding.genre2,
+                binding.genre3,
+            )
+
             with(binding) {
                 filmImage.load(movieElement.poster)
-                movieTitle.text = movieElement.averageRating.toString()
+                movieTitle.text = movieElement.name
+                date.text = "${movieElement.year} · ${movieElement.country}"
+                averageRating.text = movieElement.averageRating.toString()
+                averageRating.background = averageRatingBackground
+            }
+
+            val genres = movieElement.genres
+            for (i in genres.indices) {
+                if (i > 2) break
+                genreTextViews[i].text = genres[i]
+                genreTextViews[i].visibility = View.VISIBLE
             }
         }
     }
