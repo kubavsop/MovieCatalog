@@ -7,7 +7,7 @@ data class MovieDetails(
     val description: String,
     val director: String,
     val fees: Int,
-    val genres: List<Genre>,
+    val genres: List<String>,
     val id: String,
     val name: String,
     val poster: String,
