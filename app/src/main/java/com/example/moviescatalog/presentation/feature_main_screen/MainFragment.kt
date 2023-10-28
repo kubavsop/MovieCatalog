@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.map
 import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.FragmentMainBinding
 import com.example.moviescatalog.databinding.FragmentProfileBinding
