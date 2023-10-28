@@ -8,14 +8,14 @@ import java.text.SimpleDateFormat
 class RegisterUserUseCase(
     private val repository: UserAuthRepository
 ) {
-    suspend operator fun invoke(profile: Profile): TokenResponse {
+    suspend operator fun invoke(profile: Profile) {
         val inputFormat = SimpleDateFormat(INPUT_FORMAT)
         val outputFormat = SimpleDateFormat(OUTPUT_FORMAT)
         val date = inputFormat.parse(profile.birthDate)
         val modifiedFormatProfile = profile.copy(
             birthDate = outputFormat.format(date)
         )
-        return repository.register(modifiedFormatProfile)
+        repository.register(modifiedFormatProfile)
     }
     private companion object {
         const val INPUT_FORMAT = "dd.MM.yyyy"
