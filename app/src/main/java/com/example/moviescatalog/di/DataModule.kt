@@ -1,5 +1,8 @@
 package com.example.moviescatalog.di
 
+import android.content.Context
+import com.example.data.feature_user_auth.local.UserStorage
+import com.example.data.feature_user_auth.local.UserStorageImpl
 import com.example.data.feature_user_auth.remote.UserAuthApi
 import com.example.data.feature_user_auth.repository.UserAuthRepositoryImpl
 import com.example.data.feature_user_auth.validator.EmailPatternValidatorImpl
@@ -8,6 +11,7 @@ import com.example.domain.feature_user_auth.validator.EmailPatternValidator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -29,8 +33,14 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideUserAuthRepository(userAuthApi: UserAuthApi): UserAuthRepository {
-        return UserAuthRepositoryImpl(userAuthApi = userAuthApi)
+    fun provideUserStorage(@ApplicationContext context: Context): UserStorage {
+        return UserStorageImpl(context = context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideUserAuthRepository(userAuthApi: UserAuthApi, userStorage: UserStorage): UserAuthRepository {
+        return UserAuthRepositoryImpl(userAuthApi = userAuthApi, userStorage = userStorage)
     }
 
     @Singleton
