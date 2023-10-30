@@ -1,7 +1,7 @@
 package com.example.data.feature_user_auth.remote
 
 import com.example.data.feature_user_auth.remote.dto.LoginRequestDto
-import com.example.data.feature_user_auth.remote.dto.ProfileDto
+import com.example.data.feature_user_auth.remote.dto.UserRegistrationDto
 import com.example.data.feature_user_auth.remote.dto.TokenResponseDto
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -9,7 +9,7 @@ import retrofit2.http.POST
 
 interface UserAuthApi {
     @POST("register")
-    suspend fun register(@Body profile: ProfileDto): TokenResponseDto
+    suspend fun register(@Body profile: UserRegistrationDto): TokenResponseDto
 
 
     @POST("login")

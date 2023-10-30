@@ -1,6 +1,6 @@
 package com.example.data.feature_user_auth.remote.dto
 
-data class ProfileDto(
+data class UserRegistrationDto(
     val userName: String,
     val name: String,
     val password: String,

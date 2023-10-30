@@ -2,14 +2,14 @@ package com.example.data.feature_user_auth.mapper
 
 import com.example.data.feature_user_auth.local.TokenResponseEntity
 import com.example.data.feature_user_auth.remote.dto.LoginRequestDto
-import com.example.data.feature_user_auth.remote.dto.ProfileDto
+import com.example.data.feature_user_auth.remote.dto.UserRegistrationDto
 import com.example.data.feature_user_auth.remote.dto.TokenResponseDto
 import com.example.domain.feature_user_auth.model.LoginRequest
-import com.example.domain.feature_user_auth.model.Profile
+import com.example.domain.feature_user_auth.model.UserRegistration
 import com.example.domain.feature_user_auth.model.TokenResponse
 
 
-fun Profile.toProfileDto() = ProfileDto(
+fun UserRegistration.toProfileDto() = UserRegistrationDto(
     userName = userName,
     name = name,
     password = password,
