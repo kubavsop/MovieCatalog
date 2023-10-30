@@ -1,5 +1,6 @@
 package com.example.data.feature_user_auth.mapper
 
+import com.example.data.feature_user_auth.local.TokenResponseEntity
 import com.example.data.feature_user_auth.remote.dto.LoginRequestDto
 import com.example.data.feature_user_auth.remote.dto.ProfileDto
 import com.example.data.feature_user_auth.remote.dto.TokenResponseDto
@@ -23,5 +24,13 @@ fun LoginRequest.toLoginRequestDto() = LoginRequestDto(
 )
 
 fun TokenResponseDto.toTokenResponse() = TokenResponse(
+    token = token
+)
+
+fun TokenResponseDto.toTokenResponseEntity() = TokenResponseEntity(
+    token = token
+)
+
+fun TokenResponseEntity.toTokenResponse() = TokenResponse(
     token = token
 )

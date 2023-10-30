@@ -84,10 +84,17 @@ class DataModule {
         return MoviesRepositoryImpl(moviesApi)
     }
 
+
     @Singleton
     @Provides
-    fun provideUserAuthRepository(userAuthApi: UserAuthApi): UserAuthRepository {
-        return UserAuthRepositoryImpl(userAuthApi = userAuthApi)
+    fun provideUserStorage(@ApplicationContext context: Context): UserStorage {
+        return UserStorageImpl(context = context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideUserAuthRepository(userAuthApi: UserAuthApi, userStorage: UserStorage): UserAuthRepository {
+        return UserAuthRepositoryImpl(userAuthApi = userAuthApi, userStorage = userStorage)
     }
 
     @Singleton

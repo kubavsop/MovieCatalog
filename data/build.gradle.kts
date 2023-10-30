@@ -45,6 +45,9 @@ dependencies {
     kapt("androidx.room:room-compiler:2.6.0")
     implementation("androidx.room:room-paging:2.6.0")
 
+    //Encrypted Shared Pref
+    implementation("androidx.security:security-crypto:1.0.0-alpha02")
+
     implementation(project(":domain"))
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
