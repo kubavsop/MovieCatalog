@@ -10,6 +10,8 @@ import com.example.data.feature_main_screen.local.entity.MovieElementEntity
 import com.example.data.feature_main_screen.remote.MovieRemoteMediator
 import com.example.data.feature_main_screen.remote.MoviesApi
 import com.example.data.feature_main_screen.repository.MoviesRepositoryImpl
+import com.example.data.feature_user_auth.local.UserStorage
+import com.example.data.feature_user_auth.local.UserStorageImpl
 import com.example.data.feature_user_auth.remote.UserAuthApi
 import com.example.data.feature_user_auth.repository.UserAuthRepositoryImpl
 import com.example.data.feature_user_auth.validator.EmailPatternValidatorImpl

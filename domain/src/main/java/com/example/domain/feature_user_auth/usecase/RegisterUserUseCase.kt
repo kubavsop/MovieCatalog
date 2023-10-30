@@ -1,18 +1,17 @@
 package com.example.domain.feature_user_auth.usecase
 
-import com.example.domain.feature_user_auth.model.Profile
-import com.example.domain.feature_user_auth.model.TokenResponse
+import com.example.domain.feature_user_auth.model.UserRegistration
 import com.example.domain.feature_user_auth.repositroy.UserAuthRepository
 import java.text.SimpleDateFormat
 
 class RegisterUserUseCase(
     private val repository: UserAuthRepository
 ) {
-    suspend operator fun invoke(profile: Profile) {
+    suspend operator fun invoke(user: UserRegistration) {
         val inputFormat = SimpleDateFormat(INPUT_FORMAT)
         val outputFormat = SimpleDateFormat(OUTPUT_FORMAT)
-        val date = inputFormat.parse(profile.birthDate)
-        val modifiedFormatProfile = profile.copy(
+        val date = inputFormat.parse(user.birthDate)
+        val modifiedFormatProfile = user.copy(
             birthDate = outputFormat.format(date)
         )
         repository.register(modifiedFormatProfile)

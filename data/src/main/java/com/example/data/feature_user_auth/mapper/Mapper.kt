@@ -9,7 +9,7 @@ import com.example.domain.feature_user_auth.model.UserRegistration
 import com.example.domain.feature_user_auth.model.TokenResponse
 
 
-fun UserRegistration.toProfileDto() = UserRegistrationDto(
+fun UserRegistration.toUserRegistrationDto() = UserRegistrationDto(
     userName = userName,
     name = name,
     password = password,
