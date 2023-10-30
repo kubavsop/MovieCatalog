@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->

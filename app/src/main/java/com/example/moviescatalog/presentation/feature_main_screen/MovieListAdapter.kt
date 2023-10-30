@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.view.ViewCompat.generateViewId
-import androidx.core.widget.TextViewCompat
+import androidx.core.view.allViews
 import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -16,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.domain.feature_main_screen.model.MovieElement
 import com.example.moviescatalog.R
+import com.example.moviescatalog.databinding.GenreTextViewBinding
 import com.example.moviescatalog.databinding.MovieListItemBinding
-import com.google.android.flexbox.FlexboxLayout
 
 class MovieListAdapter :
     PagingDataAdapter<MovieElement, MovieListAdapter.MovieViewHolder>(MOVIE_COMPARATOR) {
@@ -25,7 +24,6 @@ class MovieListAdapter :
     class MovieViewHolder(private val binding: MovieListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movieElement: MovieElement) {
-
             val context = binding.root.context
             val averageRatingBackground =
                 AppCompatResources.getDrawable(context, R.drawable.average_rating_background)
@@ -43,12 +41,6 @@ class MovieListAdapter :
             averageRatingBackground?.colorFilter =
                 PorterDuffColorFilter(context.getColor(ratingColor), PorterDuff.Mode.SRC_IN)
 
-            val genreTextViews = listOf(
-                binding.genre1,
-                binding.genre2,
-                binding.genre3,
-            )
-
             with(binding) {
                 filmImage.load(movieElement.poster)
                 movieTitle.text = movieElement.name
@@ -57,11 +49,14 @@ class MovieListAdapter :
                 averageRating.background = averageRatingBackground
             }
 
-            val genres = movieElement.genres
-            for (i in genres.indices) {
-                if (i > 2) break
-                genreTextViews[i].text = genres[i]
-                genreTextViews[i].visibility = View.VISIBLE
+            for (genre in movieElement.genres) {
+                val tv = LayoutInflater.from(context)
+                    .inflate(R.layout.genre_text_view, binding.root, false).apply {
+                        id = View.generateViewId()
+                    }
+                (tv as? TextView)?.text = genre
+                binding.root.addView(tv)
+                binding.genres.addView(tv)
             }
         }
     }

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.cachedIn
+import androidx.paging.liveData
 import androidx.paging.map
 import com.example.data.feature_main_screen.local.entity.MovieElementEntity
 import com.example.data.feature_main_screen.mapper.toMovieElement
@@ -21,8 +22,9 @@ class MainViewModel @Inject constructor(
     pager: Pager<Int, MovieElementEntity>
 ) : ViewModel() {
 
+    val a = pager.liveData
     var moviePagingFlow = pager
         .flow
-        .map { value -> value.map { it.toMovieElement()} }
+        .map { value -> value.map { it.toMovieElement() } }
         .cachedIn(viewModelScope)
 }
