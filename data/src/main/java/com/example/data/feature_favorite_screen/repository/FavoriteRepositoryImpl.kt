@@ -9,7 +9,7 @@ class FavoriteRepositoryImpl(
     private val favoriteMoviesApi: FavoriteMoviesApi
 ): FavoriteRepository {
     override suspend fun getFavoriteMovies(): List<MovieElement> {
-        return favoriteMoviesApi.getFavoriteMovies().map { it.toMovieElement() }
+        return favoriteMoviesApi.getFavoriteMovies().movies.map { it.toMovieElement() }
     }
 
     override suspend fun deleteFavoriteMovie(id: String) {

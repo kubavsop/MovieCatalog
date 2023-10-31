@@ -6,6 +6,8 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.room.Room
+import com.example.data.feature_favorite_screen.remote.FavoriteMoviesApi
+import com.example.data.feature_favorite_screen.repository.FavoriteRepositoryImpl
 import com.example.data.feature_main_screen.local.MovieDatabase
 import com.example.data.feature_main_screen.local.entity.MovieElementEntity
 import com.example.data.feature_main_screen.remote.MovieRemoteMediator
@@ -18,6 +20,7 @@ import com.example.data.feature_user_auth.local.UserStorageImpl
 import com.example.data.feature_user_auth.remote.UserAuthApi
 import com.example.data.feature_user_auth.repository.UserAuthRepositoryImpl
 import com.example.data.feature_user_auth.validator.EmailPatternValidatorImpl
+import com.example.domain.feature_favorite_screen.repository.FavoriteRepository
 import com.example.domain.feature_main_screen.repository.MoviesRepository
 import com.example.domain.feature_profile_screen.repository.ProfileRepository
 import com.example.domain.feature_user_auth.repositroy.UserAuthRepository
@@ -54,6 +57,21 @@ class DataModule {
 
     @Singleton
     @Provides
+    fun provideFavoriteMoviesApi(authInterceptor: AuthInterceptor): FavoriteMoviesApi {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(FavoriteMoviesApi.BASE_URL)
+            .client(
+                OkHttpClient.Builder()
+                    .addInterceptor(authInterceptor)
+                    .build()
+            )
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        return retrofit.create(FavoriteMoviesApi::class.java)
+    }
+
+    @Singleton
+    @Provides
     fun provideUserAuthApi(): UserAuthApi {
         val retrofit = Retrofit.Builder()
             .baseUrl(UserAuthApi.BASE_URL)
@@ -83,8 +101,8 @@ class DataModule {
     }
 
     @OptIn(ExperimentalPagingApi::class)
-    @Provides
     @Singleton
+    @Provides
     fun provideCharacterPager(
         movieDatabase: MovieDatabase,
         moviesApi: MoviesApi
@@ -139,6 +157,12 @@ class DataModule {
         userStorage: UserStorage
     ): UserAuthRepository {
         return UserAuthRepositoryImpl(userAuthApi = userAuthApi, userStorage = userStorage)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFavoriteRepository(favoriteMoviesApi: FavoriteMoviesApi): FavoriteRepository {
+        return FavoriteRepositoryImpl(favoriteMoviesApi = favoriteMoviesApi)
     }
 
     @Singleton

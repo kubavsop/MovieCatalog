@@ -1,5 +1,9 @@
 package com.example.moviescatalog.di
 
+import com.example.domain.feature_favorite_screen.repository.FavoriteRepository
+import com.example.domain.feature_favorite_screen.usecase.AddFavoriteMovieUseCase
+import com.example.domain.feature_favorite_screen.usecase.DeleteFavoriteMovieUseCase
+import com.example.domain.feature_favorite_screen.usecase.GetFavoriteMoviesUseCase
 import com.example.domain.feature_main_screen.repository.MoviesRepository
 import com.example.domain.feature_main_screen.usecase.GetMovieDetailsByIdUseCase
 import com.example.domain.feature_main_screen.usecase.GetMoviesByPageUseCase
@@ -78,5 +82,20 @@ class DomainModule {
     @Provides
     fun logoutUseCase(profileRepository: ProfileRepository): LogoutUseCase {
         return LogoutUseCase(repository = profileRepository)
+    }
+
+    @Provides
+    fun addFavoriteMovieUseCase(repository: FavoriteRepository): AddFavoriteMovieUseCase {
+        return AddFavoriteMovieUseCase(repository = repository)
+    }
+
+    @Provides
+    fun deleteFavoriteMovieUseCase(repository: FavoriteRepository): DeleteFavoriteMovieUseCase {
+        return DeleteFavoriteMovieUseCase(repository = repository)
+    }
+
+    @Provides
+    fun getFavoriteMoviesUseCase(repository: FavoriteRepository): GetFavoriteMoviesUseCase {
+        return GetFavoriteMoviesUseCase(repository = repository)
     }
 }
