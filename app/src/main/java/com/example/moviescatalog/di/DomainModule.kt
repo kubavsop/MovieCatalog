@@ -3,8 +3,13 @@ package com.example.moviescatalog.di
 import com.example.domain.feature_main_screen.repository.MoviesRepository
 import com.example.domain.feature_main_screen.usecase.GetMovieDetailsByIdUseCase
 import com.example.domain.feature_main_screen.usecase.GetMoviesByPageUseCase
+import com.example.domain.feature_profile_screen.repository.ProfileRepository
+import com.example.domain.feature_profile_screen.usecase.ChangeProfileUseCase
+import com.example.domain.feature_profile_screen.usecase.GetProfileUseCase
+import com.example.domain.feature_profile_screen.usecase.LogoutUseCase
 import com.example.domain.feature_user_auth.repositroy.UserAuthRepository
 import com.example.domain.feature_user_auth.usecase.FormatDateUseCase
+import com.example.domain.feature_user_auth.usecase.GetTokenUseCase
 import com.example.domain.feature_user_auth.usecase.LoginUserUseCase
 import com.example.domain.feature_user_auth.usecase.RegisterUserUseCase
 import com.example.domain.feature_user_auth.usecase.ValidateEmailUseCase
@@ -59,5 +64,19 @@ class DomainModule {
     @Provides
     fun provideGetMovieDetailsByIdUseCase(repository: MoviesRepository): GetMovieDetailsByIdUseCase {
         return GetMovieDetailsByIdUseCase(repository = repository)
+    }
+
+    @Provides
+    fun getProfileUseCase(profileRepository: ProfileRepository): GetProfileUseCase {
+        return GetProfileUseCase(repository = profileRepository)
+    }
+
+    @Provides
+    fun changeProfileUseCase(profileRepository: ProfileRepository): ChangeProfileUseCase {
+        return ChangeProfileUseCase(repository = profileRepository)
+    }
+    @Provides
+    fun logoutUseCase(profileRepository: ProfileRepository): LogoutUseCase {
+        return LogoutUseCase(repository = profileRepository)
     }
 }

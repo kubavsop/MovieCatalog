@@ -2,19 +2,21 @@ package com.example.data.feature_user_auth.local
 
 import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences
-import androidx.security.crypto.MasterKeys
+import androidx.security.crypto.MasterKey
 
 class UserStorageImpl(context: Context) : UserStorage {
 
-    private val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+    private val masterKey = MasterKey.Builder(context)
+        .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+        .build();
 
     private val sharedPreferences = EncryptedSharedPreferences.create(
-        SHARED_PREF_NAME,
-        masterKeyAlias,
         context,
+        SHARED_PREF_NAME,
+        masterKey,
         EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
         EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-    )
+    );
 
     override fun saveToken(tokenResponseEntity: TokenResponseEntity) {
         sharedPreferences.edit().putString(TOKEN_KEY, tokenResponseEntity.token)

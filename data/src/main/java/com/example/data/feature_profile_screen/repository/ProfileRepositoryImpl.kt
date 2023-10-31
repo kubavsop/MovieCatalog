@@ -1,9 +1,9 @@
 package com.example.data.feature_profile_screen.repository
 
-import com.example.data.feature_profile_screen.mapper.toProfile
-import com.example.data.feature_profile_screen.mapper.toProfileDto
+import com.example.data.mapper.toProfile
+import com.example.data.mapper.toProfileDto
 import com.example.data.feature_profile_screen.remote.ProfileApi
-import com.example.domain.feature_profile_screen.model.Profile
+import com.example.domain.model.Profile
 import com.example.domain.feature_profile_screen.repository.ProfileRepository
 
 class ProfileRepositoryImpl(

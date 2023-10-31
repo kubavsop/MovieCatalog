@@ -46,7 +46,8 @@ dependencies {
     implementation("androidx.room:room-paging:2.6.0")
 
     //Encrypted Shared Pref
-    implementation("androidx.security:security-crypto:1.0.0-alpha02")
+    implementation("androidx.security:security-crypto:1.1.0-alpha06")
+
 
     implementation(project(":domain"))
     testImplementation("junit:junit:4.13.2")
