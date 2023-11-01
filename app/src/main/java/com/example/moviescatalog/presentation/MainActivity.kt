@@ -8,6 +8,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.ActivityMainBinding
+import com.example.moviescatalog.presentation.feature_profile_screen.screen.ProfileFragment
+import com.example.moviescatalog.presentation.feature_profile_screen.screen.ProfileFragmentDirections
 import com.example.moviescatalog.presentation.feature_user_auth.auth_selection.AuthSelectionFragment
 import com.example.moviescatalog.presentation.feature_user_auth.auth_selection.AuthSelectionFragmentDirections
 import com.example.moviescatalog.presentation.feature_user_auth.password_registration.PasswordRegistrationFragment
@@ -21,7 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
     RegistrationDetailsFragment.FragmentCallBack, PasswordRegistrationFragment.FragmentCallBack,
-    AuthSelectionFragment.FragmentCallBack {
+    AuthSelectionFragment.FragmentCallBack, ProfileFragment.FragmentCallBack {
     private lateinit var binding: ActivityMainBinding
     private val navController: NavController
         get() {
@@ -105,6 +107,10 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
         val action =
             PasswordRegistrationFragmentDirections.actionPasswordRegistrationFragmentToMainFragment()
         navController.navigate(action)
+    }
+
+    override fun openAuthSelectionScreenFromProfile() {
+        Unit
     }
 
     override fun openPasswordRegistration(

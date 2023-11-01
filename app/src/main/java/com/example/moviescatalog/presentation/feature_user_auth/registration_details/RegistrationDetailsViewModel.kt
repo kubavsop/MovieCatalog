@@ -75,6 +75,7 @@ class RegistrationDetailsViewModel @Inject constructor(
         val hasError = listOf(
             _state.value?.emailError,
             _state.value?.loginError,
+            _state.value?.firstNameError
         ).any { it != null }
 
         if (!hasError) {

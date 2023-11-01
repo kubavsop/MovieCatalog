@@ -40,7 +40,9 @@ class MovieListAdapter :
                 PorterDuffColorFilter(context.getColor(ratingColor), PorterDuff.Mode.SRC_IN)
 
             with(binding) {
-                filmImage.load(movieElement.poster)
+                filmImage.load(movieElement.poster) {
+                    placeholder(R.drawable.test_film_image)
+                }
                 movieTitle.text = movieElement.name
                 date.text = "${movieElement.year} · ${movieElement.country}"
                 averageRating.text = movieElement.averageRating.toString()
