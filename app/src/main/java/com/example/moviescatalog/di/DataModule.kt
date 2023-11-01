@@ -8,6 +8,8 @@ import androidx.paging.PagingConfig
 import androidx.room.Room
 import com.example.data.feature_favorite_screen.remote.FavoriteMoviesApi
 import com.example.data.feature_favorite_screen.repository.FavoriteRepositoryImpl
+import com.example.data.feature_film_screen.remote.ReviewApi
+import com.example.data.feature_film_screen.repository.FilmRepositoryImpl
 import com.example.data.feature_main_screen.local.MovieDatabase
 import com.example.data.feature_main_screen.local.entity.MovieElementEntity
 import com.example.data.feature_main_screen.remote.MovieRemoteMediator
@@ -21,6 +23,7 @@ import com.example.data.feature_user_auth.remote.UserAuthApi
 import com.example.data.feature_user_auth.repository.UserAuthRepositoryImpl
 import com.example.data.feature_user_auth.validator.EmailPatternValidatorImpl
 import com.example.domain.feature_favorite_screen.repository.FavoriteRepository
+import com.example.domain.feature_film_screen.repository.FilmRepository
 import com.example.domain.feature_main_screen.repository.MoviesRepository
 import com.example.domain.feature_profile_screen.repository.ProfileRepository
 import com.example.domain.feature_user_auth.repositroy.UserAuthRepository
@@ -40,6 +43,20 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class DataModule {
 
+    @Singleton
+    @Provides
+    fun provideReviewApi(authInterceptor: AuthInterceptor): ReviewApi {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(ReviewApi.BASE_URL)
+            .client(
+                OkHttpClient.Builder()
+                    .addInterceptor(authInterceptor)
+                    .build()
+            )
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        return retrofit.create(ReviewApi::class.java)
+    }
     @Singleton
     @Provides
     fun provideProfileApi(authInterceptor: AuthInterceptor): ProfileApi {
@@ -139,7 +156,7 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun getTokenUseCase(userAuthRepository: UserAuthRepository): GetTokenUseCase {
+    fun provideGetTokenUseCase(userAuthRepository: UserAuthRepository): GetTokenUseCase {
         return GetTokenUseCase(repository = userAuthRepository)
     }
 
@@ -169,5 +186,11 @@ class DataModule {
     @Provides
     fun provideProfileRepository(profileApi: ProfileApi): ProfileRepository {
         return ProfileRepositoryImpl(profileApi)
+    }
+
+    @Singleton
+    @Provides
+    fun provideFilmRepository(reviewApi: ReviewApi): FilmRepository {
+        return FilmRepositoryImpl(reviewApi = reviewApi)
     }
 }

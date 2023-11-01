@@ -4,6 +4,10 @@ import com.example.domain.feature_favorite_screen.repository.FavoriteRepository
 import com.example.domain.feature_favorite_screen.usecase.AddFavoriteMovieUseCase
 import com.example.domain.feature_favorite_screen.usecase.DeleteFavoriteMovieUseCase
 import com.example.domain.feature_favorite_screen.usecase.GetFavoriteMoviesUseCase
+import com.example.domain.feature_film_screen.repository.FilmRepository
+import com.example.domain.feature_film_screen.usecase.AddMovieReviewUseCase
+import com.example.domain.feature_film_screen.usecase.DeleteMovieReviewUseCase
+import com.example.domain.feature_film_screen.usecase.EditMovieReviewUseCase
 import com.example.domain.feature_main_screen.repository.MoviesRepository
 import com.example.domain.feature_main_screen.usecase.GetMovieDetailsByIdUseCase
 import com.example.domain.feature_main_screen.usecase.GetMoviesByPageUseCase
@@ -71,31 +75,46 @@ class DomainModule {
     }
 
     @Provides
-    fun getProfileUseCase(profileRepository: ProfileRepository): GetProfileUseCase {
+    fun provideGetProfileUseCase(profileRepository: ProfileRepository): GetProfileUseCase {
         return GetProfileUseCase(repository = profileRepository)
     }
 
     @Provides
-    fun changeProfileUseCase(profileRepository: ProfileRepository): ChangeProfileUseCase {
+    fun provideChangeProfileUseCase(profileRepository: ProfileRepository): ChangeProfileUseCase {
         return ChangeProfileUseCase(repository = profileRepository)
     }
     @Provides
-    fun logoutUseCase(profileRepository: ProfileRepository): LogoutUseCase {
+    fun provideLogoutUseCase(profileRepository: ProfileRepository): LogoutUseCase {
         return LogoutUseCase(repository = profileRepository)
     }
 
     @Provides
-    fun addFavoriteMovieUseCase(repository: FavoriteRepository): AddFavoriteMovieUseCase {
+    fun provideAddFavoriteMovieUseCase(repository: FavoriteRepository): AddFavoriteMovieUseCase {
         return AddFavoriteMovieUseCase(repository = repository)
     }
 
     @Provides
-    fun deleteFavoriteMovieUseCase(repository: FavoriteRepository): DeleteFavoriteMovieUseCase {
+    fun provideDeleteFavoriteMovieUseCase(repository: FavoriteRepository): DeleteFavoriteMovieUseCase {
         return DeleteFavoriteMovieUseCase(repository = repository)
     }
 
     @Provides
-    fun getFavoriteMoviesUseCase(repository: FavoriteRepository): GetFavoriteMoviesUseCase {
+    fun provideGetFavoriteMoviesUseCase(repository: FavoriteRepository): GetFavoriteMoviesUseCase {
         return GetFavoriteMoviesUseCase(repository = repository)
+    }
+
+    @Provides
+    fun provideAddMovieReviewUseCase(repository: FilmRepository): AddMovieReviewUseCase {
+        return AddMovieReviewUseCase(repository = repository)
+    }
+
+    @Provides
+    fun provideDeleteMovieReviewUseCase(repository: FilmRepository): DeleteMovieReviewUseCase {
+        return DeleteMovieReviewUseCase(repository = repository)
+    }
+
+    @Provides
+    fun provideEditMovieReviewUseCase(repository: FilmRepository): EditMovieReviewUseCase {
+        return EditMovieReviewUseCase(repository = repository)
     }
 }
