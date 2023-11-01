@@ -7,15 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.view.allViews
 import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.domain.feature_main_screen.model.MovieElement
+import com.example.domain.model.MovieElement
 import com.example.moviescatalog.R
-import com.example.moviescatalog.databinding.GenreTextViewBinding
 import com.example.moviescatalog.databinding.MovieListItemBinding
 
 class MovieListAdapter :
@@ -42,7 +40,9 @@ class MovieListAdapter :
                 PorterDuffColorFilter(context.getColor(ratingColor), PorterDuff.Mode.SRC_IN)
 
             with(binding) {
-                filmImage.load(movieElement.poster)
+                filmImage.load(movieElement.poster) {
+                    placeholder(R.drawable.test_film_image)
+                }
                 movieTitle.text = movieElement.name
                 date.text = "${movieElement.year} · ${movieElement.country}"
                 averageRating.text = movieElement.averageRating.toString()
@@ -55,6 +55,7 @@ class MovieListAdapter :
                         id = View.generateViewId()
                     }
                 (tv as? TextView)?.text = genre
+
                 binding.root.addView(tv)
                 binding.genres.addView(tv)
             }

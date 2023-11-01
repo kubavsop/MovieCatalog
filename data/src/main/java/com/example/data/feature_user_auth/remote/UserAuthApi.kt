@@ -1,8 +1,8 @@
 package com.example.data.feature_user_auth.remote
 
-import com.example.data.feature_user_auth.remote.dto.LoginRequestDto
-import com.example.data.feature_user_auth.remote.dto.UserRegistrationDto
-import com.example.data.feature_user_auth.remote.dto.TokenResponseDto
+import com.example.data.dto.LoginRequestDto
+import com.example.data.dto.UserRegistrationDto
+import com.example.data.dto.TokenResponseDto
 import retrofit2.http.Body
 import retrofit2.http.POST
 

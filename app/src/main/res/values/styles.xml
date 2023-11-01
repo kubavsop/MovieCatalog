@@ -50,6 +50,9 @@
         <item name="android:paddingEnd">@dimen/padding_8</item>
     </style>
 
+    <style name="Circular">
+        <item name="cornerSize">50%</item>
+    </style>
 
     <style name="TextLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="hintEnabled">false</item>
@@ -93,8 +96,8 @@
         <item name="backgroundTint">@color/accent_background_selector</item>
     </style>
 
-    <style name="AuthSelectionLoginButtonStyle" parent="ButtonStyle">
+    <style name="BaseButtonStyle" parent="ButtonStyle">
         <item name="android:textColor">@color/accent_color</item>
-        <item name="backgroundTint">@color/auth_selection_login_button_color</item>
+        <item name="backgroundTint">@color/base_color</item>
     </style>
 </resources>

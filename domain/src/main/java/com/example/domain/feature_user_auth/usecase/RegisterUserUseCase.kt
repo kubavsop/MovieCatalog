@@ -1,6 +1,6 @@
 package com.example.domain.feature_user_auth.usecase
 
-import com.example.domain.feature_user_auth.model.UserRegistration
+import com.example.domain.model.UserRegistration
 import com.example.domain.feature_user_auth.repositroy.UserAuthRepository
 import java.text.SimpleDateFormat
 

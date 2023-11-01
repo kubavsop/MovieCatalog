@@ -151,12 +151,8 @@ class RegistrationDetailsFragment : Fragment() {
         }
 
     private fun toggleButtonOnClickListener(firstButton: ToggleButton, secondButton: ToggleButton) {
-        if (firstButton.isChecked && secondButton.isChecked) {
-            secondButton.isChecked = false
-            firstButton.isChecked = true
-        } else {
-            firstButton.isChecked = true
-        }
+        firstButton.isChecked = true
+        secondButton.isChecked = false
     }
 
     private companion object {

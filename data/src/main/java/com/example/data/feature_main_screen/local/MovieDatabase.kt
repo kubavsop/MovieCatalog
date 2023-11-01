@@ -13,4 +13,8 @@ import com.example.data.feature_main_screen.local.entity.MovieElementEntity
 @TypeConverters(GenreListConverter::class)
 abstract class MovieDatabase : RoomDatabase() {
     abstract val dao: MovieDao
+
+    companion object {
+        const val NAME = "movie.db"
+    }
 }

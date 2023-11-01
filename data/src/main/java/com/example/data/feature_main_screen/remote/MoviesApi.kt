@@ -1,7 +1,7 @@
 package com.example.data.feature_main_screen.remote
 
-import com.example.data.feature_main_screen.remote.dto.MovieDetailsDto
-import com.example.data.feature_main_screen.remote.dto.MoviesPagedListDto
+import com.example.data.dto.MovieDetailsDto
+import com.example.data.dto.MoviesPagedListDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 
