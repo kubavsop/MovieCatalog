@@ -3,7 +3,6 @@ package com.example.moviescatalog.presentation.feature_user_auth.registration_de
 import com.example.moviescatalog.presentation.UiText
 
 private const val EMPTY_STRING = ""
-private const val MALE = "Мужчина"
 
 data class RegistrationDetailsState(
     val birthday: String = EMPTY_STRING,

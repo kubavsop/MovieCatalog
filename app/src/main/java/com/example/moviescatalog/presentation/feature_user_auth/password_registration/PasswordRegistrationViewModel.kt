@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.feature_user_auth.model.Profile
+import com.example.domain.model.UserRegistration
 import com.example.domain.feature_user_auth.usecase.RegisterUserUseCase
 import com.example.domain.feature_user_auth.usecase.ValidatePasswordUseCase
 import com.example.domain.feature_user_auth.usecase.ValidateRepeatedPasswordUseCase
@@ -53,10 +53,10 @@ class PasswordRegistrationViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value = _state.value?.copy(isLoading = true)
             try {
-                val profile = Profile(
+                val profile = UserRegistration(
                     userName, name, password, email, birthDate, if (gender == MALE) 0 else 1
                 )
-                val tokenResponse = registerUserUseCase(profile)
+                registerUserUseCase(profile)
                 _state.value = _state.value?.copy(
                     isLoading = false,
                     isRegistered = true

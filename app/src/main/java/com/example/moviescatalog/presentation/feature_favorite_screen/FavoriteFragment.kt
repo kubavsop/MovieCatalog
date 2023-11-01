@@ -5,13 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.moviescatalog.R
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.moviescatalog.databinding.FragmentFavoriteBinding
-import com.example.moviescatalog.databinding.FragmentMainBinding
+import kotlinx.coroutines.launch
 
 class FavoriteFragment : Fragment() {
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: FavoriteViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,6 +21,18 @@ class FavoriteFragment : Fragment() {
     ): View {
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        lifecycleScope.launch {
+            try{
+                val list = viewModel.getFavoriteTest()
+                binding.test.text = list.size.toString()
+            } catch (e: Exception) {
+                binding.test.text = e.message
+            }
+        }
     }
 
     override fun onDestroyView() {

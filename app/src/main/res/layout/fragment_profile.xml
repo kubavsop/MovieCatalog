@@ -1,13 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.feature_profile_screen.ProfileFragment">
+    tools:context=".presentation.feature_profile_screen.screen.ProfileFragment">
 
-    <TextView
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Profile fragment" />
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_16">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/profile_info"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="visible"
+            app:constraint_referenced_ids="profile_image,
+            login,exit,email,email_edit_text_container,avatar_link,
+            avatar_link_edit_text_container,first_name,
+            first_name_edit_text_container,gender,genderToggleGroup,
+            birthday,birthday_text,apply,cancel" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profile_image"
+            android:layout_width="@dimen/profile_image_size"
+            android:layout_height="@dimen/profile_image_size"
+            android:scaleType="centerCrop"
+            android:src="@drawable/empty_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/Circular" />
+
+        <TextView
+            android:id="@+id/login"
+            style="@style/TitleTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_6"
+            android:text="@string/login"
+            android:textSize="@dimen/text_size_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+
+        <TextView
+            android:id="@+id/exit"
+            style="@style/LabelTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_12"
+            android:text="@string/exit"
+            android:textAlignment="center"
+            android:textColor="@color/accent_color"
+            android:textSize="@dimen/text_size_15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login" />
+
+        <TextView
+            android:id="@+id/email"
+            style="@style/HintTextStyle"
+            android:layout_marginTop="@dimen/margin_20"
+            android:text="@string/email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/exit" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_edit_text_container"
+            style="@style/TextLayoutStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:errorIconDrawable="@null"
+            app:errorTextAppearance="@style/ErrorTextStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_edit_text"
+                style="@style/BodyTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:padding="@dimen/padding_12"
+                android:textColor="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/avatar_link"
+            style="@style/HintTextStyle"
+            android:text="@string/avatar_link"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/email_edit_text_container" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/avatar_link_edit_text_container"
+            style="@style/TextLayoutStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:errorIconDrawable="@null"
+            app:errorTextAppearance="@style/ErrorTextStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/avatar_link">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/avatar_link_edit_text"
+                style="@style/BodyTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:padding="@dimen/padding_12"
+                android:textColor="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/first_name"
+            style="@style/HintTextStyle"
+            android:text="@string/first_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/avatar_link_edit_text_container" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/first_name_edit_text_container"
+            style="@style/TextLayoutStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:errorIconDrawable="@null"
+            app:errorTextAppearance="@style/ErrorTextStyle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/first_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/first_name_edit_text"
+                style="@style/BodyTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:padding="@dimen/padding_12"
+                android:textColor="@color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/gender"
+            style="@style/HintTextStyle"
+            android:text="@string/gender"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/first_name_edit_text_container" />
+
+        <LinearLayout
+            android:id="@+id/genderToggleGroup"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toggle_group_height"
+            android:layout_marginTop="@dimen/margin_8"
+            android:background="@drawable/toggle_group_background"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/toggle_group_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/gender">
+
+            <ToggleButton
+                android:id="@+id/maleButton"
+                style="@style/ToggleButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/toggle_button_height"
+                android:layout_weight="1"
+                android:checked="true"
+                android:textOff="@string/male"
+                android:textOn="@string/male" />
+
+            <ToggleButton
+                android:id="@+id/femaleButton"
+                style="@style/ToggleButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/toggle_button_height"
+                android:layout_weight="1"
+                android:textOff="@string/female"
+                android:textOn="@string/female" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/birthday"
+            style="@style/HintTextStyle"
+            android:text="@string/birthday"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/genderToggleGroup" />
+
+        <TextView
+            android:id="@+id/birthday_text"
+            style="@style/BodyTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8"
+            android:background="@drawable/birthday_tv_background"
+            android:gravity="start|center"
+            android:padding="@dimen/padding_12"
+            app:drawableEndCompat="@drawable/calendar_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/birthday" />
+
+        <Button
+            android:id="@+id/apply"
+            style="@style/AccentButtonStyle"
+            android:enabled="false"
+            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/margin_20"
+            android:text="@string/apply"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/birthday_text" />
+
+        <Button
+            android:id="@+id/cancel"
+            style="@style/BaseButtonStyle"
+            android:layout_width="0dp"
+            android:layout_marginTop="@dimen/margin_15"
+            android:text="@string/cancel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/apply" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

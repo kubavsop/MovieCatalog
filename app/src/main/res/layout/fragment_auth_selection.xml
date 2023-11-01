@@ -57,7 +57,7 @@
 
     <Button
         android:id="@+id/loginTo"
-        style="@style/AuthSelectionLoginButtonStyle"
+        style="@style/BaseButtonStyle"
         android:layout_width="0dp"
         android:layout_marginTop="@dimen/margin_16"
         android:text="@string/login_to"
