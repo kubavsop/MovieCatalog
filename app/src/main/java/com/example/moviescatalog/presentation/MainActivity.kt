@@ -17,6 +17,8 @@ import com.example.moviescatalog.presentation.feature_user_auth.registration_det
 import com.example.moviescatalog.presentation.feature_user_auth.registration_details.RegistrationDetailsFragmentDirections
 import com.example.moviescatalog.presentation.feature_user_auth.user_login.UserLoginFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import java.lang.Thread.sleep
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
