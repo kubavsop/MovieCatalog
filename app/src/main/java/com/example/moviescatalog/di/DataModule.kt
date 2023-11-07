@@ -34,6 +34,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -57,6 +59,7 @@ class DataModule {
             .build()
         return retrofit.create(ReviewApi::class.java)
     }
+
     @Singleton
     @Provides
     fun provideProfileApi(authInterceptor: AuthInterceptor): ProfileApi {
@@ -64,8 +67,8 @@ class DataModule {
             .baseUrl(ProfileApi.BASE_URL)
             .client(
                 OkHttpClient.Builder()
-                .addInterceptor(authInterceptor)
-                .build()
+                    .addInterceptor(authInterceptor)
+                    .build()
             )
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -163,34 +166,58 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideMovieRepository(moviesApi: MoviesApi): MoviesRepository {
-        return MoviesRepositoryImpl(moviesApi)
+    fun provideMovieRepository(
+        moviesApi: MoviesApi,
+        ioDispatcher: CoroutineDispatcher
+    ): MoviesRepository {
+        return MoviesRepositoryImpl(moviesApi, ioDispatcher = ioDispatcher)
     }
 
     @Singleton
     @Provides
     fun provideUserAuthRepository(
         userAuthApi: UserAuthApi,
-        userStorage: UserStorage
+        userStorage: UserStorage,
+        ioDispatcher: CoroutineDispatcher
     ): UserAuthRepository {
-        return UserAuthRepositoryImpl(userAuthApi = userAuthApi, userStorage = userStorage)
+        return UserAuthRepositoryImpl(
+            userAuthApi = userAuthApi,
+            userStorage = userStorage,
+            ioDispatcher = ioDispatcher
+        )
     }
 
     @Provides
     @Singleton
-    fun provideFavoriteRepository(favoriteMoviesApi: FavoriteMoviesApi): FavoriteRepository {
-        return FavoriteRepositoryImpl(favoriteMoviesApi = favoriteMoviesApi)
+    fun provideFavoriteRepository(
+        favoriteMoviesApi: FavoriteMoviesApi,
+        ioDispatcher: CoroutineDispatcher
+    ): FavoriteRepository {
+        return FavoriteRepositoryImpl(
+            favoriteMoviesApi = favoriteMoviesApi,
+            ioDispatcher = ioDispatcher
+        )
     }
 
     @Singleton
     @Provides
-    fun provideProfileRepository(profileApi: ProfileApi): ProfileRepository {
-        return ProfileRepositoryImpl(profileApi)
+    fun provideProfileRepository(
+        profileApi: ProfileApi,
+        ioDispatcher: CoroutineDispatcher
+    ): ProfileRepository {
+        return ProfileRepositoryImpl(profileApi, ioDispatcher = ioDispatcher)
     }
 
     @Singleton
     @Provides
-    fun provideFilmRepository(reviewApi: ReviewApi): FilmRepository {
-        return FilmRepositoryImpl(reviewApi = reviewApi)
+    fun provideFilmRepository(
+        reviewApi: ReviewApi,
+        ioDispatcher: CoroutineDispatcher
+    ): FilmRepository {
+        return FilmRepositoryImpl(reviewApi = reviewApi, ioDispatcher = ioDispatcher)
     }
+
+    @Singleton
+    @Provides
+    fun provideIODispatcher() = Dispatchers.IO
 }

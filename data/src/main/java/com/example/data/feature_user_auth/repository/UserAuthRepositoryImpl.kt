@@ -10,19 +10,26 @@ import com.example.domain.model.LoginRequest
 import com.example.domain.model.TokenResponse
 import com.example.domain.model.UserRegistration
 import com.example.domain.feature_user_auth.repositroy.UserAuthRepository
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 
 class UserAuthRepositoryImpl(
     private val userAuthApi: UserAuthApi,
-    private val userStorage: UserStorage
+    private val userStorage: UserStorage,
+    private val ioDispatcher: CoroutineDispatcher
 ) : UserAuthRepository {
     override suspend fun register(userRegistration: UserRegistration) {
-        val tokenResponse = userAuthApi.register(userRegistration.toUserRegistrationDto())
-        userStorage.saveToken(tokenResponseEntity = tokenResponse.toTokenResponseEntity())
+        withContext(ioDispatcher) {
+            val tokenResponse = userAuthApi.register(userRegistration.toUserRegistrationDto())
+            userStorage.saveToken(tokenResponseEntity = tokenResponse.toTokenResponseEntity())
+        }
     }
 
     override suspend fun login(loginRequest: LoginRequest) {
-        val tokenResponse = userAuthApi.login(loginRequest.toLoginRequestDto())
-        userStorage.saveToken(tokenResponseEntity = tokenResponse.toTokenResponseEntity())
+        withContext(ioDispatcher) {
+            val tokenResponse = userAuthApi.login(loginRequest.toLoginRequestDto())
+            userStorage.saveToken(tokenResponseEntity = tokenResponse.toTokenResponseEntity())
+        }
     }
 
     override fun getTokenResponse(): TokenResponse? {
