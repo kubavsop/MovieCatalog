@@ -1,4 +1,4 @@
-package com.example.data.dto
+package com.example.data.common.dto
 
 data class MovieElementDto(
     val country: String,

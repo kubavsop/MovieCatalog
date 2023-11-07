@@ -1,8 +1,8 @@
-package com.example.data.mapper
+package com.example.data.common.mapper
 
-import com.example.data.dto.MovieDetailsDto
-import com.example.data.dto.ReviewDto
-import com.example.data.dto.UserShortDto
+import com.example.data.common.dto.MovieDetailsDto
+import com.example.data.common.dto.ReviewDto
+import com.example.data.common.dto.UserShortDto
 import com.example.domain.model.MovieDetails
 import com.example.domain.model.Review
 import com.example.domain.model.UserShort

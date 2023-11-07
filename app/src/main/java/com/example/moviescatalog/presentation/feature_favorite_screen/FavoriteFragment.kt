@@ -25,14 +25,6 @@ class FavoriteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        lifecycleScope.launch {
-            try{
-                val list = viewModel.getFavoriteTest()
-                binding.test.text = list.size.toString()
-            } catch (e: Exception) {
-                binding.test.text = e.message
-            }
-        }
     }
 
     override fun onDestroyView() {

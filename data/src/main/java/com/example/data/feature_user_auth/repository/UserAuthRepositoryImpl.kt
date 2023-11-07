@@ -1,10 +1,10 @@
 package com.example.data.feature_user_auth.repository
 
 import com.example.data.feature_user_auth.local.UserStorage
-import com.example.data.mapper.toLoginRequestDto
-import com.example.data.mapper.toTokenResponse
-import com.example.data.mapper.toTokenResponseEntity
-import com.example.data.mapper.toUserRegistrationDto
+import com.example.data.common.mapper.toLoginRequestDto
+import com.example.data.common.mapper.toTokenResponse
+import com.example.data.common.mapper.toTokenResponseEntity
+import com.example.data.common.mapper.toUserRegistrationDto
 import com.example.data.feature_user_auth.remote.UserAuthApi
 import com.example.domain.model.LoginRequest
 import com.example.domain.model.TokenResponse

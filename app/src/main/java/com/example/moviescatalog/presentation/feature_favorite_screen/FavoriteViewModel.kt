@@ -13,8 +13,4 @@ class FavoriteViewModel @Inject constructor(
     private val addFavoriteMovieUseCase: AddFavoriteMovieUseCase,
     private val deleteFavoriteMovieUseCase: DeleteFavoriteMovieUseCase,
     private val getFavoriteMoviesUseCase: GetFavoriteMoviesUseCase
-): ViewModel() {
-    suspend fun getFavoriteTest(): List<MovieElement> {
-        return getFavoriteMoviesUseCase()
-    }
-}
+): ViewModel()

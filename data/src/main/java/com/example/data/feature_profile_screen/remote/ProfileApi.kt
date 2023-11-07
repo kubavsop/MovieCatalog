@@ -1,6 +1,6 @@
 package com.example.data.feature_profile_screen.remote
 
-import com.example.data.dto.ProfileDto
+import com.example.data.common.dto.ProfileDto
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST

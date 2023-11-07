@@ -1,6 +1,6 @@
 package com.example.moviescatalog.di
 
-import com.example.data.interceptor.AuthInterceptor
+import com.example.data.common.interceptor.AuthInterceptor
 import android.content.Context
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager

@@ -1,5 +1,6 @@
 package com.example.moviescatalog.presentation.feature_profile_screen.view_model
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -92,46 +93,36 @@ class ProfileViewModel @Inject constructor(
                 )
                 changeProfileUseCase(currentProfile!!)
                 setProfileChanged()
+                profileSimilarity = ProfileSimilarity()
             }
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
             Unit
         }
-        profileSimilarity = ProfileSimilarity()
     }
 
     private fun showProfile() {
-        if (currentProfile == null) {
-            try {
-                viewModelScope.launch {
-                    _state.value = ProfileState.Loading
-                    currentProfile = getProfileUseCase()
-                    _state.value = ProfileState.Profile(
-                        avatarLink = currentProfile!!.avatarLink,
-                        birthDate = currentProfile!!.birthDate,
-                        email = currentProfile!!.email,
-                        gender = currentProfile!!.gender,
-                        id = currentProfile!!.id,
-                        name = currentProfile!!.name,
-                        nickName = currentProfile!!.nickName
-                    )
-                }
-            } catch (e: CancellationException) {
-                throw e
-            } catch (e: Exception) {
-                Unit
+        try {
+            viewModelScope.launch {
+                _state.value = ProfileState.Loading
+
+                currentProfile = getProfileUseCase()
+
+                _state.value = ProfileState.Profile(
+                    avatarLink = currentProfile!!.avatarLink,
+                    birthDate = currentProfile!!.birthDate,
+                    email = currentProfile!!.email,
+                    gender = currentProfile!!.gender,
+                    id = currentProfile!!.id,
+                    name = currentProfile!!.name,
+                    nickName = currentProfile!!.nickName
+                )
             }
-        } else {
-            _state.value = ProfileState.Profile(
-                avatarLink = currentProfile!!.avatarLink,
-                birthDate = currentProfile!!.birthDate,
-                email = currentProfile!!.email,
-                gender = currentProfile!!.gender,
-                id = currentProfile!!.id,
-                name = currentProfile!!.name,
-                nickName = currentProfile!!.nickName
-            )
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            Unit
         }
     }
 

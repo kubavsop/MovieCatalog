@@ -18,9 +18,11 @@ import com.example.moviescatalog.databinding.MovieListItemBinding
 
 class MovieListAdapter :
     PagingDataAdapter<MovieElement, MovieListAdapter.MovieViewHolder>(MOVIE_COMPARATOR) {
-
     class MovieViewHolder(private val binding: MovieListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        private var genres = mutableListOf<View>()
+
         fun bind(movieElement: MovieElement) {
             val context = binding.root.context
             val averageRatingBackground =
@@ -49,6 +51,12 @@ class MovieListAdapter :
                 averageRating.background = averageRatingBackground
             }
 
+            for (genre in genres) {
+                binding.root.removeView(genre)
+            }
+
+            genres = mutableListOf()
+
             for (genre in movieElement.genres) {
                 val tv = LayoutInflater.from(context)
                     .inflate(R.layout.genre_text_view, binding.root, false).apply {
@@ -58,6 +66,8 @@ class MovieListAdapter :
 
                 binding.root.addView(tv)
                 binding.genres.addView(tv)
+
+                genres.add(tv)
             }
         }
     }

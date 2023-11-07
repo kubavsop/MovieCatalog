@@ -1,9 +1,9 @@
-package com.example.data.mapper
+package com.example.data.common.mapper
 
 import com.example.data.feature_user_auth.local.TokenResponseEntity
-import com.example.data.dto.LoginRequestDto
-import com.example.data.dto.UserRegistrationDto
-import com.example.data.dto.TokenResponseDto
+import com.example.data.common.dto.LoginRequestDto
+import com.example.data.common.dto.UserRegistrationDto
+import com.example.data.common.dto.TokenResponseDto
 import com.example.domain.model.LoginRequest
 import com.example.domain.model.UserRegistration
 import com.example.domain.model.TokenResponse

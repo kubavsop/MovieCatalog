@@ -2,15 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_marginBottom="@dimen/margin_16"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_16">
 
     <ImageView
         android:id="@+id/film_image"
         android:layout_width="@dimen/movie_image_item_width"
         android:layout_height="wrap_content"
-        android:src="@drawable/test_film_image"
         android:adjustViewBounds="true"
+        android:src="@drawable/test_film_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -89,16 +89,15 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_10"
-        app:layout_constraintStart_toStartOf="@id/content_start"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/date"
-        app:flow_wrapMode="chain"
         app:flow_horizontalBias="0"
+        app:flow_horizontalGap="@dimen/margin_4"
         app:flow_horizontalStyle="packed"
-        app:flow_verticalStyle="packed"
         app:flow_verticalGap="@dimen/margin_4"
-        app:flow_horizontalGap="@dimen/margin_4"/>
-
+        app:flow_verticalStyle="packed"
+        app:flow_wrapMode="chain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/date" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

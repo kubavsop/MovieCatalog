@@ -1,4 +1,4 @@
-package com.example.data.interceptor
+package com.example.data.common.interceptor
 
 import com.example.domain.feature_user_auth.usecase.GetTokenUseCase
 import okhttp3.Interceptor

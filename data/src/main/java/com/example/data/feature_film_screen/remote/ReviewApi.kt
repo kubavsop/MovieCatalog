@@ -1,6 +1,6 @@
 package com.example.data.feature_film_screen.remote
 
-import com.example.data.dto.ReviewModifyDto
+import com.example.data.common.dto.ReviewModifyDto
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.POST

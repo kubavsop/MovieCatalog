@@ -7,7 +7,7 @@ import androidx.paging.cachedIn
 import androidx.paging.liveData
 import androidx.paging.map
 import com.example.data.feature_main_screen.local.entity.MovieElementEntity
-import com.example.data.mapper.toMovieElement
+import com.example.data.common.mapper.toMovieElement
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -17,7 +17,6 @@ class MainViewModel @Inject constructor(
     pager: Pager<Int, MovieElementEntity>
 ) : ViewModel() {
 
-    val a = pager.liveData
     var moviePagingFlow = pager
         .flow
         .map { value -> value.map { it.toMovieElement() } }

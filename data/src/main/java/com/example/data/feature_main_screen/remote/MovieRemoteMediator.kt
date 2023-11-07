@@ -7,7 +7,7 @@ import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.example.data.feature_main_screen.local.MovieDatabase
 import com.example.data.feature_main_screen.local.entity.MovieElementEntity
-import com.example.data.mapper.toMovieElementEntity
+import com.example.data.common.mapper.toMovieElementEntity
 import kotlinx.coroutines.CancellationException
 
 @OptIn(ExperimentalPagingApi::class)

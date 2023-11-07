@@ -1,11 +1,11 @@
-package com.example.data.mapper
+package com.example.data.common.mapper
 
 import com.example.data.feature_main_screen.local.entity.MovieElementEntity
 import com.example.data.feature_main_screen.local.entity.ReviewShortEntity
-import com.example.data.dto.MovieElementDto
-import com.example.data.dto.MoviesPagedListDto
-import com.example.data.dto.PageInfoDto
-import com.example.data.dto.ReviewShortDto
+import com.example.data.common.dto.MovieElementDto
+import com.example.data.common.dto.MoviesPagedListDto
+import com.example.data.common.dto.PageInfoDto
+import com.example.data.common.dto.ReviewShortDto
 import com.example.domain.model.MovieElement
 import com.example.domain.model.MoviesPagedList
 import com.example.domain.model.PageInfo

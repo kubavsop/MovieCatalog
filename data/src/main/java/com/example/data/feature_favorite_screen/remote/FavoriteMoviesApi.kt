@@ -1,6 +1,6 @@
 package com.example.data.feature_favorite_screen.remote
 
-import com.example.data.dto.MovieElementsResponse
+import com.example.data.common.dto.MovieElementsResponse
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
