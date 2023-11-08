@@ -19,17 +19,17 @@ class UserAuthRepositoryImpl(
     private val ioDispatcher: CoroutineDispatcher
 ) : UserAuthRepository {
     override suspend fun register(userRegistration: UserRegistration) {
-        withContext(ioDispatcher) {
-            val tokenResponse = userAuthApi.register(userRegistration.toUserRegistrationDto())
-            userStorage.saveToken(tokenResponseEntity = tokenResponse.toTokenResponseEntity())
+        val tokenResponse = withContext(ioDispatcher) {
+            userAuthApi.register(userRegistration.toUserRegistrationDto())
         }
+        userStorage.saveToken(tokenResponseEntity = tokenResponse.toTokenResponseEntity())
     }
 
     override suspend fun login(loginRequest: LoginRequest) {
-        withContext(ioDispatcher) {
-            val tokenResponse = userAuthApi.login(loginRequest.toLoginRequestDto())
-            userStorage.saveToken(tokenResponseEntity = tokenResponse.toTokenResponseEntity())
+        val tokenResponse = withContext(ioDispatcher) {
+            userAuthApi.login(loginRequest.toLoginRequestDto())
         }
+        userStorage.saveToken(tokenResponseEntity = tokenResponse.toTokenResponseEntity())
     }
 
     override fun getTokenResponse(): TokenResponse? {

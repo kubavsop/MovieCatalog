@@ -80,8 +80,8 @@ class ProfileViewModel @Inject constructor(
         name: String,
     ) {
         val profileChanged = (_state.value as ProfileState.ProfileChanged)
-        try {
-            viewModelScope.launch {
+        viewModelScope.launch {
+            try {
                 currentProfile = Profile(
                     avatarLink = avatarLink,
                     birthDate = profileChanged.birthDate,
@@ -94,11 +94,12 @@ class ProfileViewModel @Inject constructor(
                 changeProfileUseCase(currentProfile!!)
                 setProfileChanged()
                 profileSimilarity = ProfileSimilarity()
+
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                Unit
             }
-        } catch (e: CancellationException) {
-            throw e
-        } catch (e: Exception) {
-            Unit
         }
     }
 

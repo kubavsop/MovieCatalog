@@ -111,9 +111,9 @@ class ProfileFragment : Fragment() {
             emailEditText.setText(profile.email)
             login.text = profile.nickName
             firstNameEditText.setText(profile.name)
+            apply.isEnabled = false
             progressBar.isVisible = false
             profileInfo.isVisible = true
-            apply.isEnabled = false
         }
     }
 

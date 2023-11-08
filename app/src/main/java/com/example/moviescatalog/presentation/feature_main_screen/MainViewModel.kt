@@ -1,5 +1,6 @@
 package com.example.moviescatalog.presentation.feature_main_screen
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -10,6 +11,7 @@ import com.example.data.feature_main_screen.local.entity.MovieElementEntity
 import com.example.data.common.mapper.toMovieElement
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel

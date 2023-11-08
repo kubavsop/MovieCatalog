@@ -39,4 +39,6 @@
     <string name="avatar_link">Ссылка на аватар</string>
     <string name="cancel">Отменить</string>
     <string name="apply">Сохранить</string>
+    <string name="no_favorite_movies">У вас пока нет любимых фильмов</string>
+    <string name="add_to_favorites">Выберите понравившийся фильм в каталоге и добавьте его в любимые</string>
 </resources>
