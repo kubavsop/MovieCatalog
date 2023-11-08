@@ -5,15 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.map
-import com.example.moviescatalog.R
+import com.example.domain.model.MovieElement
 import com.example.moviescatalog.databinding.FragmentMainBinding
-import com.example.moviescatalog.databinding.FragmentProfileBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
 
 class MainFragment : Fragment() {
@@ -31,12 +29,27 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.state.observe(viewLifecycleOwner, ::handleState)
+        viewModel.carouselMovies()
+
+
+        binding.moviesList.setHasFixedSize(false)
+        binding.moviesList.isNestedScrollingEnabled = false
+
         binding.moviesList.adapter = MovieListAdapter()
         lifecycleScope.launch {
             viewModel.moviePagingFlow.collectLatest { pagingData ->
                 (binding.moviesList.adapter as? MovieListAdapter)?.submitData(pagingData)
             }
         }
+    }
+
+    private fun handleState(state: List<MovieElement>) {
+
+        val imageList = state.map { CarouselItem(imageUrl = it.poster) }
+
+        binding.carousel.setData(imageList)
     }
 
     override fun onDestroyView() {

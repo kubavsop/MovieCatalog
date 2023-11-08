@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.domain.model.MovieElement
+import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.FavoriteListItemBinding
 
 class FavoriteListAdapter : RecyclerView.Adapter<FavoriteListAdapter.FavoriteViewHolder>() {
@@ -13,7 +14,9 @@ class FavoriteListAdapter : RecyclerView.Adapter<FavoriteListAdapter.FavoriteVie
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movieElement: MovieElement) {
             with(binding) {
-                filmImage.load(movieElement.poster)
+                filmImage.load(movieElement.poster) {
+                    placeholder(R.drawable.test_film_image)
+                }
                 filmName.text = movieElement.name
             }
         }

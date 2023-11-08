@@ -48,6 +48,7 @@
     <dimen name="genre_background_radius">5dp</dimen>
     <dimen name="profile_image_radius">44dp</dimen>
     <dimen name="profile_image_size">88dp</dimen>
+    <dimen name="carousel_height">400dp</dimen>
 
     <dimen name="text_size_11">11sp</dimen>
     <dimen name="text_size_12">12sp</dimen>

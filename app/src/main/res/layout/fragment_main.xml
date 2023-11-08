@@ -7,28 +7,38 @@
     android:layout_height="match_parent"
     tools:context=".presentation.feature_main_screen.MainFragment">
 
+    <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+        android:id="@+id/carousel"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/carousel_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:showNavigationButtons="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/title"
+        style="@style/TitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/catalog"
         android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginTop="@dimen/margin_16"
+        android:text="@string/catalog"
         android:textSize="@dimen/text_size_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/TitleTextStyle"/>
+        app:layout_constraintTop_toBottomOf="@+id/carousel" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginStart="@dimen/margin_16"
-        android:layout_marginEnd="@dimen/margin_16"
-        android:layout_marginTop="@dimen/margin_15"
         android:id="@+id/movies_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginTop="@dimen/margin_15"
+        android:layout_marginEnd="@dimen/margin_16"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"
-        app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/movie_list_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>
