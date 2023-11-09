@@ -34,13 +34,7 @@ class MovieRemoteMediator(
                 }
             }
 
-            var moviesPagedList = moviesApi.getMoviesByPage(loadKey)
-
-            if (loadKey == FIRST_PAGE) {
-                moviesPagedList = moviesPagedList.copy(
-                    movies = moviesPagedList.movies.drop(MOVIES_TO_SKIP)
-                )
-            }
+            val moviesPagedList = moviesApi.getMoviesByPage(loadKey)
 
             movieDatabase.withTransaction {
                 if (loadType == LoadType.REFRESH) {
@@ -62,7 +56,7 @@ class MovieRemoteMediator(
     }
 
     private companion object {
-        const val FIRST_PAGE = 1
+        const val FIRST_PAGE = 2
         const val MOVIES_TO_SKIP = 4
     }
 

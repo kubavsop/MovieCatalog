@@ -8,8 +8,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.ActivityMainBinding
+import com.example.moviescatalog.presentation.feature_main_screen.MainFragment
+import com.example.moviescatalog.presentation.feature_main_screen.MainFragmentDirections
 import com.example.moviescatalog.presentation.feature_profile_screen.screen.ProfileFragment
-import com.example.moviescatalog.presentation.feature_profile_screen.screen.ProfileFragmentDirections
 import com.example.moviescatalog.presentation.feature_user_auth.auth_selection.AuthSelectionFragment
 import com.example.moviescatalog.presentation.feature_user_auth.auth_selection.AuthSelectionFragmentDirections
 import com.example.moviescatalog.presentation.feature_user_auth.password_registration.PasswordRegistrationFragment
@@ -19,13 +20,11 @@ import com.example.moviescatalog.presentation.feature_user_auth.registration_det
 import com.example.moviescatalog.presentation.feature_user_auth.registration_details.RegistrationDetailsFragmentDirections
 import com.example.moviescatalog.presentation.feature_user_auth.user_login.UserLoginFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import java.lang.Thread.sleep
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
     RegistrationDetailsFragment.FragmentCallBack, PasswordRegistrationFragment.FragmentCallBack,
-    AuthSelectionFragment.FragmentCallBack, ProfileFragment.FragmentCallBack {
+    AuthSelectionFragment.FragmentCallBack, ProfileFragment.FragmentCallBack, MainFragment.FragmentCallBack {
     private lateinit var binding: ActivityMainBinding
     private val navController: NavController
         get() {
@@ -133,6 +132,11 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
         navController.navigate(action)
     }
 
+    override fun openFilmScreen(id: String) {
+        val action = MainFragmentDirections.actionMainFragmentToFilmFragment(id)
+        navController.navigate(action)
+    }
+
 
     private fun showBottomNav() {
         binding.bottomNavigationView.visibility = View.VISIBLE
@@ -141,4 +145,5 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
     private fun hideBottomNav() {
         binding.bottomNavigationView.visibility = View.GONE
     }
+
 }

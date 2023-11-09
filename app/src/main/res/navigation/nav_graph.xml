@@ -94,10 +94,23 @@
         android:id="@+id/mainFragment"
         android:name="com.example.moviescatalog.presentation.feature_main_screen.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_filmFragment"
+            app:destination="@id/filmFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.example.moviescatalog.presentation.feature_favorite_screen.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/filmFragment"
+        android:name="com.example.moviescatalog.presentation.feature_film_screen.FilmFragment"
+        android:label="fragment_film"
+        tools:layout="@layout/fragment_film" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+    </fragment>
 </navigation>

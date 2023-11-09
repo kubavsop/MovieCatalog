@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.navArgs
 import com.example.moviescatalog.databinding.FragmentFavoriteBinding
 import com.example.moviescatalog.databinding.FragmentFilmBinding
 import com.example.moviescatalog.databinding.FragmentMainBinding
@@ -17,6 +18,7 @@ class FilmFragment : Fragment() {
     private var _binding: FragmentFilmBinding? = null
     private val binding get() = _binding!!
     private val viewModel: FilmViewModel by activityViewModels()
+    private val args: FilmFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
