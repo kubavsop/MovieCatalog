@@ -56,6 +56,28 @@
         <item name="android:paddingStart">@dimen/padding_8</item>
         <item name="android:paddingEnd">@dimen/padding_8</item>
     </style>
+    
+    <style name="DescriptionHeaderStyle" parent="TitleTextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_20</item>
+    </style>
+    
+    <style name="DescriptionSubHeaderStyle" parent="BodyTextStyle">
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textColor">@color/gray_400</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_10</item>
+    </style>
+
+    <style name="DescriptionStyle" parent="BodyTextStyle">
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
 
     <style name="Circular">
         <item name="cornerSize">50%</item>

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -23,13 +22,7 @@ import java.lang.IllegalArgumentException
 class MovieListAdapter(
     private val movieClickListener: (String) -> Unit
 ) :
-    PagingDataAdapter<MainRecyclerViewItem, RecyclerView.ViewHolder>(COMPARATOR) {
-
-    var movies: PagingData<MainRecyclerViewItem> = PagingData.empty()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+    PagingDataAdapter<MainRecyclerViewItem, RecyclerView.ViewHolder>(DIFF) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -132,27 +125,26 @@ class MovieListAdapter(
     private companion object {
         val headerViewType = R.layout.main_screen_header
         val movieViewType = R.layout.movie_list_item
-    }
-}
+        val DIFF = object : DiffUtil.ItemCallback<MainRecyclerViewItem>() {
+            override fun areItemsTheSame(
+                oldItem: MainRecyclerViewItem,
+                newItem: MainRecyclerViewItem
+            ): Boolean {
+                if (oldItem is MainRecyclerViewItem.MovieItem && newItem is MainRecyclerViewItem.MovieItem) {
+                    return newItem.movieElement.id == oldItem.movieElement.id
+                }
+                return oldItem is MainRecyclerViewItem.HeaderItem && newItem is MainRecyclerViewItem.HeaderItem
+            }
 
-private val COMPARATOR = object : DiffUtil.ItemCallback<MainRecyclerViewItem>() {
-    override fun areItemsTheSame(
-        oldItem: MainRecyclerViewItem,
-        newItem: MainRecyclerViewItem
-    ): Boolean {
-        if (oldItem is MainRecyclerViewItem.MovieItem && newItem is MainRecyclerViewItem.MovieItem) {
-            return newItem.movieElement.id == oldItem.movieElement.id
+            override fun areContentsTheSame(
+                oldItem: MainRecyclerViewItem,
+                newItem: MainRecyclerViewItem
+            ): Boolean {
+                if (oldItem is MainRecyclerViewItem.MovieItem && newItem is MainRecyclerViewItem.MovieItem){
+                    return newItem.movieElement == oldItem.movieElement
+                }
+                return oldItem is MainRecyclerViewItem.HeaderItem && newItem is MainRecyclerViewItem.HeaderItem
+            }
         }
-        return oldItem is MainRecyclerViewItem.HeaderItem && newItem is MainRecyclerViewItem.HeaderItem
-    }
-
-    override fun areContentsTheSame(
-        oldItem: MainRecyclerViewItem,
-        newItem: MainRecyclerViewItem
-    ): Boolean {
-        if (oldItem is MainRecyclerViewItem.MovieItem && newItem is MainRecyclerViewItem.MovieItem){
-            return newItem.movieElement == oldItem.movieElement
-        }
-        return oldItem is MainRecyclerViewItem.HeaderItem && newItem is MainRecyclerViewItem.HeaderItem
     }
 }

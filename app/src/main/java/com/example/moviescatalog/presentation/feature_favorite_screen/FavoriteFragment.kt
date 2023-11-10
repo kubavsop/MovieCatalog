@@ -7,11 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.domain.model.MovieElement
 import com.example.moviescatalog.databinding.FragmentFavoriteBinding
-import kotlinx.coroutines.launch
 
 class FavoriteFragment : Fragment() {
     private var _binding: FragmentFavoriteBinding? = null
@@ -29,14 +27,12 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val layoutManager = GridLayoutManager(context, 2) // spanCount - количество колонок в сетке
+        val layoutManager = GridLayoutManager(context, 2)
         layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
-                // Здесь определяется размер колонки (SpanSize) для элемента в позиции position
-                return if (position % 3 == 2) 2 else 1 // Пример: каждый третий элемент занимает 2 ячейки, остальные по 1
+                return if (position % 3 == 2) 2 else 1
             }
         }
-
 
         binding.favoriteList.adapter = FavoriteListAdapter()
         binding.favoriteList.layoutManager = layoutManager

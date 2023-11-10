@@ -3,6 +3,7 @@
     <dimen name="padding_16">16dp</dimen>
     <dimen name="padding_12">12dp</dimen>
     <dimen name="padding_8">8dp</dimen>
+    <dimen name="padding_6">6dp</dimen>
     <dimen name="padding_4">4dp</dimen>
     <dimen name="padding_2">2dp</dimen>
     <dimen name="margin_56">56dp</dimen>
@@ -11,6 +12,7 @@
     <dimen name="margin_16">16dp</dimen>
     <dimen name="margin_15">15dp</dimen>
     <dimen name="margin_105">105dp</dimen>
+    <dimen name="margin_108">108dp</dimen>
     <dimen name="margin_12">12dp</dimen>
     <dimen name="margin_10">10dp</dimen>
     <dimen name="margin_8">8dp</dimen>
@@ -20,6 +22,7 @@
     <dimen name="margin_4">4dp</dimen>
     <dimen name="margin_2">2dp</dimen>
 
+    <dimen name="edit_button_size">26dp</dimen>
     <dimen name="favorite_button_size">40dp</dimen>
     <dimen name="movie_image_width">95dp</dimen>
     <dimen name="auth_selection_image_height">338dp</dimen>
@@ -52,6 +55,7 @@
     <dimen name="genre_background_radius">5dp</dimen>
     <dimen name="profile_image_radius">44dp</dimen>
     <dimen name="profile_image_size">88dp</dimen>
+    <dimen name="review_image_size">40dp</dimen>
     <dimen name="carousel_height">425dp</dimen>
 
     <dimen name="text_size_11">11sp</dimen>
