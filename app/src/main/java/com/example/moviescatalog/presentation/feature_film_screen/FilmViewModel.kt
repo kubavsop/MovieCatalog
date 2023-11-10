@@ -55,7 +55,8 @@ class FilmViewModel @Inject constructor(
                 poster = poster,
                 tagline = tagline,
                 time = time,
-                year = year
+                year = year,
+                averageRating = String.format("%.1f", reviews.map { it.rating }.average()).toDouble()
             )
         ) + reviews.map { FilmRecyclerViewItem.ReviewItem(it) }
     }

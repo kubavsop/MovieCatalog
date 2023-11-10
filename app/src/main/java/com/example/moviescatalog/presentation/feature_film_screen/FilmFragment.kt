@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
+import coil.load
 import com.example.domain.model.MovieDetails
 import com.example.moviescatalog.databinding.FragmentFavoriteBinding
 import com.example.moviescatalog.databinding.FragmentFilmBinding
@@ -43,7 +44,7 @@ class FilmFragment : Fragment() {
     }
 
     private fun handleState(state: FilmState) {
-        when(state) {
+        when (state) {
             FilmState.Initial -> Unit
             FilmState.Loading -> showProgress()
             is FilmState.Content -> showContent(state.movieDetails)
@@ -51,12 +52,27 @@ class FilmFragment : Fragment() {
     }
 
     private fun showContent(movieDetails: List<FilmRecyclerViewItem>) {
-        Log.d("Maksim","asdasdasd")
-        (binding.movieContent.adapter as? ReviewListAdapter)?.submitList(movieDetails)
+        with(binding) {
+            poster.load((movieDetails[HEADER_INDEX] as  FilmRecyclerViewItem.HeaderItem).poster) {
+                crossfade(true)
+            }
+            (movieContent.adapter as? ReviewListAdapter)?.submitList(movieDetails)
+            progressBar.isVisible = false
+            movieContent.isVisible = true
+            appBarLayout.isVisible = true
+        }
     }
 
     private fun showProgress() {
-        Unit
+        with(binding) {
+            progressBar.isVisible = true
+            movieContent.isVisible = false
+            appBarLayout.isVisible = false
+        }
+    }
+
+    private companion object {
+        const val HEADER_INDEX = 0
     }
 
     override fun onDestroyView() {

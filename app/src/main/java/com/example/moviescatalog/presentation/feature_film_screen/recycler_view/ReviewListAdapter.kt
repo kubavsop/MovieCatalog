@@ -1,13 +1,17 @@
 package com.example.moviescatalog.presentation.feature_film_screen.recycler_view
 
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.FilmScreenHeaderBinding
 import com.example.moviescatalog.databinding.ReviewListItemBinding
+import com.example.moviescatalog.presentation.util.getRatingColor
 import java.lang.IllegalArgumentException
 
 class ReviewListAdapter : ListAdapter<FilmRecyclerViewItem, RecyclerView.ViewHolder>(DIFF) {
@@ -44,7 +48,31 @@ class ReviewListAdapter : ListAdapter<FilmRecyclerViewItem, RecyclerView.ViewHol
     inner class HeaderViewHolder(private val binding: FilmScreenHeaderBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(headerItem: FilmRecyclerViewItem.HeaderItem) {
-            
+
+            val context = binding.root.context
+            val averageRatingBackground =
+                AppCompatResources.getDrawable(context, R.drawable.average_rating_background)
+
+            val ratingColor = getRatingColor(headerItem.averageRating)
+
+            averageRatingBackground?.colorFilter =
+                PorterDuffColorFilter(context.getColor(ratingColor), PorterDuff.Mode.SRC_IN)
+
+
+            with(binding) {
+                title.text = headerItem.name
+                description.text = headerItem.description
+                yearDescription.text = headerItem.year.toString()
+                countryDescription.text = headerItem.country
+                taglineDescription.text = headerItem.tagline
+                directorDescription.text = headerItem.director
+                budgetDescription.text = headerItem.budget.toString()
+                collectionDescription.text = headerItem.fees.toString()
+                ageDescription.text = headerItem.ageLimit.toString()
+                durationDescription.text = headerItem.time.toString()
+                averageRating.text = headerItem.averageRating.toString()
+                averageRating.background = averageRatingBackground
+            }
         }
     }
 

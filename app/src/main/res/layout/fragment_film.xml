@@ -21,9 +21,9 @@
             <ImageView
                 android:id="@+id/poster"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
+                android:layout_height="@dimen/poster_height"
                 android:layout_marginTop="@dimen/toolbar_height"
+                android:scaleType="centerCrop"
                 android:src="@drawable/empty_image"
                 app:layout_collapseMode="parallax" />
 
@@ -54,5 +54,11 @@
         android:padding="@dimen/padding_16"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

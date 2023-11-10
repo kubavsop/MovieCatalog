@@ -15,7 +15,7 @@ class FavoriteListAdapter : RecyclerView.Adapter<FavoriteListAdapter.FavoriteVie
         fun bind(movieElement: MovieElement) {
             with(binding) {
                 filmImage.load(movieElement.poster) {
-                    placeholder(R.drawable.test_film_image)
+                    crossfade(true)
                 }
                 filmName.text = movieElement.name
             }

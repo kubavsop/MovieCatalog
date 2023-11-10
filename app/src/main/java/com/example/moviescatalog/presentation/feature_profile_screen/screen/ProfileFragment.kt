@@ -104,7 +104,7 @@ class ProfileFragment : Fragment() {
     private fun showProfile(profile: ProfileState.Profile) {
         with(binding) {
             profileImage.load(profile.avatarLink) {
-                error(R.drawable.empty_image)
+                crossfade(true)
             }
             avatarLinkEditText.setText(profile.avatarLink)
             birthdayText.text = profile.birthDate
