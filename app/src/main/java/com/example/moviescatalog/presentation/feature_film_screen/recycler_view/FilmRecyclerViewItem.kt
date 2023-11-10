@@ -3,7 +3,7 @@ package com.example.moviescatalog.presentation.feature_film_screen.recycler_view
 import com.example.domain.model.Review
 
 sealed interface FilmRecyclerViewItem {
-    data class HeaderMovieItem(
+    data class HeaderItem(
         val ageLimit: Int,
         val budget: Int,
         val country: String,
@@ -17,9 +17,9 @@ sealed interface FilmRecyclerViewItem {
         val tagline: String,
         val time: Int,
         val year: Int
-    ): FilmRecyclerViewItem
+    ) : FilmRecyclerViewItem
 
-    data class MovieReviewItem(
+    data class ReviewItem(
         val review: Review
-    ): FilmRecyclerViewItem
+    ) : FilmRecyclerViewItem
 }

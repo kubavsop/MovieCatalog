@@ -21,8 +21,7 @@ import java.lang.IllegalArgumentException
 
 class MovieListAdapter(
     private val movieClickListener: (String) -> Unit
-) :
-    PagingDataAdapter<MainRecyclerViewItem, RecyclerView.ViewHolder>(DIFF) {
+) : PagingDataAdapter<MainRecyclerViewItem, RecyclerView.ViewHolder>(DIFF) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -90,7 +89,7 @@ class MovieListAdapter(
 
             with(binding) {
                 filmImage.load(movieElement.poster) {
-                    placeholder(R.drawable.test_film_image)
+                    crossfade(true)
                 }
                 movieTitle.text = movieElement.name
                 date.text = "${movieElement.year} · ${movieElement.country}"
