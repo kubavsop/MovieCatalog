@@ -28,9 +28,6 @@
         <action
             android:id="@+id/action_userLoginFragment_to_registrationDetailsFragment"
             app:destination="@id/registrationDetailsFragment" />
-        <action
-            android:id="@+id/action_userLoginFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/passwordRegistrationFragment"
@@ -62,9 +59,6 @@
         <action
             android:id="@+id/action_passwordRegistrationFragment_to_userLoginFragment"
             app:destination="@id/userLoginFragment" />
-        <action
-            android:id="@+id/action_passwordRegistrationFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationDetailsFragment"

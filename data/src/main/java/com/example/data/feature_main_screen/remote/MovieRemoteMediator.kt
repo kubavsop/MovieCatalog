@@ -57,7 +57,5 @@ class MovieRemoteMediator(
 
     private companion object {
         const val FIRST_PAGE = 2
-        const val MOVIES_TO_SKIP = 4
     }
-
 }

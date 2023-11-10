@@ -8,7 +8,7 @@ import androidx.paging.PagingConfig
 import androidx.room.Room
 import com.example.data.feature_favorite_screen.remote.FavoriteMoviesApi
 import com.example.data.feature_favorite_screen.repository.FavoriteRepositoryImpl
-import com.example.data.feature_film_screen.remote.ReviewApi
+import com.example.data.feature_film_screen.remote.FilmApi
 import com.example.data.feature_film_screen.repository.FilmRepositoryImpl
 import com.example.data.feature_main_screen.local.MovieDatabase
 import com.example.data.feature_main_screen.local.entity.MovieElementEntity
@@ -47,9 +47,9 @@ class DataModule {
 
     @Singleton
     @Provides
-    fun provideReviewApi(authInterceptor: AuthInterceptor): ReviewApi {
+    fun provideReviewApi(authInterceptor: AuthInterceptor): FilmApi {
         val retrofit = Retrofit.Builder()
-            .baseUrl(ReviewApi.BASE_URL)
+            .baseUrl(FilmApi.BASE_URL)
             .client(
                 OkHttpClient.Builder()
                     .addInterceptor(authInterceptor)
@@ -57,7 +57,7 @@ class DataModule {
             )
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        return retrofit.create(ReviewApi::class.java)
+        return retrofit.create(FilmApi::class.java)
     }
 
     @Singleton
@@ -128,7 +128,7 @@ class DataModule {
         moviesApi: MoviesApi
     ): Pager<Int, MovieElementEntity> {
         return Pager(
-            config = PagingConfig(pageSize = 5),
+            config = PagingConfig(pageSize = 6),
             remoteMediator = MovieRemoteMediator(
                 movieDatabase = movieDatabase,
                 moviesApi = moviesApi
@@ -211,10 +211,10 @@ class DataModule {
     @Singleton
     @Provides
     fun provideFilmRepository(
-        reviewApi: ReviewApi,
+        filmApi: FilmApi,
         ioDispatcher: CoroutineDispatcher
     ): FilmRepository {
-        return FilmRepositoryImpl(reviewApi = reviewApi, ioDispatcher = ioDispatcher)
+        return FilmRepositoryImpl(filmApi = filmApi, ioDispatcher = ioDispatcher)
     }
 
     @Singleton

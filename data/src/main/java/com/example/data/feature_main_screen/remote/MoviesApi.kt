@@ -9,9 +9,6 @@ interface MoviesApi {
     @GET("{page}")
     suspend fun getMoviesByPage(@Path("page") page: Int): MoviesPagedListDto
 
-    @GET("details/{id}")
-    suspend fun getMovieDetailsById(@Path("id") id: String): MovieDetailsDto
-
     companion object {
         const val BASE_URL = "https://react-midterm.kreosoft.space/api/movies/"
     }

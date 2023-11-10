@@ -64,8 +64,7 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
     }
 
     override fun openMainFromUserLogin() {
-        val action = UserLoginFragmentDirections.actionUserLoginFragmentToMainFragment()
-        navController.navigate(action)
+        binding.bottomNavigationView.selectedItemId = R.id.mainFragment
     }
 
     override fun openUserLoginFromRegistrationDetails() {
@@ -105,9 +104,7 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
     }
 
     override fun openMainFromPasswordRegistration() {
-        val action =
-            PasswordRegistrationFragmentDirections.actionPasswordRegistrationFragmentToMainFragment()
-        navController.navigate(action)
+        binding.bottomNavigationView.selectedItemId = R.id.mainFragment
     }
 
     override fun openAuthSelectionScreenFromProfile() {
@@ -145,5 +142,4 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
     private fun hideBottomNav() {
         binding.bottomNavigationView.visibility = View.GONE
     }
-
 }

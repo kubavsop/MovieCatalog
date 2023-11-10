@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/margin_16"
-    android:layout_marginTop="@dimen/margin_15"
+    android:layout_marginBottom="@dimen/margin_16"
     android:layout_marginEnd="@dimen/margin_16">
 
     <ImageView
@@ -22,7 +22,7 @@
         android:layout_marginStart="@dimen/margin_2"
         android:layout_marginTop="@dimen/margin_2"
         android:background="@drawable/average_rating_background"
-        android:text="9.0"
+        android:text="@string/test_rating"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="@id/film_image"
         app:layout_constraintTop_toTopOf="@id/film_image" />
@@ -39,7 +39,7 @@
         style="@style/TitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Название фильма"
+        android:text="@string/movie_title"
         android:textSize="@dimen/text_size_14"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toStartOf="@id/user_rating"

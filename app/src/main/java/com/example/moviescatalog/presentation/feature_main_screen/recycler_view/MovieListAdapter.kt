@@ -77,15 +77,6 @@ class MovieListAdapter(
                 carousel.setData(imageList)
             }
         }
-
-//        private fun getCarouselClickListener(movieClickListener: (String) -> Unit) =
-//            object : CarouselListener {
-//                override fun onClick(position: Int, carouselItem: CarouselItem) {
-//                    super.onClick(position, carouselItem)
-//                    val id = carouselItem.headers?.get("id")
-//                    id?.let { movieClickListener(it) }
-//                }
-//            }
     }
 
     inner class MovieViewHolder(private val binding: MovieListItemBinding) :

@@ -1,5 +1,6 @@
 package com.example.domain.feature_film_screen.repository
 
+import com.example.domain.model.MovieDetails
 import com.example.domain.model.ReviewModify
 
 interface FilmRepository {
@@ -16,4 +17,6 @@ interface FilmRepository {
         movieId: String,
         id: String
     )
+
+    suspend fun getMovieDetailsById(id: String): MovieDetails
 }
