@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.domain.feature_film_screen.usecase.AddMovieReviewUseCase
 import com.example.domain.feature_film_screen.usecase.DeleteMovieReviewUseCase
 import com.example.domain.feature_film_screen.usecase.EditMovieReviewUseCase
-import com.example.domain.feature_film_screen.usecase.GetMovieDetailsByIdUseCase
+import com.example.domain.feature_main_screen.usecase.GetMovieDetailsByIdUseCase
 import com.example.domain.model.MovieDetails
 import com.example.moviescatalog.presentation.feature_film_screen.recycler_view.FilmRecyclerViewItem
 import dagger.hilt.android.lifecycle.HiltViewModel

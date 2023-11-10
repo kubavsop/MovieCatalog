@@ -8,6 +8,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.ActivityMainBinding
+import com.example.moviescatalog.presentation.feature_film_screen.FilmFragment
+import com.example.moviescatalog.presentation.feature_film_screen.FilmFragmentDirections
 import com.example.moviescatalog.presentation.feature_main_screen.MainFragment
 import com.example.moviescatalog.presentation.feature_main_screen.MainFragmentDirections
 import com.example.moviescatalog.presentation.feature_profile_screen.screen.ProfileFragment
@@ -24,7 +26,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
     RegistrationDetailsFragment.FragmentCallBack, PasswordRegistrationFragment.FragmentCallBack,
-    AuthSelectionFragment.FragmentCallBack, ProfileFragment.FragmentCallBack, MainFragment.FragmentCallBack {
+    AuthSelectionFragment.FragmentCallBack, ProfileFragment.FragmentCallBack,
+    MainFragment.FragmentCallBack, FilmFragment.FragmentCallBack {
     private lateinit var binding: ActivityMainBinding
     private val navController: NavController
         get() {
@@ -126,6 +129,11 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
                 birthDate = birthDate,
                 gender = gender
             )
+        navController.navigate(action)
+    }
+
+    override fun openMainFromFilmScreen() {
+        val action = FilmFragmentDirections.actionFilmFragmentToMainFragment()
         navController.navigate(action)
     }
 

@@ -18,4 +18,10 @@ class MoviesRepositoryImpl(
             moviesApi.getMoviesByPage(page = page).toMoviesPagedList()
         }
     }
+
+    override suspend fun getMovieDetailsById(id: String): MovieDetails {
+        return withContext(ioDispatcher) {
+            moviesApi.getMovieDetailsById(id = id).toMovieDetails()
+        }
+    }
 }

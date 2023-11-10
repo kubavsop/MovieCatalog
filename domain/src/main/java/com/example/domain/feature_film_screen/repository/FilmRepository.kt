@@ -17,6 +17,4 @@ interface FilmRepository {
         movieId: String,
         id: String
     )
-
-    suspend fun getMovieDetailsById(id: String): MovieDetails
 }

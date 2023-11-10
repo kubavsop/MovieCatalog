@@ -12,7 +12,7 @@ sealed interface FilmRecyclerViewItem {
         val director: String,
         val fees: Int,
         val genres: List<String>,
-        val id: UUID,
+        val id: String,
         val name: String,
         val poster: String,
         val tagline: String,

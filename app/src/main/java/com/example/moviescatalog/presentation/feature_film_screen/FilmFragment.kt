@@ -1,5 +1,6 @@
 package com.example.moviescatalog.presentation.feature_film_screen
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -26,7 +27,16 @@ class FilmFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: FilmViewModel by activityViewModels()
     private val args: FilmFragmentArgs by navArgs()
+    private var fragmentCallBack: FragmentCallBack? = null
 
+    interface FragmentCallBack {
+        fun openMainFromFilmScreen()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        fragmentCallBack = context as FragmentCallBack
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -76,6 +86,7 @@ class FilmFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        binding.movieContent.adapter = null
         _binding = null
         super.onDestroyView()
     }

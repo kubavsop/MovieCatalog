@@ -9,7 +9,7 @@ import com.example.domain.feature_film_screen.usecase.AddMovieReviewUseCase
 import com.example.domain.feature_film_screen.usecase.DeleteMovieReviewUseCase
 import com.example.domain.feature_film_screen.usecase.EditMovieReviewUseCase
 import com.example.domain.feature_main_screen.repository.MoviesRepository
-import com.example.domain.feature_film_screen.usecase.GetMovieDetailsByIdUseCase
+import com.example.domain.feature_main_screen.usecase.GetMovieDetailsByIdUseCase
 import com.example.domain.feature_main_screen.usecase.GetMoviesByPageUseCase
 import com.example.domain.feature_profile_screen.repository.ProfileRepository
 import com.example.domain.feature_profile_screen.usecase.ChangeProfileUseCase
@@ -69,7 +69,7 @@ class DomainModule {
     }
 
     @Provides
-    fun provideGetMovieDetailsByIdUseCase(repository: FilmRepository): GetMovieDetailsByIdUseCase {
+    fun provideGetMovieDetailsByIdUseCase(repository: MoviesRepository): GetMovieDetailsByIdUseCase {
         return GetMovieDetailsByIdUseCase(repository = repository)
     }
 
