@@ -37,7 +37,7 @@ fun UserShort.toUserShortDto() = UserShortDto(
 )
 
 fun ReviewDto.toReview() = Review(
-    author = author.toUserShort(),
+    author = author?.toUserShort(),
     createDateTime = createDateTime,
     id = id,
     isAnonymous = isAnonymous,
@@ -46,7 +46,7 @@ fun ReviewDto.toReview() = Review(
 )
 
 fun Review.toReviewDto() = ReviewDto(
-    author = author.toUserShortDto(),
+    author = author?.toUserShortDto(),
     createDateTime = createDateTime,
     id = id,
     isAnonymous = isAnonymous,

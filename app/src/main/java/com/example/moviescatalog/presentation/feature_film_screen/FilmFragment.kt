@@ -1,26 +1,22 @@
 package com.example.moviescatalog.presentation.feature_film_screen
 
-import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
-import com.example.domain.model.MovieDetails
-import com.example.moviescatalog.R
-import com.example.moviescatalog.databinding.FragmentFavoriteBinding
 import com.example.moviescatalog.databinding.FragmentFilmBinding
-import com.example.moviescatalog.databinding.FragmentMainBinding
-import com.example.moviescatalog.presentation.MainActivity
-import com.example.moviescatalog.presentation.feature_favorite_screen.FavoriteViewModel
 import com.example.moviescatalog.presentation.feature_film_screen.recycler_view.FilmRecyclerViewItem
 import com.example.moviescatalog.presentation.feature_film_screen.recycler_view.ReviewListAdapter
+import kotlin.math.abs
 
 
 class FilmFragment : Fragment() {
@@ -52,8 +48,23 @@ class FilmFragment : Fragment() {
         viewModel.state.observe(viewLifecycleOwner, ::handleState)
 
 //        val dialog = Dialog(requireContext())
-//        dialog.setContentView(R.layout.review_dilog)
+//       dialog.setContentView(R.layout.review_dialog)
 //        dialog.show()
+
+        binding.appBarLayout.addOnOffsetChangedListener { _, verticalOffset ->
+            val totalScrollRange = binding.appBarLayout.totalScrollRange
+            val absVerticalOffset = abs(verticalOffset)
+            var alpha = (absVerticalOffset / totalScrollRange.toFloat()) - 0.2
+
+            if (alpha < 0) {
+                alpha = 0.0
+            }
+
+            val colorFilter = PorterDuffColorFilter(Color.argb((alpha * 255).toInt(), 0, 0, 0), PorterDuff.Mode.SRC_ATOP)
+            binding.poster.colorFilter = colorFilter
+        }
+
+
 
 
         binding.movieContent.adapter = ReviewListAdapter()

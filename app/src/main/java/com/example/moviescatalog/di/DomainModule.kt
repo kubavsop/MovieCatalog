@@ -11,12 +11,14 @@ import com.example.domain.feature_film_screen.usecase.EditMovieReviewUseCase
 import com.example.domain.feature_main_screen.repository.MoviesRepository
 import com.example.domain.feature_main_screen.usecase.GetMovieDetailsByIdUseCase
 import com.example.domain.feature_main_screen.usecase.GetMoviesByPageUseCase
+import com.example.domain.feature_main_screen.usecase.GetRatingByMovieIdUseCase
 import com.example.domain.feature_profile_screen.repository.ProfileRepository
 import com.example.domain.feature_profile_screen.usecase.ChangeProfileUseCase
 import com.example.domain.feature_profile_screen.usecase.GetProfileUseCase
 import com.example.domain.feature_profile_screen.usecase.LogoutUseCase
 import com.example.domain.feature_user_auth.repositroy.UserAuthRepository
 import com.example.domain.feature_user_auth.usecase.FormatDateUseCase
+import com.example.domain.feature_user_auth.usecase.GetUserIdUseCase
 import com.example.domain.feature_user_auth.usecase.LoginUserUseCase
 import com.example.domain.feature_user_auth.usecase.RegisterUserUseCase
 import com.example.domain.feature_user_auth.usecase.ValidateEmailUseCase
@@ -34,13 +36,19 @@ import dagger.hilt.android.components.ViewModelComponent
 @InstallIn(ViewModelComponent::class)
 class DomainModule {
     @Provides
-    fun provideLoginUserUseCase(repository: UserAuthRepository): LoginUserUseCase {
-        return LoginUserUseCase(repository = repository)
+    fun provideLoginUserUseCase(
+        repository: UserAuthRepository,
+        getProfileUseCase: GetProfileUseCase
+    ): LoginUserUseCase {
+        return LoginUserUseCase(repository = repository, getProfileUseCase = getProfileUseCase)
     }
 
     @Provides
-    fun provideRegisterUserUseCase(repository: UserAuthRepository): RegisterUserUseCase {
-        return RegisterUserUseCase(repository = repository)
+    fun provideRegisterUserUseCase(
+        repository: UserAuthRepository,
+        getProfileUseCase: GetProfileUseCase
+    ): RegisterUserUseCase {
+        return RegisterUserUseCase(repository = repository, getProfileUseCase = getProfileUseCase)
     }
 
     @Provides
@@ -82,6 +90,7 @@ class DomainModule {
     fun provideChangeProfileUseCase(profileRepository: ProfileRepository): ChangeProfileUseCase {
         return ChangeProfileUseCase(repository = profileRepository)
     }
+
     @Provides
     fun provideLogoutUseCase(profileRepository: ProfileRepository): LogoutUseCase {
         return LogoutUseCase(repository = profileRepository)
@@ -98,8 +107,14 @@ class DomainModule {
     }
 
     @Provides
-    fun provideGetFavoriteMoviesUseCase(repository: FavoriteRepository): GetFavoriteMoviesUseCase {
-        return GetFavoriteMoviesUseCase(repository = repository)
+    fun provideGetFavoriteMoviesUseCase(
+        repository: FavoriteRepository,
+        getRatingByMovieIdUseCase: GetRatingByMovieIdUseCase
+    ): GetFavoriteMoviesUseCase {
+        return GetFavoriteMoviesUseCase(
+            repository = repository,
+            getRatingByMovieIdUseCase = getRatingByMovieIdUseCase
+        )
     }
 
     @Provides
@@ -115,5 +130,21 @@ class DomainModule {
     @Provides
     fun provideEditMovieReviewUseCase(repository: FilmRepository): EditMovieReviewUseCase {
         return EditMovieReviewUseCase(repository = repository)
+    }
+
+    @Provides
+    fun provideGetUserIdUseCase(repository: UserAuthRepository): GetUserIdUseCase {
+        return GetUserIdUseCase(repository = repository)
+    }
+
+    @Provides
+    fun provideGetRatingByMovieIdUseCase(
+        repository: MoviesRepository,
+        getUserIdUseCase: GetUserIdUseCase
+    ): GetRatingByMovieIdUseCase {
+        return GetRatingByMovieIdUseCase(
+            repository = repository,
+            getUserIdUseCase = getUserIdUseCase
+        )
     }
 }

@@ -14,8 +14,10 @@ import com.example.domain.feature_main_screen.usecase.GetMoviesByPageUseCase
 import com.example.domain.model.MovieElement
 import com.example.moviescatalog.presentation.feature_main_screen.recycler_view.MainRecyclerViewItem
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -29,14 +31,19 @@ class MainViewModel @Inject constructor(
 
     val state: StateFlow<PagingData<MainRecyclerViewItem>> = pager
         .flow
+        .flowOn(Dispatchers.IO)
         .map { value ->
             val movies = getMoviesByPageUseCase(FIRST_PAGE).movies
             var mappedValue: PagingData<MainRecyclerViewItem> =
                 value.map { MainRecyclerViewItem.MovieItem(it.toMovieElement()) }
 
-            mappedValue = movies.drop(MOVIES_IN_THE_CAROUSEL).reversed().fold(mappedValue) {acc, movieElement ->
-                acc.insertHeaderItem(TerminalSeparatorType.SOURCE_COMPLETE, MainRecyclerViewItem.MovieItem(movieElement))
-            }
+            mappedValue = movies.drop(MOVIES_IN_THE_CAROUSEL).reversed()
+                .fold(mappedValue) { acc, movieElement ->
+                    acc.insertHeaderItem(
+                        TerminalSeparatorType.SOURCE_COMPLETE,
+                        MainRecyclerViewItem.MovieItem(movieElement)
+                    )
+                }
 
             mappedValue.insertHeaderItem(
                 TerminalSeparatorType.SOURCE_COMPLETE,

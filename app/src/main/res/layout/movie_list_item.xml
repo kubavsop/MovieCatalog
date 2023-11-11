@@ -10,8 +10,9 @@
     <ImageView
         android:id="@+id/film_image"
         android:layout_width="@dimen/movie_image_item_width"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/poster_image_height"
         android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
         android:src="@drawable/test_film_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -53,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/user_rating"
-        android:drawablePadding="@dimen/padding_4"
+        android:drawablePadding="@dimen/padding_6"
         android:padding="@dimen/padding_4"
         android:text="@string/test_number"
         app:drawableStartCompat="@drawable/star_icon"

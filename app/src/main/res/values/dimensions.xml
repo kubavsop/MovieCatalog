@@ -68,6 +68,7 @@
     <dimen name="profile_image_size">88dp</dimen>
     <dimen name="review_image_size">40dp</dimen>
     <dimen name="carousel_height">425dp</dimen>
+    <dimen name="poster_image_height">130dp</dimen>
 
     <dimen name="text_size_11">11sp</dimen>
     <dimen name="text_size_12">12sp</dimen>

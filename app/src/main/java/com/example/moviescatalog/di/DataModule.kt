@@ -125,13 +125,15 @@ class DataModule {
     @Provides
     fun provideCharacterPager(
         movieDatabase: MovieDatabase,
-        moviesApi: MoviesApi
+        moviesApi: MoviesApi,
+        userStorage: UserStorage
     ): Pager<Int, MovieElementEntity> {
         return Pager(
             config = PagingConfig(pageSize = 6),
             remoteMediator = MovieRemoteMediator(
                 movieDatabase = movieDatabase,
-                moviesApi = moviesApi
+                moviesApi = moviesApi,
+                userStorage = userStorage
             ),
             pagingSourceFactory = {
                 movieDatabase.dao.pagingSource()

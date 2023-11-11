@@ -81,8 +81,12 @@ dependencies {
     kapt("androidx.room:room-compiler:2.6.0")
     implementation("androidx.room:room-paging:2.6.0")
 
+    //Carousel
     implementation("me.relex:circleindicator:2.1.6")
     implementation("org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.1.0")
+
+    //Popup menu
+    implementation("com.github.skydoves:powermenu:2.2.4")
 }
 
 kapt {

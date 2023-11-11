@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,7 @@ import coil.load
 import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.MainScreenHeaderBinding
 import com.example.moviescatalog.databinding.MovieListItemBinding
+import com.example.moviescatalog.presentation.util.getAverageRatingColor
 import com.example.moviescatalog.presentation.util.getRatingColor
 import org.imaginativeworld.whynotimagecarousel.listener.CarouselListener
 import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
@@ -33,6 +35,7 @@ class MovieListAdapter(
             movieViewType -> MovieViewHolder(
                 MovieListItemBinding.inflate(inflater, parent, false)
             )
+
             else -> throw IllegalArgumentException()
         }
     }
@@ -40,9 +43,16 @@ class MovieListAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
         item?.let {
-            when(holder) {
-                is HeaderViewHolder -> holder.bind(it as MainRecyclerViewItem.HeaderItem, movieClickListener)
-                is MovieViewHolder -> holder.bind(it as MainRecyclerViewItem.MovieItem, movieClickListener)
+            when (holder) {
+                is HeaderViewHolder -> holder.bind(
+                    it as MainRecyclerViewItem.HeaderItem,
+                    movieClickListener
+                )
+
+                is MovieViewHolder -> holder.bind(
+                    it as MainRecyclerViewItem.MovieItem,
+                    movieClickListener
+                )
             }
         }
     }
@@ -53,7 +63,10 @@ class MovieListAdapter(
 
     inner class HeaderViewHolder(private val binding: MainScreenHeaderBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(headerItem: MainRecyclerViewItem.HeaderItem, movieClickListener: (String) -> Unit) {
+        fun bind(
+            headerItem: MainRecyclerViewItem.HeaderItem,
+            movieClickListener: (String) -> Unit
+        ) {
             val movies = headerItem.movies
 
             val carouselListener = object : CarouselListener {
@@ -79,17 +92,41 @@ class MovieListAdapter(
         fun bind(movieItem: MainRecyclerViewItem.MovieItem, movieClickListener: (String) -> Unit) {
             val movieElement = movieItem.movieElement
             val context = binding.root.context
+
             val averageRatingBackground =
                 AppCompatResources.getDrawable(context, R.drawable.average_rating_background)
 
-            val ratingColor = getRatingColor(movieElement.averageRating)
+            val averageRatingColor = getAverageRatingColor(movieElement.averageRating)
 
             averageRatingBackground?.colorFilter =
-                PorterDuffColorFilter(context.getColor(ratingColor), PorterDuff.Mode.SRC_IN)
+                PorterDuffColorFilter(context.getColor(averageRatingColor), PorterDuff.Mode.SRC_IN)
+
+            if (movieElement.userRating != null) {
+                val userRatingBackground =
+                    AppCompatResources.getDrawable(context, R.drawable.user_rating)
+
+                val userRatingColor = getRatingColor(movieElement.userRating!!)
+
+                userRatingBackground?.colorFilter =
+                    PorterDuffColorFilter(
+                        context.getColor(userRatingColor),
+                        PorterDuff.Mode.SRC_IN
+                    )
+
+                with(binding) {
+                    userRating.isVisible = true
+                    userRating.text = movieElement.userRating.toString()
+                    userRating.background = userRatingBackground
+                }
+
+            } else {
+                binding.userRating.isVisible = false
+            }
 
             with(binding) {
                 filmImage.load(movieElement.poster) {
                     crossfade(true)
+                    placeholder(R.drawable.test_film_image)
                 }
                 movieTitle.text = movieElement.name
                 date.text = "${movieElement.year} · ${movieElement.country}"
@@ -139,7 +176,7 @@ class MovieListAdapter(
                 oldItem: MainRecyclerViewItem,
                 newItem: MainRecyclerViewItem
             ): Boolean {
-                if (oldItem is MainRecyclerViewItem.MovieItem && newItem is MainRecyclerViewItem.MovieItem){
+                if (oldItem is MainRecyclerViewItem.MovieItem && newItem is MainRecyclerViewItem.MovieItem) {
                     return newItem.movieElement == oldItem.movieElement
                 }
                 return oldItem is MainRecyclerViewItem.HeaderItem && newItem is MainRecyclerViewItem.HeaderItem

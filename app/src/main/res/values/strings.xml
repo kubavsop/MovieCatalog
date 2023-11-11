@@ -65,4 +65,6 @@
     <string name="anonymous">Анонимный отзыв</string>
     <string name="save">Сохранить</string>
     <string name="cancellation">Отмена</string>
+    <string name="edit">Редактировать</string>
+    <string name="delete">Удалить</string>
 </resources>

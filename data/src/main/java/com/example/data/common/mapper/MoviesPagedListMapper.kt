@@ -23,9 +23,10 @@ fun MovieElementEntity.toMovieElement() = MovieElement(
     poster = poster,
     averageRating = averageRating,
     year = year,
+    userRating = userRating
 )
 
-fun MovieElementDto.toMovieElementEntity(currentPage: Int) = MovieElementEntity(
+fun MovieElementDto.toMovieElementEntity(currentPage: Int, userRating: Int?) = MovieElementEntity(
     country = country,
     id = id,
     name = name,
@@ -33,7 +34,8 @@ fun MovieElementDto.toMovieElementEntity(currentPage: Int) = MovieElementEntity(
     year = year,
     page = currentPage,
     genres = genres.map { it.name },
-    averageRating =  String.format("%.1f", reviews.map { it.rating }.average()).toDouble()
+    averageRating =  String.format("%.1f", reviews.map { it.rating }.average()).toDouble(),
+    userRating = userRating
 )
 
 fun MovieElementDto.toMovieElement() = MovieElement(
@@ -43,7 +45,7 @@ fun MovieElementDto.toMovieElement() = MovieElement(
     name = name,
     poster = poster,
     averageRating = String.format("%.1f", reviews.map { it.rating }.average()).toDouble(),
-    year = year
+    year = year,
 )
 
 fun PageInfoDto.toPageInfo() = PageInfo(

@@ -51,7 +51,7 @@
         android:layout_marginTop="@dimen/margin_4"
         android:layout_marginEnd="@dimen/margin_10"
         android:background="@drawable/user_rating"
-        android:drawablePadding="@dimen/padding_4"
+        android:drawablePadding="@dimen/padding_6"
         android:padding="@dimen/padding_4"
         android:text="@string/test_number"
         app:drawableStartCompat="@drawable/star_icon"

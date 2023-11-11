@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.FilmScreenHeaderBinding
 import com.example.moviescatalog.databinding.ReviewListItemBinding
-import com.example.moviescatalog.presentation.util.getRatingColor
+import com.example.moviescatalog.presentation.util.getAverageRatingColor
 import java.lang.IllegalArgumentException
 
 class ReviewListAdapter : ListAdapter<FilmRecyclerViewItem, RecyclerView.ViewHolder>(DIFF) {
@@ -53,7 +53,7 @@ class ReviewListAdapter : ListAdapter<FilmRecyclerViewItem, RecyclerView.ViewHol
             val averageRatingBackground =
                 AppCompatResources.getDrawable(context, R.drawable.average_rating_background)
 
-            val ratingColor = getRatingColor(headerItem.averageRating)
+            val ratingColor = getAverageRatingColor(headerItem.averageRating)
 
             averageRatingBackground?.colorFilter =
                 PorterDuffColorFilter(context.getColor(ratingColor), PorterDuff.Mode.SRC_IN)
@@ -79,7 +79,15 @@ class ReviewListAdapter : ListAdapter<FilmRecyclerViewItem, RecyclerView.ViewHol
     inner class ReviewViewHolder(private val binding: ReviewListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(reviewItem: FilmRecyclerViewItem.ReviewItem) {
-
+//            val context = binding.root.context
+//            val view = LayoutInflater.from(context)
+//                .inflate(R.layout.test_layout, binding.root, false)
+//
+//            val popupWindow = PopupWindow(context)
+//            popupWindow.contentView = view
+//            popupWindow.isFocusable = true
+//
+//            binding.editButton.setOnClickListener { popupWindow.showAsDropDown(binding.editButton,100,100) }
         }
     }
 

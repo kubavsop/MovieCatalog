@@ -1,6 +1,7 @@
 package com.example.moviescatalog.presentation.feature_profile_screen.state
 
 import com.example.moviescatalog.presentation.UiText
+import java.util.UUID
 
 
 sealed interface ProfileState {
@@ -10,7 +11,7 @@ sealed interface ProfileState {
         val birthDate: String,
         val email: String,
         val gender: Int,
-        val id: String,
+        val id: UUID,
         val name: String,
         val nickName: String,
     ): ProfileState

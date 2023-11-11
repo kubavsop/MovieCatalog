@@ -1,7 +1,7 @@
 package com.example.data.common.dto
 
 data class ReviewDto(
-    val author: UserShortDto,
+    val author: UserShortDto?,
     val createDateTime: String,
     val id: String,
     val isAnonymous: Boolean,

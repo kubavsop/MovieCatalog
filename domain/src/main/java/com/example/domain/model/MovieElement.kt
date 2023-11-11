@@ -7,5 +7,6 @@ data class MovieElement(
     val name: String,
     val poster: String,
     val averageRating: Double,
+    val userRating: Int? = null,
     val year: Int
 )
