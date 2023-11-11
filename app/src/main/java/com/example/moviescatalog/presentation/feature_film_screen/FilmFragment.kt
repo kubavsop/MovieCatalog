@@ -1,5 +1,6 @@
 package com.example.moviescatalog.presentation.feature_film_screen
 
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.example.domain.model.MovieDetails
+import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.FragmentFavoriteBinding
 import com.example.moviescatalog.databinding.FragmentFilmBinding
 import com.example.moviescatalog.databinding.FragmentMainBinding
@@ -48,8 +50,14 @@ class FilmFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.state.observe(viewLifecycleOwner, ::handleState)
-        binding.movieContent.adapter = ReviewListAdapter()
 
+//        val dialog = Dialog(requireContext())
+//        dialog.setContentView(R.layout.review_dilog)
+//        dialog.show()
+
+
+        binding.movieContent.adapter = ReviewListAdapter()
+        binding.backspace.setOnClickListener { fragmentCallBack?.openMainFromFilmScreen() }
         viewModel.movieDetails(args.id)
     }
 

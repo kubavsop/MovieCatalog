@@ -60,4 +60,9 @@
     <string name="review_text">Текст отзыва</string>
     <string name="test_date">07.10.2023</string>
     <string name="test_date_with_country">2013 · США</string>
+    <string name="leave_review">Оставить отзыв</string>
+    <string name="write_review">Напишите отзыв</string>
+    <string name="anonymous">Анонимный отзыв</string>
+    <string name="save">Сохранить</string>
+    <string name="cancellation">Отмена</string>
 </resources>

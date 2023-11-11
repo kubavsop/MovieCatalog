@@ -1,6 +1,5 @@
 package com.example.moviescatalog.presentation.feature_main_screen
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager

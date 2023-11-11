@@ -114,6 +114,14 @@
         <item name="android:textColor">@drawable/toggle_text_color_selector</item>
     </style>
 
+    <style name="ReviewStarButtonStyle">
+        <item name="android:background">@drawable/review_star_selector</item>
+        <item name="android:textOff">""</item>
+        <item name="android:textOn">""</item>
+        <item name="android:layout_height">@dimen/review_star_size</item>
+        <item name="android:layout_width">@dimen/review_star_size</item>
+    </style>
+
     <style name="ButtonStyle" parent="LabelTextStyle">
         <item name="android:textSize">@dimen/text_size_15</item>
         <item name="android:layout_height">@dimen/button_height</item>
