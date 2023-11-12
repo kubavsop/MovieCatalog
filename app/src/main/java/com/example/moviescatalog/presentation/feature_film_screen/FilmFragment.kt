@@ -1,5 +1,6 @@
 package com.example.moviescatalog.presentation.feature_film_screen
 
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.PorterDuff
@@ -14,6 +15,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.example.moviescatalog.databinding.FragmentFilmBinding
+import com.example.moviescatalog.databinding.ReviewDialogBinding
 import com.example.moviescatalog.presentation.feature_film_screen.recycler_view.FilmRecyclerViewItem
 import com.example.moviescatalog.presentation.feature_film_screen.recycler_view.ReviewListAdapter
 import kotlin.math.abs
@@ -23,6 +25,10 @@ class FilmFragment : Fragment() {
 
     private var _binding: FragmentFilmBinding? = null
     private val binding get() = _binding!!
+
+    private var _dialogBinding: ReviewDialogBinding? = null
+    private val dialogBinding get() = _dialogBinding!!
+
     private val viewModel: FilmViewModel by activityViewModels()
     private val args: FilmFragmentArgs by navArgs()
     private var fragmentCallBack: FragmentCallBack? = null
@@ -35,6 +41,7 @@ class FilmFragment : Fragment() {
         super.onAttach(context)
         fragmentCallBack = context as FragmentCallBack
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,11 +52,14 @@ class FilmFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.state.observe(viewLifecycleOwner, ::handleState)
 
-//        val dialog = Dialog(requireContext())
-//       dialog.setContentView(R.layout.review_dialog)
-//        dialog.show()
+        _dialogBinding = ReviewDialogBinding.inflate(
+            LayoutInflater.from(requireContext()),
+            binding.root,
+            false
+        )
+
+        viewModel.state.observe(viewLifecycleOwner, ::handleState)
 
         binding.appBarLayout.addOnOffsetChangedListener { _, verticalOffset ->
             val totalScrollRange = binding.appBarLayout.totalScrollRange
@@ -60,16 +70,20 @@ class FilmFragment : Fragment() {
                 alpha = 0.0
             }
 
-            val colorFilter = PorterDuffColorFilter(Color.argb((alpha * 255).toInt(), 0, 0, 0), PorterDuff.Mode.SRC_ATOP)
+            val colorFilter = PorterDuffColorFilter(
+                Color.argb((alpha * 255).toInt(), 0, 0, 0),
+                PorterDuff.Mode.SRC_ATOP
+            )
             binding.poster.colorFilter = colorFilter
         }
 
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(dialogBinding.root)
 
-
-
-        binding.movieContent.adapter = ReviewListAdapter()
+        binding.movieContent.adapter = ReviewListAdapter(::onFavoriteClick, dialog::show)
         binding.backspace.setOnClickListener { fragmentCallBack?.openMainFromFilmScreen() }
-        viewModel.movieDetails(args.id)
+
+        viewModel.onEvent(FilmEvent.GetMovieDetails(args.id))
     }
 
     private fun handleState(state: FilmState) {
@@ -82,7 +96,7 @@ class FilmFragment : Fragment() {
 
     private fun showContent(movieDetails: List<FilmRecyclerViewItem>) {
         with(binding) {
-            poster.load((movieDetails[HEADER_INDEX] as  FilmRecyclerViewItem.HeaderItem).poster) {
+            poster.load((movieDetails[HEADER_INDEX] as FilmRecyclerViewItem.HeaderItem).poster) {
                 crossfade(true)
             }
             (movieContent.adapter as? ReviewListAdapter)?.submitList(movieDetails)
@@ -98,6 +112,10 @@ class FilmFragment : Fragment() {
             movieContent.isVisible = false
             appBarLayout.isVisible = false
         }
+    }
+
+    private fun onFavoriteClick(isAdd: Boolean, id: String) {
+        viewModel.onEvent(FilmEvent.FavoriteChanged(isAdd = isAdd, id = id))
     }
 
     private companion object {

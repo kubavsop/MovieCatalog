@@ -91,7 +91,7 @@ class MovieListAdapter(
 
         fun bind(movieItem: MainRecyclerViewItem.MovieItem, movieClickListener: (String) -> Unit) {
             val movieElement = movieItem.movieElement
-            val context = binding.root.context
+            val context = binding.root.context.applicationContext
 
             val averageRatingBackground =
                 AppCompatResources.getDrawable(context, R.drawable.average_rating_background)

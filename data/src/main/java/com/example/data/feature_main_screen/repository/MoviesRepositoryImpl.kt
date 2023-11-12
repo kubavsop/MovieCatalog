@@ -8,6 +8,7 @@ import com.example.domain.model.MoviesPagedList
 import com.example.domain.feature_main_screen.repository.MoviesRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import java.util.UUID
 
 class MoviesRepositoryImpl(
     private val moviesApi: MoviesApi,

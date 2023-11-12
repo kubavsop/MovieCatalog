@@ -4,6 +4,7 @@ import com.example.domain.feature_favorite_screen.repository.FavoriteRepository
 import com.example.domain.feature_favorite_screen.usecase.AddFavoriteMovieUseCase
 import com.example.domain.feature_favorite_screen.usecase.DeleteFavoriteMovieUseCase
 import com.example.domain.feature_favorite_screen.usecase.GetFavoriteMoviesUseCase
+import com.example.domain.feature_favorite_screen.usecase.MovieInFavoriteUseCase
 import com.example.domain.feature_film_screen.repository.FilmRepository
 import com.example.domain.feature_film_screen.usecase.AddMovieReviewUseCase
 import com.example.domain.feature_film_screen.usecase.DeleteMovieReviewUseCase
@@ -77,8 +78,16 @@ class DomainModule {
     }
 
     @Provides
-    fun provideGetMovieDetailsByIdUseCase(repository: MoviesRepository): GetMovieDetailsByIdUseCase {
-        return GetMovieDetailsByIdUseCase(repository = repository)
+    fun provideGetMovieDetailsByIdUseCase(
+        repository: MoviesRepository,
+        movieInFavoriteUseCase: MovieInFavoriteUseCase,
+        getUserIdUseCase: GetUserIdUseCase
+    ): GetMovieDetailsByIdUseCase {
+        return GetMovieDetailsByIdUseCase(
+            repository = repository,
+            getUserIdUseCase = getUserIdUseCase,
+            movieInFavoriteUseCase = movieInFavoriteUseCase
+        )
     }
 
     @Provides
@@ -135,6 +144,11 @@ class DomainModule {
     @Provides
     fun provideGetUserIdUseCase(repository: UserAuthRepository): GetUserIdUseCase {
         return GetUserIdUseCase(repository = repository)
+    }
+
+    @Provides
+    fun movieInFavoriteUseCase(repository: FavoriteRepository): MovieInFavoriteUseCase {
+        return MovieInFavoriteUseCase(repository = repository)
     }
 
     @Provides

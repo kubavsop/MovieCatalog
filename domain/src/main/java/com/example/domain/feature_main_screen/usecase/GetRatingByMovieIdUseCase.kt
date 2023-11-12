@@ -2,13 +2,14 @@ package com.example.domain.feature_main_screen.usecase
 
 import com.example.domain.feature_main_screen.repository.MoviesRepository
 import com.example.domain.feature_user_auth.usecase.GetUserIdUseCase
+import java.util.UUID
 
 class GetRatingByMovieIdUseCase(
     private val repository: MoviesRepository,
     private val getUserIdUseCase: GetUserIdUseCase
 ) {
     suspend operator fun invoke(id: String): Int? {
-        val reviews = repository.getMovieDetailsById(id).reviews
+        val reviews = repository.getMovieDetailsById(id.toString()).reviews
         var userRating: Int? = null
 
         for (review in reviews) {

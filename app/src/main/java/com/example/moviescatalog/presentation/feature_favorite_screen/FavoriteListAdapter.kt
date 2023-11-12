@@ -18,7 +18,7 @@ class FavoriteListAdapter : RecyclerView.Adapter<FavoriteListAdapter.FavoriteVie
     class FavoriteViewHolder(private val binding: FavoriteListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(movieElement: MovieElement) {
-            val context = binding.root.context
+            val context = binding.root.context.applicationContext
 
             if (movieElement.userRating != null) {
                 val userRatingBackground =

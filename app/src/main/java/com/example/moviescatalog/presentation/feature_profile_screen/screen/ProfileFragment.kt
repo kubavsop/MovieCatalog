@@ -105,6 +105,8 @@ class ProfileFragment : Fragment() {
         with(binding) {
             profileImage.load(profile.avatarLink) {
                 crossfade(true)
+                placeholder(R.drawable.anonymous)
+                error(R.drawable.anonymous)
             }
             avatarLinkEditText.setText(profile.avatarLink)
             birthdayText.text = profile.birthDate

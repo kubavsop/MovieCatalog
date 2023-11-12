@@ -119,6 +119,7 @@ class ProfileViewModel @Inject constructor(
                     name = currentProfile!!.name,
                     nickName = currentProfile!!.nickName
                 )
+                profileSimilarity = ProfileSimilarity()
             }
         } catch (e: CancellationException) {
             throw e
