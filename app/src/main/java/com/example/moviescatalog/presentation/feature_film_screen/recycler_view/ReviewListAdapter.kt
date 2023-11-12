@@ -161,7 +161,10 @@ class ReviewListAdapter(
                 if (oldItem is FilmRecyclerViewItem.ReviewItem && newItem is FilmRecyclerViewItem.ReviewItem) {
                     return newItem.id == oldItem.id
                 }
-                return oldItem is FilmRecyclerViewItem.HeaderItem && newItem is FilmRecyclerViewItem.HeaderItem
+                if (oldItem is FilmRecyclerViewItem.HeaderItem && newItem is FilmRecyclerViewItem.HeaderItem) {
+                    return oldItem.id == newItem.id
+                }
+                return false
             }
 
             override fun areContentsTheSame(
@@ -171,7 +174,10 @@ class ReviewListAdapter(
                 if (oldItem is FilmRecyclerViewItem.ReviewItem && newItem is FilmRecyclerViewItem.ReviewItem) {
                     return oldItem == newItem
                 }
-                return oldItem is FilmRecyclerViewItem.HeaderItem && newItem is FilmRecyclerViewItem.HeaderItem
+                if (oldItem is FilmRecyclerViewItem.HeaderItem && newItem is FilmRecyclerViewItem.HeaderItem) {
+                    return oldItem == newItem
+                }
+                return false
             }
         }
     }

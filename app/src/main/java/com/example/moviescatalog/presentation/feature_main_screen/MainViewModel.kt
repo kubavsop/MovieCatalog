@@ -11,6 +11,7 @@ import androidx.paging.map
 import com.example.data.feature_main_screen.local.entity.MovieElementEntity
 import com.example.data.common.mapper.toMovieElement
 import com.example.domain.feature_main_screen.usecase.GetMoviesByPageUseCase
+import com.example.domain.feature_main_screen.usecase.GetRatingByMovieIdUseCase
 import com.example.domain.model.MovieElement
 import com.example.moviescatalog.presentation.feature_main_screen.recycler_view.MainRecyclerViewItem
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,7 +27,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     pager: Pager<Int, MovieElementEntity>,
-    private val getMoviesByPageUseCase: GetMoviesByPageUseCase
+    private val getMoviesByPageUseCase: GetMoviesByPageUseCase,
+    private val getRatingByMovieIdUseCase: GetRatingByMovieIdUseCase
 ) : ViewModel() {
 
     val state: StateFlow<PagingData<MainRecyclerViewItem>> = pager
@@ -41,7 +43,7 @@ class MainViewModel @Inject constructor(
                 .fold(mappedValue) { acc, movieElement ->
                     acc.insertHeaderItem(
                         TerminalSeparatorType.SOURCE_COMPLETE,
-                        MainRecyclerViewItem.MovieItem(movieElement)
+                        MainRecyclerViewItem.MovieItem(movieElement.copy(userRating = getRatingByMovieIdUseCase(movieElement.id)))
                     )
                 }
 

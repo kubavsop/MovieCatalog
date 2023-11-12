@@ -6,6 +6,8 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +20,8 @@ import com.example.moviescatalog.databinding.FragmentFilmBinding
 import com.example.moviescatalog.databinding.ReviewDialogBinding
 import com.example.moviescatalog.presentation.feature_film_screen.recycler_view.FilmRecyclerViewItem
 import com.example.moviescatalog.presentation.feature_film_screen.recycler_view.ReviewListAdapter
+import com.example.moviescatalog.presentation.feature_user_auth.registration_details.DetailsEditTextChanged
+import com.example.moviescatalog.presentation.feature_user_auth.registration_details.RegistrationDetailsEvent
 import kotlin.math.abs
 
 
@@ -80,8 +84,49 @@ class FilmFragment : Fragment() {
         val dialog = Dialog(requireContext())
         dialog.setContentView(dialogBinding.root)
 
-        binding.movieContent.adapter = ReviewListAdapter(::onFavoriteClick, dialog::show)
+        binding.movieContent.adapter = ReviewListAdapter(::onFavoriteClick) {
+            viewModel.onEvent(FilmEvent.OpenReviewDialog)
+            dialog.show()
+        }
+
+        binding.movieContent.itemAnimator = null
+
         binding.backspace.setOnClickListener { fragmentCallBack?.openMainFromFilmScreen() }
+        with(dialogBinding) {
+            firstStar.setOnClickListener { viewModel.onEvent(FilmEvent.RatingChanged(FIRST_STAR)) }
+            secondStar.setOnClickListener { viewModel.onEvent(FilmEvent.RatingChanged(SECOND_STAR)) }
+            thirdStar.setOnClickListener { viewModel.onEvent(FilmEvent.RatingChanged(THIRD_STAR)) }
+            fourthStar.setOnClickListener { viewModel.onEvent(FilmEvent.RatingChanged(FOURTH_STAR)) }
+            fifthStar.setOnClickListener { viewModel.onEvent(FilmEvent.RatingChanged(FIFTH_STAR)) }
+            sixthStar.setOnClickListener { viewModel.onEvent(FilmEvent.RatingChanged(SIXTH_STAR)) }
+            seventhStar.setOnClickListener { viewModel.onEvent(FilmEvent.RatingChanged(SEVENTH_STAR)) }
+            eighthStar.setOnClickListener { viewModel.onEvent(FilmEvent.RatingChanged(EIGHTH_STAR)) }
+            ninthStar.setOnClickListener { viewModel.onEvent(FilmEvent.RatingChanged(NINTH_STAR)) }
+            tenthStar.setOnClickListener { viewModel.onEvent(FilmEvent.RatingChanged(TENTH_STAR)) }
+            reviewEditText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+                override fun afterTextChanged(s: Editable) {
+                    viewModel.onEvent(FilmEvent.ReviewTextChanged(s.toString()))
+                }
+            })
+            save.setOnClickListener {
+                dialog.hide()
+                viewModel.onEvent(
+                    FilmEvent.SaveReview(
+                        reviewEditText.text.toString(),
+                        isAnonymous = checkbox.isChecked
+                    )
+                )
+            }
+        }
 
         viewModel.onEvent(FilmEvent.GetMovieDetails(args.id))
     }
@@ -91,6 +136,18 @@ class FilmFragment : Fragment() {
             FilmState.Initial -> Unit
             FilmState.Loading -> showProgress()
             is FilmState.Content -> showContent(state.movieDetails)
+            is FilmState.ReviewDialog -> showReviewDialog(
+                state.rating,
+                state.isNotEmptyRating,
+                state.isNotEmptyText
+            )
+        }
+    }
+
+    private fun showReviewDialog(rating: Int?, isNotEmptyRating: Boolean, isNotEmptyText: Boolean) {
+        onStarClick(rating)
+        with(dialogBinding) {
+            save.isEnabled = isNotEmptyRating && isNotEmptyText
         }
     }
 
@@ -118,7 +175,37 @@ class FilmFragment : Fragment() {
         viewModel.onEvent(FilmEvent.FavoriteChanged(isAdd = isAdd, id = id))
     }
 
+    private fun onStarClick(starPosition: Int?) {
+        if (starPosition == null) return
+        val stars = listOf(
+            dialogBinding.firstStar,
+            dialogBinding.secondStar,
+            dialogBinding.thirdStar,
+            dialogBinding.fourthStar,
+            dialogBinding.fifthStar,
+            dialogBinding.sixthStar,
+            dialogBinding.seventhStar,
+            dialogBinding.eighthStar,
+            dialogBinding.ninthStar,
+            dialogBinding.tenthStar,
+        )
+
+        for (i in stars.indices) {
+            stars[i].isChecked = i <= starPosition - 1
+        }
+    }
+
     private companion object {
+        const val FIRST_STAR = 1
+        const val SECOND_STAR = 2
+        const val THIRD_STAR = 3
+        const val FOURTH_STAR = 4
+        const val FIFTH_STAR = 5
+        const val SIXTH_STAR = 6
+        const val SEVENTH_STAR = 7
+        const val EIGHTH_STAR = 8
+        const val NINTH_STAR = 9
+        const val TENTH_STAR = 10
         const val HEADER_INDEX = 0
     }
 

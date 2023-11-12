@@ -6,16 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.feature_favorite_screen.usecase.AddFavoriteMovieUseCase
 import com.example.domain.feature_favorite_screen.usecase.DeleteFavoriteMovieUseCase
-import com.example.domain.feature_favorite_screen.usecase.MovieInFavoriteUseCase
 import com.example.domain.feature_film_screen.usecase.AddMovieReviewUseCase
 import com.example.domain.feature_film_screen.usecase.DeleteMovieReviewUseCase
 import com.example.domain.feature_film_screen.usecase.EditMovieReviewUseCase
 import com.example.domain.feature_main_screen.usecase.GetMovieDetailsByIdUseCase
-import com.example.domain.feature_user_auth.usecase.GetUserIdUseCase
 import com.example.domain.model.ModifiedMoviesDetails
-import com.example.domain.model.MovieDetails
-import com.example.domain.model.MovieElement
-import com.example.domain.model.Review
 import com.example.moviescatalog.presentation.feature_film_screen.recycler_view.FilmRecyclerViewItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CancellationException
@@ -31,6 +26,8 @@ class FilmViewModel @Inject constructor(
     private val addFavoriteMovieUseCase: AddFavoriteMovieUseCase,
     private val deleteFavoriteMovieUseCase: DeleteFavoriteMovieUseCase,
 ) : ViewModel() {
+    private lateinit var movieList: List<FilmRecyclerViewItem>
+    private var movieId: String? = null
     private val _state = MutableLiveData<FilmState>(FilmState.Initial)
     val state: LiveData<FilmState> = _state
 
@@ -38,6 +35,53 @@ class FilmViewModel @Inject constructor(
         when (event) {
             is FilmEvent.GetMovieDetails -> movieDetails(event.id)
             is FilmEvent.FavoriteChanged -> favoriteChanged(event.isAdd, event.id)
+            is FilmEvent.RatingChanged -> ratingChanged(event.rating)
+            is FilmEvent.OpenReviewDialog -> openReviewDialog()
+            is FilmEvent.ReviewTextChanged -> reviewTextChanged(event.text)
+            is FilmEvent.SaveReview -> saveReview(event.isAnonymous, event.reviewText)
+        }
+    }
+
+    private fun saveReview(isAnonymous: Boolean, reviewText: String) {
+        try {
+            viewModelScope.launch {
+                val rating = (_state.value as FilmState.ReviewDialog).rating!!
+                _state.value = FilmState.Loading
+                addMovieReviewUseCase(
+                    movieId = movieId!!,
+                    isAnonymous = isAnonymous,
+                    reviewText = reviewText,
+                    rating = rating
+                )
+                movieDetails(movieId!!)
+            }
+        } catch (e: Exception) {
+            throw e // TODO
+        }
+    }
+
+    private fun reviewTextChanged(text: String) {
+        if (_state.value is FilmState.ReviewDialog) {
+            _state.value = (_state.value as FilmState.ReviewDialog).copy(
+                isNotEmptyText = text.isNotBlank()
+            )
+        } else {
+            _state.value = FilmState.ReviewDialog(isNotEmptyText = text.isNotBlank())
+        }
+    }
+
+    private fun openReviewDialog() {
+        _state.value = FilmState.ReviewDialog()
+    }
+
+    private fun ratingChanged(rating: Int) {
+        if (_state.value is FilmState.ReviewDialog) {
+            _state.value = (_state.value as FilmState.ReviewDialog).copy(
+                rating = rating,
+                isNotEmptyRating = true
+            )
+        } else {
+            _state.value = FilmState.ReviewDialog(rating)
         }
     }
 
@@ -49,6 +93,12 @@ class FilmViewModel @Inject constructor(
                 } else {
                     deleteFavoriteMovieUseCase(id)
                 }
+                movieList =
+                    listOf((movieList[HEADER_POSITION] as FilmRecyclerViewItem.HeaderItem).copy(inFavorite = isAdd)) + movieList.subList(
+                        HEADER_POSITION + 1, movieList.size
+                    ).toList()
+
+                _state.value = FilmState.Content(movieList)
             }
         } catch (e: Exception) {
             throw e // TODO
@@ -60,7 +110,8 @@ class FilmViewModel @Inject constructor(
             viewModelScope.launch {
                 _state.value = FilmState.Loading
                 val movieDetails = getMovieDetailsByIdUseCase(id)
-                _state.value = FilmState.Content(movieDetails.toFilmItem())
+                movieList = movieDetails.toFilmItem()
+                _state.value = FilmState.Content(movieList)
             }
         } catch (e: CancellationException) {
             throw e
@@ -100,5 +151,9 @@ class FilmViewModel @Inject constructor(
                 isMine = review.isMine
             )
         }
+    }
+
+    private companion object {
+        const val HEADER_POSITION = 0
     }
 }

@@ -7,9 +7,17 @@ class AddMovieReviewUseCase(
     private val repository: FilmRepository
 ) {
     suspend operator fun invoke(
-        reviewModify: ReviewModify,
+        isAnonymous: Boolean,
+        rating: Int,
+        reviewText: String,
         movieId: String
     ) {
-        repository.addMovieReview(reviewModify, movieId)
+        repository.addMovieReview(
+            ReviewModify(
+                isAnonymous = isAnonymous,
+                rating = rating,
+                reviewText = reviewText
+            ), movieId
+        )
     }
 }

@@ -1,6 +1,5 @@
 package com.example.moviescatalog.presentation.feature_profile_screen.view_model
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -92,9 +91,8 @@ class ProfileViewModel @Inject constructor(
                     nickName = currentProfile!!.nickName
                 )
                 changeProfileUseCase(currentProfile!!)
-                setProfileChanged()
                 profileSimilarity = ProfileSimilarity()
-
+                setProfileChanged()
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
