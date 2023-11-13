@@ -1,6 +1,5 @@
 package com.example.moviescatalog.presentation.feature_film_screen.recycler_view
 
-import android.text.BoringLayout
 import com.example.domain.model.UserShort
 
 sealed interface FilmRecyclerViewItem {

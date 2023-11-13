@@ -7,8 +7,18 @@ class EditMovieReviewUseCase(
     private val repository: FilmRepository
 ) {
     suspend operator fun invoke(
-        reviewModify: ReviewModify, movieId: String, id: String
+        isAnonymous: Boolean,
+        rating: Int,
+        reviewText: String,
+        movieId: String,
+        id: String
     ) {
-        repository.editMovieReview(reviewModify = reviewModify, movieId = movieId, id = id)
+        repository.editMovieReview(
+            reviewModify = ReviewModify(
+                isAnonymous = isAnonymous,
+                rating = rating,
+                reviewText = reviewText
+            ), movieId = movieId, id = id
+        )
     }
 }

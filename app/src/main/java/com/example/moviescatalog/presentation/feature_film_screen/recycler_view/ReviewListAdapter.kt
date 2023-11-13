@@ -1,30 +1,35 @@
 package com.example.moviescatalog.presentation.feature_film_screen.recycler_view
 
-import android.app.Dialog
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
 import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.FilmScreenHeaderBinding
-import com.example.moviescatalog.databinding.ReviewDialogBinding
 import com.example.moviescatalog.databinding.ReviewListItemBinding
 import com.example.moviescatalog.presentation.util.getAverageRatingColor
 import com.example.moviescatalog.presentation.util.getRatingColor
-import java.lang.IllegalArgumentException
 
 class ReviewListAdapter(
-    private val onFavoriteClick: (isAdd: Boolean, id: String) -> Unit,
-    private val onAddClick: () -> Unit
-) : ListAdapter<FilmRecyclerViewItem, RecyclerView.ViewHolder>(DIFF) {
+    private val onFavoriteClick: (isAdd: Boolean) -> Unit,
+    private val onAddClick: () -> Unit,
+    private val showAsDropDown: (
+        view: View,
+        id: String,
+        reviewText: String,
+        rating: Int,
+        isAnonymous: Boolean
+    ) -> Unit,
+) : ListAdapter<FilmRecyclerViewItem, ViewHolder>(DIFF) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             headerViewType -> HeaderViewHolder(
@@ -39,7 +44,7 @@ class ReviewListAdapter(
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         when (holder) {
             is HeaderViewHolder -> holder.bind(
@@ -48,7 +53,10 @@ class ReviewListAdapter(
                 onAddClick
             )
 
-            is ReviewViewHolder -> holder.bind(item as FilmRecyclerViewItem.ReviewItem)
+            is ReviewViewHolder -> holder.bind(
+                item as FilmRecyclerViewItem.ReviewItem,
+                showAsDropDown
+            )
         }
     }
 
@@ -59,10 +67,10 @@ class ReviewListAdapter(
 
 
     inner class HeaderViewHolder(private val binding: FilmScreenHeaderBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+        ViewHolder(binding.root) {
         fun bind(
             headerItem: FilmRecyclerViewItem.HeaderItem,
-            onFavoriteClick: (isAdd: Boolean, id: String) -> Unit,
+            onFavoriteClick: (isAdd: Boolean) -> Unit,
             onAddClick: () -> Unit
         ) {
 
@@ -92,7 +100,6 @@ class ReviewListAdapter(
                 favoriteButton.setOnClickListener {
                     onFavoriteClick(
                         favoriteButton.isChecked,
-                        headerItem.id
                     )
                 }
                 addReviewButton.isVisible = !headerItem.haveReview
@@ -102,22 +109,34 @@ class ReviewListAdapter(
     }
 
     inner class ReviewViewHolder(private val binding: ReviewListItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(reviewItem: FilmRecyclerViewItem.ReviewItem) {
-            val context = binding.root.context.applicationContext
-//            val view = LayoutInflater.from(context)
-//                .inflate(R.layout.test_layout, binding.root, false)
-//
-//            val popupWindow = PopupWindow(context)
-//            popupWindow.contentView = view
-//            popupWindow.isFocusable = true
-//
-//            binding.editButton.setOnClickListener { popupWindow.showAsDropDown(binding.editButton,100,100) }
+        ViewHolder(binding.root) {
+        fun bind(
+            reviewItem: FilmRecyclerViewItem.ReviewItem,
+            showAsDropDown: (
+                view: View,
+                id: String,
+                reviewText: String,
+                rating: Int,
+                isAnonymous: Boolean
+            ) -> Unit,
+        ) {
+            val context = binding.root.context
+
 
             val userRatingBackground =
                 AppCompatResources.getDrawable(context, R.drawable.user_rating)
 
             val userRatingColor = getRatingColor(reviewItem.rating)
+
+            binding.editButton.setOnClickListener {
+                showAsDropDown(
+                    binding.editButton,
+                    reviewItem.id,
+                    reviewItem.reviewText,
+                    reviewItem.rating,
+                    reviewItem.isAnonymous
+                )
+            }
 
             userRatingBackground?.colorFilter =
                 PorterDuffColorFilter(
@@ -136,6 +155,7 @@ class ReviewListAdapter(
                 }
             } else {
                 binding.login.text = context.getString(R.string.anonymous_user)
+                binding.profileImage.load(R.drawable.anonymous)
             }
 
             with(binding) {

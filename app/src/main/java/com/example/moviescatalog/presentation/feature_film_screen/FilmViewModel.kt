@@ -11,7 +11,6 @@ import com.example.domain.feature_film_screen.usecase.DeleteMovieReviewUseCase
 import com.example.domain.feature_film_screen.usecase.EditMovieReviewUseCase
 import com.example.domain.feature_main_screen.usecase.GetMovieDetailsByIdUseCase
 import com.example.domain.model.ModifiedMoviesDetails
-import com.example.moviescatalog.presentation.feature_film_screen.recycler_view.FilmRecyclerViewItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
@@ -26,34 +25,74 @@ class FilmViewModel @Inject constructor(
     private val addFavoriteMovieUseCase: AddFavoriteMovieUseCase,
     private val deleteFavoriteMovieUseCase: DeleteFavoriteMovieUseCase,
 ) : ViewModel() {
-    private lateinit var movieList: List<FilmRecyclerViewItem>
-    private var movieId: String? = null
+    private lateinit var movieDetails: ModifiedMoviesDetails
+
+    private var currentReviewState = FilmState.ReviewDialog()
+    private var reviewState = FilmState.ReviewDialog()
+
     private val _state = MutableLiveData<FilmState>(FilmState.Initial)
     val state: LiveData<FilmState> = _state
+
 
     fun onEvent(event: FilmEvent) {
         when (event) {
             is FilmEvent.GetMovieDetails -> movieDetails(event.id)
-            is FilmEvent.FavoriteChanged -> favoriteChanged(event.isAdd, event.id)
+            is FilmEvent.FavoriteChanged -> favoriteChanged(event.isAdd)
+            is FilmEvent.OpenReviewDialog -> reviewDialog(
+                event.rating,
+                event.reviewText,
+                event.isAnonymous
+            )
+
+            is FilmEvent.SaveReview -> saveReview(event.id)
+
+            is FilmEvent.DeleteReview -> deleteReview(event.id)
+
             is FilmEvent.RatingChanged -> ratingChanged(event.rating)
-            is FilmEvent.OpenReviewDialog -> openReviewDialog()
             is FilmEvent.ReviewTextChanged -> reviewTextChanged(event.text)
-            is FilmEvent.SaveReview -> saveReview(event.isAnonymous, event.reviewText)
+            is FilmEvent.IsAnonymousChanged -> isAnonymousChanged(event.flag)
         }
     }
 
-    private fun saveReview(isAnonymous: Boolean, reviewText: String) {
+    private fun deleteReview(id: String) {
         try {
             viewModelScope.launch {
-                val rating = (_state.value as FilmState.ReviewDialog).rating!!
                 _state.value = FilmState.Loading
-                addMovieReviewUseCase(
-                    movieId = movieId!!,
-                    isAnonymous = isAnonymous,
-                    reviewText = reviewText,
-                    rating = rating
-                )
-                movieDetails(movieId!!)
+                deleteMovieReviewUseCase(id = id, movieId = movieDetails.id)
+                movieDetails(movieDetails.id)
+            }
+        } catch (e: Exception) {
+            throw e // TODO
+        }
+    }
+
+    private fun saveReview(id: String?) {
+        try {
+            viewModelScope.launch {
+
+                _state.value = FilmState.Loading
+
+                if (id == null) {
+                    addMovieReviewUseCase(
+                        movieId = movieDetails.id,
+                        isAnonymous = currentReviewState.isAnonymous,
+                        reviewText = currentReviewState.reviewText,
+                        rating = currentReviewState.rating
+                    )
+                } else {
+                    editMovieReviewUseCase(
+                        isAnonymous = currentReviewState.isAnonymous,
+                        rating = currentReviewState.rating,
+                        reviewText = currentReviewState.reviewText,
+                        movieId = movieDetails.id,
+                        id = id
+                    )
+                }
+
+                currentReviewState = FilmState.ReviewDialog()
+                reviewState = FilmState.ReviewDialog()
+
+                movieDetails(movieDetails.id)
             }
         } catch (e: Exception) {
             throw e // TODO
@@ -61,44 +100,54 @@ class FilmViewModel @Inject constructor(
     }
 
     private fun reviewTextChanged(text: String) {
-        if (_state.value is FilmState.ReviewDialog) {
-            _state.value = (_state.value as FilmState.ReviewDialog).copy(
-                isNotEmptyText = text.isNotBlank()
-            )
-        } else {
-            _state.value = FilmState.ReviewDialog(isNotEmptyText = text.isNotBlank())
-        }
+        currentReviewState = currentReviewState.copy(reviewText = text)
+        isSaveActive()
     }
 
-    private fun openReviewDialog() {
-        _state.value = FilmState.ReviewDialog()
+    private fun isAnonymousChanged(flag: Boolean) {
+        currentReviewState = currentReviewState.copy(isAnonymous = flag)
+        isSaveActive()
     }
 
     private fun ratingChanged(rating: Int) {
-        if (_state.value is FilmState.ReviewDialog) {
-            _state.value = (_state.value as FilmState.ReviewDialog).copy(
-                rating = rating,
-                isNotEmptyRating = true
-            )
-        } else {
-            _state.value = FilmState.ReviewDialog(rating)
-        }
+        currentReviewState = currentReviewState.copy(rating = rating)
+        isSaveActive()
     }
 
-    private fun favoriteChanged(isAdd: Boolean, id: String) {
+    private fun reviewDialog(
+        rating: Int,
+        reviewText: String,
+        isAnonymous: Boolean
+    ) {
+        reviewState = FilmState.ReviewDialog(
+            rating = rating,
+            reviewText = reviewText,
+            isAnonymous = isAnonymous
+        )
+        currentReviewState = FilmState.ReviewDialog(
+            rating = rating,
+            reviewText = reviewText,
+            isAnonymous = isAnonymous
+        )
+
+        _state.value = reviewState
+    }
+
+    private fun favoriteChanged(isAdd: Boolean) {
         try {
             viewModelScope.launch {
-                if (isAdd) {
-                    addFavoriteMovieUseCase(id)
-                } else {
-                    deleteFavoriteMovieUseCase(id)
-                }
-                movieList =
-                    listOf((movieList[HEADER_POSITION] as FilmRecyclerViewItem.HeaderItem).copy(inFavorite = isAdd)) + movieList.subList(
-                        HEADER_POSITION + 1, movieList.size
-                    ).toList()
 
-                _state.value = FilmState.Content(movieList)
+                if (isAdd) {
+                    addFavoriteMovieUseCase(movieDetails.id)
+                } else {
+                    deleteFavoriteMovieUseCase(movieDetails.id)
+                }
+
+                movieDetails = movieDetails.copy(
+                    inFavorite = isAdd
+                )
+
+                _state.value = FilmState.Content(movieDetails = movieDetails)
             }
         } catch (e: Exception) {
             throw e // TODO
@@ -109,9 +158,8 @@ class FilmViewModel @Inject constructor(
         try {
             viewModelScope.launch {
                 _state.value = FilmState.Loading
-                val movieDetails = getMovieDetailsByIdUseCase(id)
-                movieList = movieDetails.toFilmItem()
-                _state.value = FilmState.Content(movieList)
+                movieDetails = getMovieDetailsByIdUseCase(id)
+                _state.value = FilmState.Content(movieDetails)
             }
         } catch (e: CancellationException) {
             throw e
@@ -120,40 +168,18 @@ class FilmViewModel @Inject constructor(
         }
     }
 
-    private fun ModifiedMoviesDetails.toFilmItem(): List<FilmRecyclerViewItem> {
-        return listOf(
-            FilmRecyclerViewItem.HeaderItem(
-                ageLimit = ageLimit,
-                budget = budget,
-                country = country,
-                description = description,
-                director = director,
-                fees = fees,
-                genres = genres,
-                inFavorite = inFavorite,
-                name = name,
-                poster = poster,
-                tagline = tagline,
-                time = time,
-                year = year,
-                haveReview = haveReview,
-                id = id,
-                averageRating = averageRating
-            )
-        ) + reviews.map { review ->
-            FilmRecyclerViewItem.ReviewItem(
-                author = review.author,
-                createDateTime = review.createDateTime,
-                id = review.id,
-                isAnonymous = review.isAnonymous,
-                rating = review.rating,
-                reviewText = review.reviewText,
-                isMine = review.isMine
-            )
-        }
+    private fun isSaveActive() {
+        val comparisons = listOf(
+            currentReviewState.rating == reviewState.rating,
+            currentReviewState.isAnonymous == reviewState.isAnonymous,
+            currentReviewState.reviewText == reviewState.reviewText,
+        ).any { !it }
+        _state.value =
+            FilmState.ReviewDialogChanged(isSaveActive = comparisons && currentReviewState.rating != ZERO && currentReviewState.reviewText.isNotBlank())
     }
 
     private companion object {
         const val HEADER_POSITION = 0
+        const val ZERO = 0
     }
 }

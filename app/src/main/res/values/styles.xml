@@ -92,12 +92,12 @@
         <item name="boxStrokeColor">@color/stroke_selector</item>
         <item name="boxStrokeWidth">@dimen/stroke_width</item>
         <item name="android:layout_marginTop">@dimen/margin_8</item>
-        <item name="boxStrokeErrorColor">@color/error_color</item>
+        <item name="boxStrokeErrorColor">@color/red</item>
     </style>
 
     <style name="ErrorTextStyle" parent="BodyTextStyle">
         <item name="android:textSize">@dimen/text_size_14</item>
-        <item name="android:textColor">@color/error_color</item>
+        <item name="android:textColor">@color/red</item>
     </style>
 
     <style name="HintTextStyle" parent="SubTitleTextStyle">
