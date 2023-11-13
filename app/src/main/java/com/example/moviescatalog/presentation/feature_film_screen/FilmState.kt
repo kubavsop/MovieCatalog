@@ -1,8 +1,6 @@
 package com.example.moviescatalog.presentation.feature_film_screen
 
 import com.example.domain.model.ModifiedMoviesDetails
-import com.example.domain.model.MovieDetails
-import com.example.moviescatalog.presentation.feature_film_screen.recycler_view.FilmRecyclerViewItem
 
 private const val ZERO = 0
 private const val EMPTY_STRING = ""

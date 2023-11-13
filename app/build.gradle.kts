@@ -85,7 +85,6 @@ dependencies {
     implementation("me.relex:circleindicator:2.1.6")
     implementation("org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.1.0")
 
-    implementation("com.squareup.okhttp3:logging-interceptor:3.9.0")
 }
 
 kapt {

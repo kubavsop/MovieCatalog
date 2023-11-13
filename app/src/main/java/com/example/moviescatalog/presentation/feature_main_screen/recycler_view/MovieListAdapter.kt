@@ -142,7 +142,7 @@ class MovieListAdapter(
 
             for (genre in movieElement.genres) {
                 val tv = LayoutInflater.from(context)
-                    .inflate(R.layout.genre_text_view, binding.root, false).apply {
+                    .inflate(R.layout.genre_text_view_main_screen, binding.root, false).apply {
                         id = View.generateViewId()
                     }
                 (tv as? TextView)?.text = genre

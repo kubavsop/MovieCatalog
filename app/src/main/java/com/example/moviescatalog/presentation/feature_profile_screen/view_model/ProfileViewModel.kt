@@ -1,5 +1,6 @@
 package com.example.moviescatalog.presentation.feature_profile_screen.view_model
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -32,7 +33,7 @@ class ProfileViewModel @Inject constructor(
     private val validateFirstNameUseCase: ValidateFirstNameUseCase,
     private val formatDateUseCase: FormatDateUseCase
 ) : ViewModel() {
-    private var currentProfile: Profile? = null
+    private lateinit var profile: Profile
     private var profileSimilarity = ProfileSimilarity()
 
     private var _state = MutableLiveData<ProfileState>(ProfileState.Initial)
@@ -57,19 +58,20 @@ class ProfileViewModel @Inject constructor(
                 name = event.name,
             )
 
-            is ProfileEvent.Cancel -> cancel()
+            is ProfileEvent.Cancel -> showCachedProfile()
         }
     }
 
-    private fun cancel() {
+    private fun showCachedProfile() {
+        profileSimilarity = ProfileSimilarity()
         _state.value = ProfileState.Profile(
-            avatarLink = currentProfile!!.avatarLink,
-            birthDate = currentProfile!!.birthDate,
-            email = currentProfile!!.email,
-            gender = currentProfile!!.gender,
-            id = currentProfile!!.id,
-            name = currentProfile!!.name,
-            nickName = currentProfile!!.nickName
+            avatarLink = profile.avatarLink,
+            birthDate = profile.birthDate,
+            email = profile.email,
+            gender = profile.gender,
+            id = profile.id,
+            name = profile.name,
+            nickName = profile.nickName
         )
     }
 
@@ -81,18 +83,17 @@ class ProfileViewModel @Inject constructor(
         val profileChanged = (_state.value as ProfileState.ProfileChanged)
         viewModelScope.launch {
             try {
-                currentProfile = Profile(
+                profile = Profile(
                     avatarLink = avatarLink,
                     birthDate = profileChanged.birthDate,
                     email = email,
                     gender = profileChanged.gender.ordinal,
-                    id = currentProfile!!.id,
+                    id = profile.id,
                     name = name,
-                    nickName = currentProfile!!.nickName
+                    nickName = profile.nickName
                 )
-                changeProfileUseCase(currentProfile!!)
-                profileSimilarity = ProfileSimilarity()
-                setProfileChanged()
+                changeProfileUseCase(profile)
+                showCachedProfile()
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
@@ -104,20 +105,20 @@ class ProfileViewModel @Inject constructor(
     private fun showProfile() {
         try {
             viewModelScope.launch {
+                profileSimilarity = ProfileSimilarity()
+
                 _state.value = ProfileState.Loading
 
-                currentProfile = getProfileUseCase()
-
+                profile = getProfileUseCase()
                 _state.value = ProfileState.Profile(
-                    avatarLink = currentProfile!!.avatarLink,
-                    birthDate = currentProfile!!.birthDate,
-                    email = currentProfile!!.email,
-                    gender = currentProfile!!.gender,
-                    id = currentProfile!!.id,
-                    name = currentProfile!!.name,
-                    nickName = currentProfile!!.nickName
+                    avatarLink = profile.avatarLink,
+                    birthDate = profile.birthDate,
+                    email = profile.email,
+                    gender = profile.gender,
+                    id = profile.id,
+                    name = profile.name,
+                    nickName = profile.nickName
                 )
-                profileSimilarity = ProfileSimilarity()
             }
         } catch (e: CancellationException) {
             throw e
@@ -127,9 +128,10 @@ class ProfileViewModel @Inject constructor(
     }
 
     private fun genderChanged(gender: Gender) {
+        Log.d("maksim","asdasd")
         if (_state.value !is ProfileState.ProfileChanged) setProfileChanged()
 
-        profileSimilarity.gender = gender.ordinal == currentProfile?.gender
+        profileSimilarity.gender = gender.ordinal == profile.gender
 
         _state.value = (_state.value as ProfileState.ProfileChanged).copy(
             gender = gender,
@@ -140,7 +142,7 @@ class ProfileViewModel @Inject constructor(
     }
 
     private fun avatarChanged(avatarLink: String) {
-        profileSimilarity.avatarLink = avatarLink == currentProfile?.avatarLink
+        profileSimilarity.avatarLink = avatarLink == profile.avatarLink
         checkError()
     }
 
@@ -152,7 +154,7 @@ class ProfileViewModel @Inject constructor(
             monthOfYear,
             dayOfMonth
         )
-        profileSimilarity.birthDate = birthDate == currentProfile?.birthDate
+        profileSimilarity.birthDate = birthDate == profile.birthDate
 
         _state.value = (_state.value as ProfileState.ProfileChanged).copy(
             birthDate = birthDate,
@@ -164,7 +166,7 @@ class ProfileViewModel @Inject constructor(
     private fun firstNameChanged(firstName: String) {
         if (_state.value !is ProfileState.ProfileChanged) setProfileChanged()
 
-        profileSimilarity.name = firstName == currentProfile?.name
+        profileSimilarity.name = firstName == profile.name
 
         val isSuccess = validateFirstNameUseCase(firstName)
 
@@ -182,7 +184,7 @@ class ProfileViewModel @Inject constructor(
     private fun emailChanged(email: String) {
         if (_state.value !is ProfileState.ProfileChanged) setProfileChanged()
 
-        profileSimilarity.email = email == currentProfile?.email
+        profileSimilarity.email = email == profile.email
 
         val isSuccess = validateEmailUseCase(email)
         _state.value = (_state.value as ProfileState.ProfileChanged).copy(
@@ -223,8 +225,8 @@ class ProfileViewModel @Inject constructor(
 
     private fun setProfileChanged() {
         _state.value = ProfileState.ProfileChanged(
-            gender = if (currentProfile!!.gender == 0) Gender.MALE else Gender.FEMALE,
-            birthDate = currentProfile!!.birthDate,
+            gender = if (profile.gender == 0) Gender.MALE else Gender.FEMALE,
+            birthDate = profile.birthDate,
             isValid = false
         )
     }

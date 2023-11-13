@@ -5,6 +5,7 @@ import android.graphics.PorterDuffColorFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
@@ -68,6 +69,9 @@ class ReviewListAdapter(
 
     inner class HeaderViewHolder(private val binding: FilmScreenHeaderBinding) :
         ViewHolder(binding.root) {
+
+        private var genres = mutableListOf<View>()
+
         fun bind(
             headerItem: FilmRecyclerViewItem.HeaderItem,
             onFavoriteClick: (isAdd: Boolean) -> Unit,
@@ -104,6 +108,26 @@ class ReviewListAdapter(
                 }
                 addReviewButton.isVisible = !headerItem.haveReview
                 addReviewButton.setOnClickListener { onAddClick() }
+            }
+
+
+            for (genre in genres) {
+                binding.root.removeView(genre)
+            }
+
+            genres = mutableListOf()
+
+            for (genre in headerItem.genres) {
+                val tv = LayoutInflater.from(context)
+                    .inflate(R.layout.genre_text_view_movie_screen, binding.root, false).apply {
+                        id = View.generateViewId()
+                    }
+                (tv as? TextView)?.text = genre
+
+                binding.root.addView(tv)
+                binding.genres.addView(tv)
+
+                genres.add(tv)
             }
         }
     }

@@ -81,7 +81,7 @@ class FilmViewModel @Inject constructor(
                     )
                 } else {
                     editMovieReviewUseCase(
-                        isAnonymous = currentReviewState.isAnonymous,
+                        isAnonymous = if (currentReviewState.isAnonymous && !reviewState.isAnonymous) false else currentReviewState.isAnonymous,
                         rating = currentReviewState.rating,
                         reviewText = currentReviewState.reviewText,
                         movieId = movieDetails.id,

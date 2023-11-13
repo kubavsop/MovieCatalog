@@ -79,7 +79,7 @@
         style="@style/DescriptionHeaderStyle"
         android:text="@string/about_film"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/genres" />
+        app:layout_constraintTop_toBottomOf="@+id/genres" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/description_start"

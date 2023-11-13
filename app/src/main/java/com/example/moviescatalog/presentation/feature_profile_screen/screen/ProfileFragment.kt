@@ -6,23 +6,20 @@ import android.icu.util.Calendar
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ToggleButton
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import coil.load
 import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.FragmentProfileBinding
+import com.example.moviescatalog.presentation.feature_profile_screen.event.ProfileEvent
 import com.example.moviescatalog.presentation.feature_profile_screen.state.Gender
 import com.example.moviescatalog.presentation.feature_profile_screen.state.ProfileEditTextChanged
-import com.example.moviescatalog.presentation.feature_profile_screen.event.ProfileEvent
 import com.example.moviescatalog.presentation.feature_profile_screen.state.ProfileState
 import com.example.moviescatalog.presentation.feature_profile_screen.view_model.ProfileViewModel
-import com.example.moviescatalog.presentation.feature_user_auth.registration_details.RegistrationDetailsFragment
 import com.example.moviescatalog.presentation.util.setContainerError
 
 class ProfileFragment : Fragment() {
@@ -57,16 +54,8 @@ class ProfileFragment : Fragment() {
 
         with(binding) {
             birthdayText.setOnClickListener { datePicker.show() }
-            firstNameEditText.addTextChangedListener(
-                getAfterTextChangedListener(
-                    ProfileEditTextChanged.FIRST_NAME_CHANGED
-                )
-            )
-            avatarLinkEditText.addTextChangedListener(
-                getAfterTextChangedListener(
-                    ProfileEditTextChanged.AVATAR_CHANGED
-                )
-            )
+            firstNameEditText.addTextChangedListener(getAfterTextChangedListener(ProfileEditTextChanged.FIRST_NAME_CHANGED))
+            avatarLinkEditText.addTextChangedListener(getAfterTextChangedListener(ProfileEditTextChanged.AVATAR_CHANGED))
             emailEditText.addTextChangedListener(getAfterTextChangedListener(ProfileEditTextChanged.EMAIL_CHANGED))
             maleButton.setOnClickListener { viewModel.onEvent(ProfileEvent.GenderChanged(Gender.MALE)) }
             femaleButton.setOnClickListener { viewModel.onEvent(ProfileEvent.GenderChanged(Gender.FEMALE)) }
@@ -80,7 +69,6 @@ class ProfileFragment : Fragment() {
             cancel.setOnClickListener { viewModel.onEvent(ProfileEvent.Cancel) }
             exit.setOnClickListener { fragmentCallBack?.openAuthSelectionScreenFromProfile() }
         }
-
         viewModel.onEvent(ProfileEvent.ShowProfile)
     }
 
@@ -95,7 +83,6 @@ class ProfileFragment : Fragment() {
 
     private fun showProgressBar() {
         with(binding) {
-            apply.isEnabled = false
             progressBar.isVisible = true
             profileInfo.visibility = View.INVISIBLE
         }
@@ -113,7 +100,6 @@ class ProfileFragment : Fragment() {
             emailEditText.setText(profile.email)
             login.text = profile.nickName
             firstNameEditText.setText(profile.name)
-            apply.isEnabled = false
             progressBar.isVisible = false
             profileInfo.isVisible = true
         }
