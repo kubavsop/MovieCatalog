@@ -67,6 +67,7 @@ class ProfileFragment : Fragment() {
             cancel.setOnClickListener { viewModel.onEvent(ProfileEvent.Cancel) }
             exit.setOnClickListener { viewModel.onEvent(ProfileEvent.Exit) }
         }
+
         viewModel.onEvent(ProfileEvent.ShowProfile)
     }
 
@@ -102,6 +103,8 @@ class ProfileFragment : Fragment() {
             firstNameEditText.setText(profile.name)
             progressBar.isVisible = false
             profileInfo.isVisible = true
+            maleButton.isChecked = profile.gender == Gender.MALE
+            femaleButton.isChecked = profile.gender == Gender.FEMALE
         }
     }
 
@@ -114,10 +117,9 @@ class ProfileFragment : Fragment() {
             )
 
             birthdayText.text = state.birthDate
-            apply.isEnabled = state.isValid
-
             maleButton.isChecked = state.gender == Gender.MALE
             femaleButton.isChecked = state.gender == Gender.FEMALE
+            apply.isEnabled = state.isValid
         }
     }
 

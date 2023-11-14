@@ -1,5 +1,6 @@
 package com.example.moviescatalog.presentation.feature_profile_screen
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,6 +15,7 @@ import com.example.domain.common.model.Profile
 import com.example.moviescatalog.R
 import com.example.moviescatalog.presentation.UiText
 import com.example.moviescatalog.presentation.feature_profile_screen.state.Gender
+import com.example.moviescatalog.presentation.feature_profile_screen.state.ProfileIsNotEmptyState
 import com.example.moviescatalog.presentation.feature_profile_screen.state.ProfileSimilarity
 import com.example.moviescatalog.presentation.feature_profile_screen.state.ProfileState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,6 +35,7 @@ class ProfileViewModel @Inject constructor(
 ) : ViewModel() {
     private lateinit var profile: Profile
     private var profileSimilarity = ProfileSimilarity()
+    private var isNotEmptyState = ProfileIsNotEmptyState()
 
     private var _state = MutableLiveData<ProfileState>(ProfileState.Initial)
     val state: LiveData<ProfileState> = _state
@@ -82,8 +85,7 @@ class ProfileViewModel @Inject constructor(
             avatarLink = profile.avatarLink,
             birthDate = profile.birthDate,
             email = profile.email,
-            gender = profile.gender,
-            id = profile.id,
+            gender = if (profile.gender == MALE_GENDER) Gender.MALE else Gender.FEMALE,
             name = profile.name,
             nickName = profile.nickName
         )
@@ -130,8 +132,7 @@ class ProfileViewModel @Inject constructor(
                     avatarLink = profile.avatarLink,
                     birthDate = profile.birthDate,
                     email = profile.email,
-                    gender = profile.gender,
-                    id = profile.id,
+                    gender = if (profile.gender == MALE_GENDER) Gender.MALE else Gender.FEMALE,
                     name = profile.name,
                     nickName = profile.nickName
                 )
@@ -159,8 +160,14 @@ class ProfileViewModel @Inject constructor(
     }
 
     private fun avatarChanged(avatarLink: String) {
-        profileSimilarity.avatarLink = avatarLink == profile.avatarLink
-        checkError()
+        if (_state.value !is ProfileState.ProfileChanged) setProfileChanged()
+
+        profileSimilarity.avatarLink = avatarLink == profile.avatarLink || (avatarLink.isBlank() && profile.avatarLink == null)
+
+        _state.value = (_state.value as ProfileState.ProfileChanged).copy(
+            isValid = false
+        )
+        if (!profileSimilarity.avatarLink) checkError()
     }
 
 
@@ -184,6 +191,7 @@ class ProfileViewModel @Inject constructor(
         if (_state.value !is ProfileState.ProfileChanged) setProfileChanged()
 
         profileSimilarity.name = firstName == profile.name
+        isNotEmptyState = isNotEmptyState.copy(firstName = firstName.isNotBlank())
 
         val isSuccess = validateFirstNameUseCase(firstName)
 
@@ -202,6 +210,7 @@ class ProfileViewModel @Inject constructor(
         if (_state.value !is ProfileState.ProfileChanged) setProfileChanged()
 
         profileSimilarity.email = email == profile.email
+        isNotEmptyState = isNotEmptyState.copy(email = email.isNotBlank())
 
         val isSuccess = validateEmailUseCase(email)
         _state.value = (_state.value as ProfileState.ProfileChanged).copy(
@@ -228,12 +237,13 @@ class ProfileViewModel @Inject constructor(
             profileSimilarity.birthDate,
             profileSimilarity.email,
             profileSimilarity.gender,
-            profileSimilarity.id,
             profileSimilarity.name,
             profileSimilarity.nickName,
         ).any { !it }
 
-        if (!hasError && hasDifferences) {
+        Log.d("maksim", profileSimilarity.avatarLink.toString())
+
+        if (!hasError && hasDifferences && isNotEmptyState.email && isNotEmptyState.firstName) {
             _state.value = (_state.value as ProfileState.ProfileChanged).copy(
                 isValid = true
             )
@@ -242,7 +252,7 @@ class ProfileViewModel @Inject constructor(
 
     private fun setProfileChanged() {
         _state.value = ProfileState.ProfileChanged(
-            gender = if (profile.gender == 0) Gender.MALE else Gender.FEMALE,
+            gender = if (profile.gender == MALE_GENDER) Gender.MALE else Gender.FEMALE,
             birthDate = profile.birthDate,
             isValid = false
         )
@@ -251,5 +261,6 @@ class ProfileViewModel @Inject constructor(
     private companion object {
         const val MIN_FIRST_NAME_LENGTH = 2
         const val UNAUTHORIZED = 401
+        const val MALE_GENDER = 0
     }
 }

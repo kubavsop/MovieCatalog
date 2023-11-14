@@ -10,8 +10,7 @@ sealed interface ProfileState {
         val avatarLink: String?,
         val birthDate: String,
         val email: String,
-        val gender: Int,
-        val id: UUID,
+        val gender: Gender,
         val name: String,
         val nickName: String,
     ): ProfileState
