@@ -10,7 +10,8 @@
     <ImageView
         android:id="@+id/film_image"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/film_image_height"
+        android:scaleType="centerCrop"
         android:adjustViewBounds="true"
         android:src="@drawable/test_film_image"
         app:layout_constraintEnd_toEndOf="parent"

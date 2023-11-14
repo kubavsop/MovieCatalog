@@ -26,6 +26,7 @@
     <dimen name="margin_4">4dp</dimen>
     <dimen name="margin_2">2dp</dimen>
 
+    <dimen name="film_image_height">205dp</dimen>
     <dimen name="review_tools_icon_size">24dp</dimen>
     <dimen name="review_tools_height">80dp</dimen>
     <dimen name="review_tools_width">177dp</dimen>
