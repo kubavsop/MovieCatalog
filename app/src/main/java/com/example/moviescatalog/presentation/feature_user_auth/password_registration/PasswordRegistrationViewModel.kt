@@ -9,7 +9,7 @@ import com.example.domain.feature_user_auth.usecase.RegisterUserUseCase
 import com.example.domain.feature_user_auth.usecase.ValidatePasswordUseCase
 import com.example.domain.feature_user_auth.usecase.ValidateRepeatedPasswordUseCase
 import com.example.moviescatalog.R
-import com.example.moviescatalog.presentation.UiText
+import com.example.moviescatalog.presentation.util.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch

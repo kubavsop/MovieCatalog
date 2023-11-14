@@ -9,7 +9,7 @@ import com.example.domain.feature_user_auth.usecase.LoginUserUseCase
 import com.example.domain.feature_user_auth.usecase.ValidateLoginUseCase
 import com.example.domain.feature_user_auth.usecase.ValidatePasswordUseCase
 import com.example.moviescatalog.R
-import com.example.moviescatalog.presentation.UiText
+import com.example.moviescatalog.presentation.util.UiText
 import com.example.moviescatalog.presentation.feature_user_auth.user_login.state.LoginIsNotEmptyState
 import com.example.moviescatalog.presentation.feature_user_auth.user_login.state.UserLoginState
 import dagger.hilt.android.lifecycle.HiltViewModel

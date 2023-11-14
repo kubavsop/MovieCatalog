@@ -12,7 +12,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.moviescatalog.databinding.FragmentPasswordRegistrationBinding
-import com.example.moviescatalog.presentation.UiText
+import com.example.moviescatalog.presentation.util.UiText
 import com.example.moviescatalog.presentation.util.setClearFocusOnDoneClick
 import com.example.moviescatalog.presentation.util.setContainerError
 

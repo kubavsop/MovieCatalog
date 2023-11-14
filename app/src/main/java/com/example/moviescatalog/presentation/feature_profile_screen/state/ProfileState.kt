@@ -1,7 +1,6 @@
 package com.example.moviescatalog.presentation.feature_profile_screen.state
 
-import com.example.moviescatalog.presentation.UiText
-import java.util.UUID
+import com.example.moviescatalog.presentation.util.UiText
 
 
 sealed interface ProfileState {

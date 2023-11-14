@@ -13,7 +13,7 @@ import com.example.domain.feature_user_auth.usecase.ValidateEmailUseCase
 import com.example.domain.feature_user_auth.usecase.ValidateFirstNameUseCase
 import com.example.domain.common.model.Profile
 import com.example.moviescatalog.R
-import com.example.moviescatalog.presentation.UiText
+import com.example.moviescatalog.presentation.util.UiText
 import com.example.moviescatalog.presentation.feature_profile_screen.state.Gender
 import com.example.moviescatalog.presentation.feature_profile_screen.state.ProfileIsNotEmptyState
 import com.example.moviescatalog.presentation.feature_profile_screen.state.ProfileSimilarity

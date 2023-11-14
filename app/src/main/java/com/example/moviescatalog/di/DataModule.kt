@@ -107,7 +107,6 @@ class DataModule {
         return AuthInterceptor(getTokenUseCase = getTokenUseCase)
     }
 
-    @Singleton
     @Provides
     fun provideGetTokenUseCase(userRepository: UserRepository): GetTokenUseCase {
         return GetTokenUseCase(repository = userRepository)

@@ -1,6 +1,6 @@
 package com.example.moviescatalog.presentation.feature_user_auth.user_login.state
 
-import com.example.moviescatalog.presentation.UiText
+import com.example.moviescatalog.presentation.util.UiText
 
 sealed interface UserLoginState {
     data object Initial : UserLoginState

@@ -1,6 +1,6 @@
 package com.example.moviescatalog.presentation.feature_user_auth.registration_details.state
 
-import com.example.moviescatalog.presentation.UiText
+import com.example.moviescatalog.presentation.util.UiText
 
 private const val EMPTY_STRING = ""
 data class RegistrationDetailsState(

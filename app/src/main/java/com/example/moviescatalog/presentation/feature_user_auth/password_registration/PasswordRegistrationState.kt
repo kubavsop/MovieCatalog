@@ -1,6 +1,6 @@
 package com.example.moviescatalog.presentation.feature_user_auth.password_registration
 
-import com.example.moviescatalog.presentation.UiText
+import com.example.moviescatalog.presentation.util.UiText
 
 sealed interface PasswordRegistrationState {
     data class PasswordRegistration(

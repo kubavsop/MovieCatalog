@@ -1,4 +1,4 @@
-package com.example.moviescatalog.presentation
+package com.example.moviescatalog.presentation.util
 
 import android.content.Context
 import androidx.annotation.StringRes

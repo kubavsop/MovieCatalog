@@ -8,12 +8,11 @@ import com.example.domain.feature_user_auth.usecase.ValidateEmailUseCase
 import com.example.domain.feature_user_auth.usecase.ValidateFirstNameUseCase
 import com.example.domain.feature_user_auth.usecase.ValidateLoginUseCase
 import com.example.moviescatalog.R
-import com.example.moviescatalog.presentation.UiText
+import com.example.moviescatalog.presentation.util.UiText
 import com.example.moviescatalog.presentation.feature_user_auth.registration_details.state.DetailsIsNotEmptyState
 import com.example.moviescatalog.presentation.feature_user_auth.registration_details.state.RegistrationDetailsState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlin.math.log
 
 @HiltViewModel
 class RegistrationDetailsViewModel @Inject constructor(
