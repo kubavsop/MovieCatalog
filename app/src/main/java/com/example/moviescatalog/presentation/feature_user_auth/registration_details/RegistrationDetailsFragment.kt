@@ -76,22 +76,21 @@ class RegistrationDetailsFragment : Fragment() {
             singIn.setOnClickListener { fragmentCallBack?.openUserLoginFromRegistrationDetails() }
             emailEditText.setClearFocusOnDoneClick()
         }
+        viewModel.onEvent(RegistrationDetailsEvent.RegistrationDetails)
     }
 
 
     private fun handleState(state: RegistrationDetailsState) {
-        binding.loginEditTextContainer.setContainerError(state.loginError, requireContext())
-        binding.emailEditTextContainer.setContainerError(state.emailError, requireContext())
-        binding.firstNameEditTextContainer.setContainerError(state.firstNameError, requireContext())
-        binding.birthdayText.text = state.birthday
-
-        val hasEmpty = listOf(
-            binding.loginEditText.text.toString(),
-            binding.emailEditText.text.toString(),
-            binding.loginEditText.text.toString(),
-            state.birthday
-        ).any { it.isEmpty() }
-        binding.continueRegistration.isEnabled = state.isValid && !hasEmpty
+        with(binding){
+            loginEditTextContainer.setContainerError(state.loginError, requireContext())
+            emailEditTextContainer.setContainerError(state.emailError, requireContext())
+            firstNameEditTextContainer.setContainerError(
+                state.firstNameError,
+                requireContext()
+            )
+            birthdayText.text = state.birthday
+            continueRegistration.isEnabled = state.isValid
+        }
     }
 
     private fun createDatePickerDialog(): DatePickerDialog {

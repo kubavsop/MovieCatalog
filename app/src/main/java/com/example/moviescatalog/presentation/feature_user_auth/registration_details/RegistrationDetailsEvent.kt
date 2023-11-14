@@ -5,4 +5,6 @@ sealed interface RegistrationDetailsEvent {
     data class FirstNameChanged(val firstName: String): RegistrationDetailsEvent
     data class LoginChanged(val login: String): RegistrationDetailsEvent
     data class BirthdayChanged(val year: Int, val monthOfYear: Int,val dayOfMonth: Int): RegistrationDetailsEvent
+
+    data object RegistrationDetails: RegistrationDetailsEvent
 }
