@@ -158,7 +158,7 @@ class FilmViewModel @Inject constructor(
                 if (e.code() == UNAUTHORIZED) {
                     _state.value = FilmState.AuthorisationError
                 } else {
-                    throw e
+                    Unit
                 }
             }
         }
