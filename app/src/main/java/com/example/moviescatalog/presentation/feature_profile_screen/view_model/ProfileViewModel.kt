@@ -14,6 +14,8 @@ import com.example.domain.feature_user_auth.usecase.ValidateFirstNameUseCase
 import com.example.domain.model.Profile
 import com.example.moviescatalog.R
 import com.example.moviescatalog.presentation.UiText
+import com.example.moviescatalog.presentation.feature_film_screen.FilmState
+import com.example.moviescatalog.presentation.feature_film_screen.FilmViewModel
 import com.example.moviescatalog.presentation.feature_profile_screen.event.ProfileEvent
 import com.example.moviescatalog.presentation.feature_profile_screen.state.Gender
 import com.example.moviescatalog.presentation.feature_profile_screen.state.ProfileSimilarity
@@ -21,6 +23,7 @@ import com.example.moviescatalog.presentation.feature_profile_screen.state.Profi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import javax.inject.Inject
 
 
@@ -59,6 +62,22 @@ class ProfileViewModel @Inject constructor(
             )
 
             is ProfileEvent.Cancel -> showCachedProfile()
+            is ProfileEvent.Exit -> logout()
+        }
+    }
+
+    private fun logout() {
+        viewModelScope.launch {
+            try {
+                logoutUseCase()
+                _state.value = ProfileState.Exit
+            } catch (e: HttpException) {
+                if (e.code() == UNAUTHORIZED) {
+                    _state.value = ProfileState.AuthorisationError
+                } else {
+                    throw e
+                }
+            }
         }
     }
 
@@ -94,17 +113,19 @@ class ProfileViewModel @Inject constructor(
                 )
                 changeProfileUseCase(profile)
                 showCachedProfile()
-            } catch (e: CancellationException) {
-                throw e
-            } catch (e: Exception) {
-                Unit
+            } catch (e: HttpException) {
+                if (e.code() == UNAUTHORIZED) {
+                    _state.value = ProfileState.AuthorisationError
+                } else {
+                    throw e
+                }
             }
         }
     }
 
     private fun showProfile() {
-        try {
-            viewModelScope.launch {
+        viewModelScope.launch {
+            try {
                 profileSimilarity = ProfileSimilarity()
 
                 _state.value = ProfileState.Loading
@@ -119,16 +140,17 @@ class ProfileViewModel @Inject constructor(
                     name = profile.name,
                     nickName = profile.nickName
                 )
+            } catch (e: HttpException) {
+                if (e.code() == UNAUTHORIZED) {
+                    _state.value = ProfileState.AuthorisationError
+                } else {
+                    throw e
+                }
             }
-        } catch (e: CancellationException) {
-            throw e
-        } catch (e: Exception) {
-            Unit
         }
     }
 
     private fun genderChanged(gender: Gender) {
-        Log.d("maksim","asdasd")
         if (_state.value !is ProfileState.ProfileChanged) setProfileChanged()
 
         profileSimilarity.gender = gender.ordinal == profile.gender
@@ -233,5 +255,6 @@ class ProfileViewModel @Inject constructor(
 
     private companion object {
         const val MIN_FIRST_NAME_LENGTH = 2
+        const val UNAUTHORIZED = 401
     }
 }

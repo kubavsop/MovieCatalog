@@ -12,8 +12,8 @@ import com.example.domain.feature_film_screen.usecase.EditMovieReviewUseCase
 import com.example.domain.feature_main_screen.usecase.GetMovieDetailsByIdUseCase
 import com.example.domain.model.ModifiedMoviesDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -55,23 +55,25 @@ class FilmViewModel @Inject constructor(
     }
 
     private fun deleteReview(id: String) {
-        try {
-            viewModelScope.launch {
+        viewModelScope.launch {
+            try {
                 _state.value = FilmState.Loading
                 deleteMovieReviewUseCase(id = id, movieId = movieDetails.id)
                 movieDetails(movieDetails.id)
+            } catch (e: HttpException) {
+                if (e.code() == UNAUTHORIZED) {
+                    _state.value = FilmState.AuthorisationError
+                } else {
+                    throw e
+                }
             }
-        } catch (e: Exception) {
-            throw e // TODO
         }
     }
 
     private fun saveReview(id: String?) {
-        try {
-            viewModelScope.launch {
-
+        viewModelScope.launch {
+            try {
                 _state.value = FilmState.Loading
-
                 if (id == null) {
                     addMovieReviewUseCase(
                         movieId = movieDetails.id,
@@ -93,9 +95,13 @@ class FilmViewModel @Inject constructor(
                 reviewState = FilmState.ReviewDialog()
 
                 movieDetails(movieDetails.id)
+            } catch (e: HttpException) {
+                if (e.code() == UNAUTHORIZED) {
+                    _state.value = FilmState.AuthorisationError
+                } else {
+                    throw e
+                }
             }
-        } catch (e: Exception) {
-            throw e // TODO
         }
     }
 
@@ -134,8 +140,8 @@ class FilmViewModel @Inject constructor(
     }
 
     private fun favoriteChanged(isAdd: Boolean) {
-        try {
-            viewModelScope.launch {
+        viewModelScope.launch {
+            try {
 
                 if (isAdd) {
                     addFavoriteMovieUseCase(movieDetails.id)
@@ -148,23 +154,30 @@ class FilmViewModel @Inject constructor(
                 )
 
                 _state.value = FilmState.Content(movieDetails = movieDetails)
+            } catch (e: HttpException) {
+                if (e.code() == UNAUTHORIZED) {
+                    _state.value = FilmState.AuthorisationError
+                } else {
+                    throw e
+                }
             }
-        } catch (e: Exception) {
-            throw e // TODO
         }
     }
 
     private fun movieDetails(id: String) {
-        try {
-            viewModelScope.launch {
+        viewModelScope.launch {
+            try {
                 _state.value = FilmState.Loading
                 movieDetails = getMovieDetailsByIdUseCase(id)
                 _state.value = FilmState.Content(movieDetails)
+
+            } catch (e: HttpException) {
+                if (e.code() == UNAUTHORIZED) {
+                    _state.value = FilmState.AuthorisationError
+                } else {
+                    throw e
+                }
             }
-        } catch (e: CancellationException) {
-            throw e
-        } catch (e: Exception) {
-            Unit // TODO
         }
     }
 
@@ -179,7 +192,7 @@ class FilmViewModel @Inject constructor(
     }
 
     private companion object {
-        const val HEADER_POSITION = 0
         const val ZERO = 0
+        const val UNAUTHORIZED = 401
     }
 }

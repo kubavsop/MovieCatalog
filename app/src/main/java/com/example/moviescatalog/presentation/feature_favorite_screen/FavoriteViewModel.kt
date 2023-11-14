@@ -9,6 +9,7 @@ import com.example.moviescatalog.presentation.feature_profile_screen.state.Profi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,15 +29,20 @@ class FavoriteViewModel @Inject constructor(
 
                 _state.value = if (movies.isEmpty()) {
                     FavoriteState.Empty
-                }
-                else {
+                } else {
                     FavoriteState.Content(movies)
                 }
-            } catch (e: CancellationException) {
-                throw e
-            } catch (e: Exception) {
-                Unit // TODO
+            } catch (e: HttpException) {
+                if (e.code() == UNAUTHORIZED) {
+                    _state.value = FavoriteState.AuthorisationError
+                } else {
+                    throw e
+                }
             }
         }
+    }
+
+    private companion object {
+        const val UNAUTHORIZED = 401
     }
 }

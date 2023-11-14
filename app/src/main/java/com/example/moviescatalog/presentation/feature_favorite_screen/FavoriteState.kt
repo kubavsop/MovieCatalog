@@ -8,4 +8,5 @@ sealed interface FavoriteState {
     data object Initial: FavoriteState
     data object Empty: FavoriteState
     data class Content(val movies: List<MovieElement>): FavoriteState
+    data object AuthorisationError: FavoriteState
 }

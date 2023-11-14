@@ -39,7 +39,12 @@ class PasswordRegistrationViewModel @Inject constructor(
             is PasswordRegistrationEvent.PasswordChanged -> passwordChanged(
                 event.password, event.repeatedPassword
             )
+            is PasswordRegistrationEvent.Content -> showContent()
         }
+    }
+
+    private fun showContent() {
+        _state.value = PasswordRegistrationState()
     }
 
     private fun register(
@@ -51,8 +56,8 @@ class PasswordRegistrationViewModel @Inject constructor(
         gender: String
     ) {
         viewModelScope.launch {
-            _state.value = _state.value?.copy(isLoading = true)
             try {
+                _state.value = _state.value?.copy(isLoading = true)
                 val profile = UserRegistration(
                     userName, name, password, email, birthDate, if (gender == MALE) 0 else 1
                 )

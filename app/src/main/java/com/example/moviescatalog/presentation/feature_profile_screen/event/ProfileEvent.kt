@@ -19,4 +19,6 @@ sealed interface ProfileEvent {
         val email: String,
         val name: String,
     ): ProfileEvent
+
+    data object Exit: ProfileEvent
 }

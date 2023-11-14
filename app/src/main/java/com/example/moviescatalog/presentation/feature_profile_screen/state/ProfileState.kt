@@ -24,6 +24,10 @@ sealed interface ProfileState {
         val isValid: Boolean = false
     ) : ProfileState
 
+    data object AuthorisationError: ProfileState
+
     data object Loading: ProfileState
     data object Initial: ProfileState
+
+    data object Exit: ProfileState
 }

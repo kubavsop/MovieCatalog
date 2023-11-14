@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.domain.model.User
 import com.example.moviescatalog.databinding.FragmentUserLoginBinding
 import com.example.moviescatalog.presentation.util.setClearFocusOnDoneClick
 
@@ -17,6 +18,7 @@ class UserLoginFragment : Fragment() {
 
     private val viewModel: UserLoginViewModel by activityViewModels()
     private var fragmentCallBack: FragmentCallBack? = null
+
     interface FragmentCallBack {
         fun openAuthSelectionFromLogin()
         fun openRegistrationDetailsFromUserLogin()
@@ -26,7 +28,7 @@ class UserLoginFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        fragmentCallBack = context as FragmentCallBack
+        fragmentCallBack = context as? FragmentCallBack
     }
 
     override fun onCreateView(
@@ -42,18 +44,21 @@ class UserLoginFragment : Fragment() {
         viewModel.state.observe(viewLifecycleOwner, ::handleState)
 
         binding.loginTo.setOnClickListener {
-            viewModel.login(
-                username = binding.loginEditText.text.toString(),
-                password = binding.passwordEditText.text.toString()
+            viewModel.onEvent(
+                UserLoginEvent.Login(
+                    username = binding.loginEditText.text.toString(),
+                    password = binding.passwordEditText.text.toString()
+                )
             )
         }
         binding.backspace.setOnClickListener { fragmentCallBack?.openAuthSelectionFromLogin() }
         binding.register.setOnClickListener { fragmentCallBack?.openRegistrationDetailsFromUserLogin() }
         binding.passwordEditText.setClearFocusOnDoneClick()
+        viewModel.onEvent(UserLoginEvent.Initial)
     }
 
     private fun handleState(state: UserLoginState) {
-        when(state) {
+        when (state) {
             UserLoginState.Initial -> Unit
             UserLoginState.Success -> goToMainScreen()
             UserLoginState.Loading -> showProgressBar()

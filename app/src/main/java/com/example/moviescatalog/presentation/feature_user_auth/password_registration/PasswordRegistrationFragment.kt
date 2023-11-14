@@ -32,7 +32,7 @@ class PasswordRegistrationFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        fragmentCallBack = context as FragmentCallBack
+        fragmentCallBack = context as? FragmentCallBack
     }
 
     override fun onCreateView(
@@ -65,6 +65,7 @@ class PasswordRegistrationFragment : Fragment() {
         }
         binding.signIn.setOnClickListener { fragmentCallBack?.openUserLoginFromPasswordRegistration() }
         binding.repeatedPasswordEditText.setClearFocusOnDoneClick()
+        viewModel.onEvent(PasswordRegistrationEvent.Content)
     }
 
     private fun handleState(state: PasswordRegistrationState) {

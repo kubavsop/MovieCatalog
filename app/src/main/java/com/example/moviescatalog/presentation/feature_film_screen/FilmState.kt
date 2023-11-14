@@ -7,6 +7,8 @@ private const val EMPTY_STRING = ""
 sealed interface FilmState {
     data object Loading : FilmState
     data object Initial : FilmState
+
+    data object AuthorisationError: FilmState
     data class Content(val movieDetails: ModifiedMoviesDetails) : FilmState
 
     data class ReviewDialogChanged(

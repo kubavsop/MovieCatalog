@@ -34,7 +34,7 @@ class ProfileFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        fragmentCallBack = context as FragmentCallBack
+        fragmentCallBack = context as? FragmentCallBack
     }
 
     override fun onCreateView(
@@ -67,7 +67,7 @@ class ProfileFragment : Fragment() {
                 )
             ) }
             cancel.setOnClickListener { viewModel.onEvent(ProfileEvent.Cancel) }
-            exit.setOnClickListener { fragmentCallBack?.openAuthSelectionScreenFromProfile() }
+            exit.setOnClickListener { viewModel.onEvent(ProfileEvent.Exit) }
         }
         viewModel.onEvent(ProfileEvent.ShowProfile)
     }
@@ -78,6 +78,8 @@ class ProfileFragment : Fragment() {
             ProfileState.Loading -> showProgressBar()
             is ProfileState.Profile -> showProfile(state)
             is ProfileState.ProfileChanged -> showChanges(state)
+            is ProfileState.Exit -> fragmentCallBack?.openAuthSelectionScreenFromProfile()
+            is ProfileState.AuthorisationError -> fragmentCallBack?.openAuthSelectionScreenFromProfile()
         }
     }
 

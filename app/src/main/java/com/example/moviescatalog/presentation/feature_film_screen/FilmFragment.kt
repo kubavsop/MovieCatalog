@@ -48,11 +48,12 @@ class FilmFragment : Fragment() {
 
     interface FragmentCallBack {
         fun openMainFromFilmScreen()
+        fun openAuthSelectionFromFilm()
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        fragmentCallBack = context as FragmentCallBack
+        fragmentCallBack = context as? FragmentCallBack
     }
 
     override fun onCreateView(
@@ -137,6 +138,7 @@ class FilmFragment : Fragment() {
         when (state) {
             FilmState.Initial -> Unit
             FilmState.Loading -> showProgress()
+            FilmState.AuthorisationError -> fragmentCallBack?.openAuthSelectionFromFilm()
             is FilmState.Content -> showContent(state.movieDetails.toFilmItem())
             is FilmState.ReviewDialogChanged -> updateReviewDialog(state.isSaveActive)
 

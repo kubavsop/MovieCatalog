@@ -1,5 +1,6 @@
 package com.example.moviescatalog.presentation.feature_favorite_screen
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,6 +16,16 @@ class FavoriteFragment : Fragment() {
     private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
     private val viewModel: FavoriteViewModel by activityViewModels()
+    private var fragmentCallBack: FragmentCallBack? = null
+
+    interface FragmentCallBack {
+        fun openAuthSelectionFromFavorite()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        fragmentCallBack = context as? FragmentCallBack
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +58,7 @@ class FavoriteFragment : Fragment() {
             FavoriteState.Initial -> Unit
             FavoriteState.Loading -> showProgressBar()
             FavoriteState.Empty -> showEmpty()
+            FavoriteState.AuthorisationError -> fragmentCallBack?.openAuthSelectionFromFavorite()
             is FavoriteState.Content -> showContent(state.movies)
         }
     }

@@ -21,10 +21,18 @@ class UserLoginViewModel @Inject constructor(
     private val _state: MutableLiveData<UserLoginState> = MutableLiveData(UserLoginState.Initial)
     val state: LiveData<UserLoginState> = _state
 
-    fun login(username: String, password: String) {
+
+    fun onEvent(event: UserLoginEvent) {
+        when(event) {
+            UserLoginEvent.Initial -> initial()
+            is UserLoginEvent.Login -> login(username = event.username, password = event.password)
+        }
+    }
+
+    private fun login(username: String, password: String) {
         viewModelScope.launch {
-            _state.value = UserLoginState.Loading
             try {
+                _state.value = UserLoginState.Loading
                 val loginRequest = LoginRequest(
                     username = username,
                     password = password
@@ -37,5 +45,9 @@ class UserLoginViewModel @Inject constructor(
                 _state.value = UserLoginState.Error(msg = UiText(R.string.login_failed))
             }
         }
+    }
+
+    private fun initial() {
+        _state.value = UserLoginState.Initial
     }
 }
