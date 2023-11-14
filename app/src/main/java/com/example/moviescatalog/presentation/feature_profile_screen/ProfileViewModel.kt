@@ -1,6 +1,5 @@
-package com.example.moviescatalog.presentation.feature_profile_screen.view_model
+package com.example.moviescatalog.presentation.feature_profile_screen
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,14 +13,10 @@ import com.example.domain.feature_user_auth.usecase.ValidateFirstNameUseCase
 import com.example.domain.common.model.Profile
 import com.example.moviescatalog.R
 import com.example.moviescatalog.presentation.UiText
-import com.example.moviescatalog.presentation.feature_film_screen.FilmState
-import com.example.moviescatalog.presentation.feature_film_screen.FilmViewModel
-import com.example.moviescatalog.presentation.feature_profile_screen.event.ProfileEvent
 import com.example.moviescatalog.presentation.feature_profile_screen.state.Gender
 import com.example.moviescatalog.presentation.feature_profile_screen.state.ProfileSimilarity
 import com.example.moviescatalog.presentation.feature_profile_screen.state.ProfileState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
 import javax.inject.Inject

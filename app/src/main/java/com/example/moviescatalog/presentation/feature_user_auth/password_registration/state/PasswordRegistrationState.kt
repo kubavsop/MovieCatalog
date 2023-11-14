@@ -1,4 +1,4 @@
-package com.example.moviescatalog.presentation.feature_user_auth.password_registration
+package com.example.moviescatalog.presentation.feature_user_auth.password_registration.state
 
 import com.example.moviescatalog.presentation.UiText
 

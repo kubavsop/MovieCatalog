@@ -1,4 +1,4 @@
-package com.example.moviescatalog.presentation.feature_user_auth.registration_details
+package com.example.moviescatalog.presentation.feature_user_auth.registration_details.state
 
 enum class DetailsEditTextChanged {
     EMAIL_CHANGED,

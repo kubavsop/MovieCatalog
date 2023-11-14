@@ -10,6 +10,7 @@ import com.example.domain.feature_user_auth.usecase.ValidatePasswordUseCase
 import com.example.domain.feature_user_auth.usecase.ValidateRepeatedPasswordUseCase
 import com.example.moviescatalog.R
 import com.example.moviescatalog.presentation.UiText
+import com.example.moviescatalog.presentation.feature_user_auth.password_registration.state.PasswordRegistrationState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch

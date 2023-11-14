@@ -13,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.moviescatalog.databinding.FragmentPasswordRegistrationBinding
 import com.example.moviescatalog.presentation.UiText
+import com.example.moviescatalog.presentation.feature_user_auth.password_registration.state.PasswordRegistrationState
 import com.example.moviescatalog.presentation.util.setClearFocusOnDoneClick
 import com.example.moviescatalog.presentation.util.setContainerError
 

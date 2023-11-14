@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.feature_profile_screen.screen.ProfileFragment">
+    tools:context=".presentation.feature_profile_screen.ProfileFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

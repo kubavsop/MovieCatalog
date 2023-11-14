@@ -92,7 +92,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.moviescatalog.presentation.feature_profile_screen.screen.ProfileFragment"
+        android:name="com.example.moviescatalog.presentation.feature_profile_screen.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" >
         <action

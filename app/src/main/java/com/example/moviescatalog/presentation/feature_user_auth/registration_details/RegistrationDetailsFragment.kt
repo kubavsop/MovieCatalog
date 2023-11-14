@@ -13,6 +13,8 @@ import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.moviescatalog.databinding.FragmentRegistrationDetailsBinding
+import com.example.moviescatalog.presentation.feature_user_auth.registration_details.state.DetailsEditTextChanged
+import com.example.moviescatalog.presentation.feature_user_auth.registration_details.state.RegistrationDetailsState
 import com.example.moviescatalog.presentation.util.setClearFocusOnDoneClick
 import com.example.moviescatalog.presentation.util.setContainerError
 
@@ -55,7 +57,8 @@ class RegistrationDetailsFragment : Fragment() {
 
         with(binding) {
             emailEditText.addTextChangedListener(getAfterTextChangedListener(DetailsEditTextChanged.EMAIL_CHANGED))
-            firstNameEditText.addTextChangedListener(getAfterTextChangedListener(DetailsEditTextChanged.FIRST_NAME_CHANGED))
+            firstNameEditText.addTextChangedListener(getAfterTextChangedListener(
+                DetailsEditTextChanged.FIRST_NAME_CHANGED))
             loginEditText.addTextChangedListener(getAfterTextChangedListener(DetailsEditTextChanged.LOGIN_CHANGED))
             birthdayText.setOnClickListener { datePicker.show() }
             backspace.setOnClickListener { fragmentCallBack?.openAuthSelectionFromRegistration() }

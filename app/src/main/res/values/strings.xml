@@ -26,6 +26,7 @@
     <string name="repeat_password">Повторите пароль</string>
     <string name="min_login_length_error">Логин содержит не менее %d символов.</string>
     <string name="min_first_name_length_error">Имя содержит не менее %d символов.</string>
+    <string name="min_password_length_error">Пароль содержит не менее %d символов</string>
     <string name="email_error">Некорректный адрес электронной почты</string>
     <string name="password_error">Некорректный пароль.</string>
     <string name="repeated_password_error">Пароли не совпадают.</string>

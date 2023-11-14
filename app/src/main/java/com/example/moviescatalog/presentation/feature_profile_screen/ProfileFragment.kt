@@ -1,4 +1,4 @@
-package com.example.moviescatalog.presentation.feature_profile_screen.screen
+package com.example.moviescatalog.presentation.feature_profile_screen
 
 import android.app.DatePickerDialog
 import android.content.Context
@@ -15,11 +15,9 @@ import androidx.fragment.app.activityViewModels
 import coil.load
 import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.FragmentProfileBinding
-import com.example.moviescatalog.presentation.feature_profile_screen.event.ProfileEvent
 import com.example.moviescatalog.presentation.feature_profile_screen.state.Gender
 import com.example.moviescatalog.presentation.feature_profile_screen.state.ProfileEditTextChanged
 import com.example.moviescatalog.presentation.feature_profile_screen.state.ProfileState
-import com.example.moviescatalog.presentation.feature_profile_screen.view_model.ProfileViewModel
 import com.example.moviescatalog.presentation.util.setContainerError
 
 class ProfileFragment : Fragment() {

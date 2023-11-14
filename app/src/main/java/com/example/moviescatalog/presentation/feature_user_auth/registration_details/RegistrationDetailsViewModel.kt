@@ -9,6 +9,7 @@ import com.example.domain.feature_user_auth.usecase.ValidateFirstNameUseCase
 import com.example.domain.feature_user_auth.usecase.ValidateLoginUseCase
 import com.example.moviescatalog.R
 import com.example.moviescatalog.presentation.UiText
+import com.example.moviescatalog.presentation.feature_user_auth.registration_details.state.RegistrationDetailsState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -38,6 +39,7 @@ class RegistrationDetailsViewModel @Inject constructor(
 
     private fun firstNameChanged(firstName: String) {
         val isSuccess = validateFirstNameUseCase(firstName)
+
         _state.value = _state.value?.copy(
             firstNameError = if (isSuccess) null else UiText(
                 R.string.min_first_name_length_error,
@@ -45,11 +47,13 @@ class RegistrationDetailsViewModel @Inject constructor(
             ),
             isValid = false
         )
+
         if (isSuccess) checkError()
     }
 
     private fun loginChanged(login: String) {
         val isSuccess = validateLoginUseCase(login)
+
         _state.value = _state.value?.copy(
             loginError = if (isSuccess) null else UiText(
                 R.string.min_login_length_error,
@@ -57,17 +61,20 @@ class RegistrationDetailsViewModel @Inject constructor(
             ),
             isValid = false
         )
+
         if (isSuccess) checkError()
     }
 
     private fun emailChanged(email: String) {
         val isSuccess = validateEmailUseCase(email)
+
         _state.value = _state.value?.copy(
             emailError = if (isSuccess) null else UiText(
                 R.string.email_error
             ),
             isValid = false
         )
+
         if (isSuccess) checkError()
     }
 

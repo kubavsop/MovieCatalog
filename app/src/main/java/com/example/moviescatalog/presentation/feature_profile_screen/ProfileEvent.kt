@@ -1,4 +1,4 @@
-package com.example.moviescatalog.presentation.feature_profile_screen.event
+package com.example.moviescatalog.presentation.feature_profile_screen
 
 import com.example.moviescatalog.presentation.feature_profile_screen.state.Gender
 
