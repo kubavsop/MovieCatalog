@@ -33,7 +33,6 @@ class MainViewModel @Inject constructor(
 
     val state: StateFlow<PagingData<MainRecyclerViewItem>> = pager
         .flow
-        .flowOn(Dispatchers.IO)
         .map { value ->
             val movies = getMoviesByPageUseCase(FIRST_PAGE).movies
             var mappedValue: PagingData<MainRecyclerViewItem> =

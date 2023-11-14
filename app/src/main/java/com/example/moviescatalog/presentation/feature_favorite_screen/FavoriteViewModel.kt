@@ -35,8 +35,6 @@ class FavoriteViewModel @Inject constructor(
             } catch (e: HttpException) {
                 if (e.code() == UNAUTHORIZED) {
                     _state.value = FavoriteState.AuthorisationError
-                } else {
-                    throw e
                 }
             }
         }

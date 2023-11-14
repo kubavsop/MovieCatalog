@@ -19,7 +19,6 @@ import com.example.moviescatalog.presentation.util.getAverageRatingColor
 import com.example.moviescatalog.presentation.util.getRatingColor
 
 class ReviewListAdapter(
-    private val onFavoriteClick: (isAdd: Boolean) -> Unit,
     private val onAddClick: () -> Unit,
     private val showAsDropDown: (
         view: View,
@@ -50,7 +49,6 @@ class ReviewListAdapter(
         when (holder) {
             is HeaderViewHolder -> holder.bind(
                 item as FilmRecyclerViewItem.HeaderItem,
-                onFavoriteClick,
                 onAddClick
             )
 
@@ -74,21 +72,12 @@ class ReviewListAdapter(
 
         fun bind(
             headerItem: FilmRecyclerViewItem.HeaderItem,
-            onFavoriteClick: (isAdd: Boolean) -> Unit,
             onAddClick: () -> Unit
         ) {
 
             val context = binding.root.context.applicationContext
-            val averageRatingBackground =
-                AppCompatResources.getDrawable(context, R.drawable.average_rating_background)
-
-            val ratingColor = getAverageRatingColor(headerItem.averageRating)
-
-            averageRatingBackground?.colorFilter =
-                PorterDuffColorFilter(context.getColor(ratingColor), PorterDuff.Mode.SRC_IN)
 
             with(binding) {
-                title.text = headerItem.name
                 description.text = headerItem.description
                 yearDescription.text = headerItem.year.toString()
                 countryDescription.text = headerItem.country
@@ -98,14 +87,6 @@ class ReviewListAdapter(
                 collectionDescription.text = headerItem.fees.toString()
                 ageDescription.text = headerItem.ageLimit.toString()
                 durationDescription.text = headerItem.time.toString()
-                averageRating.text = headerItem.averageRating.toString()
-                averageRating.background = averageRatingBackground
-                favoriteButton.isChecked = headerItem.inFavorite
-                favoriteButton.setOnClickListener {
-                    onFavoriteClick(
-                        favoriteButton.isChecked,
-                    )
-                }
                 addReviewButton.isVisible = !headerItem.haveReview
                 addReviewButton.setOnClickListener { onAddClick() }
             }

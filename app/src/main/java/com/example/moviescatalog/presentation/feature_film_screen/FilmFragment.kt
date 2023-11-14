@@ -13,17 +13,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.example.domain.common.model.ModifiedMoviesDetails
+import com.example.domain.common.model.MovieDetails
+import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.FragmentFilmBinding
 import com.example.moviescatalog.databinding.ReviewDialogBinding
 import com.example.moviescatalog.databinding.ReviewToolsLayoutBinding
 import com.example.moviescatalog.presentation.feature_film_screen.recycler_view.FilmRecyclerViewItem
 import com.example.moviescatalog.presentation.feature_film_screen.recycler_view.ReviewListAdapter
+import com.example.moviescatalog.presentation.util.getAverageRatingColor
+import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import kotlin.math.abs
 
 
@@ -76,7 +82,6 @@ class FilmFragment : Fragment() {
 
         with(binding) {
             movieContent.adapter = ReviewListAdapter(
-                onFavoriteClick = ::onFavoriteClick,
                 onAddClick = ::onAddClick,
                 showAsDropDown = ::showAsDropDown
             )
@@ -139,7 +144,7 @@ class FilmFragment : Fragment() {
             FilmState.Initial -> Unit
             FilmState.Loading -> showProgress()
             FilmState.AuthorisationError -> fragmentCallBack?.openAuthSelectionFromFilm()
-            is FilmState.Content -> showContent(state.movieDetails.toFilmItem())
+            is FilmState.Content -> showContent(state.movieDetails)
             is FilmState.ReviewDialogChanged -> updateReviewDialog(state.isSaveActive)
 
             is FilmState.ReviewDialog -> showReviewDialog(
@@ -166,12 +171,33 @@ class FilmFragment : Fragment() {
         dialogBinding.save.isEnabled = isSaveActive
     }
 
-    private fun showContent(movieDetails: List<FilmRecyclerViewItem>) {
+    private fun showContent(movieDetails: ModifiedMoviesDetails) {
+
+        val averageRatingBackground =
+            AppCompatResources.getDrawable(requireContext(), R.drawable.average_rating_background)
+
+        val ratingColor = getAverageRatingColor(movieDetails.averageRating)
+
+        averageRatingBackground?.colorFilter =
+            PorterDuffColorFilter(requireContext().getColor(ratingColor), PorterDuff.Mode.SRC_IN)
+
+
         with(binding) {
-            poster.load((movieDetails[HEADER_INDEX] as FilmRecyclerViewItem.HeaderItem).poster) {
+            title.text = movieDetails.name
+            averageRating.text = movieDetails.averageRating.toString()
+            averageRating.background = averageRatingBackground
+            favoriteButton.isChecked = movieDetails.inFavorite
+            favoriteButton.setOnClickListener { onFavoriteClick(favoriteButton.isChecked) }
+
+            toolbarTitle.text = movieDetails.name
+            toolbarFavoriteButton.isChecked = movieDetails.inFavorite
+            toolbarFavoriteButton.setOnClickListener { onFavoriteClick(toolbarFavoriteButton.isChecked) }
+
+
+            poster.load(movieDetails.poster) {
                 crossfade(true)
             }
-            (movieContent.adapter as? ReviewListAdapter)?.submitList(movieDetails)
+            (movieContent.adapter as? ReviewListAdapter)?.submitList(movieDetails.toFilmItem())
             progressBar.isVisible = false
             movieContent.isVisible = true
             appBarLayout.isVisible = true
@@ -292,6 +318,16 @@ class FilmFragment : Fragment() {
                 PorterDuff.Mode.SRC_ATOP
             )
             binding.poster.colorFilter = colorFilter
+
+            with(binding) {
+                if (abs(verticalOffset) >= totalScrollRange) {
+                    toolbarTitle.isVisible = true
+                    toolbarFavoriteButton.isVisible = true
+                } else {
+                    toolbarTitle.visibility = View.INVISIBLE
+                    toolbarFavoriteButton.visibility = View.INVISIBLE
+                }
+            }
         }
     }
 
