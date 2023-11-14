@@ -1,4 +1,4 @@
-package com.example.data.feature_user_auth.local
+package com.example.data.common.local
 
 import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences

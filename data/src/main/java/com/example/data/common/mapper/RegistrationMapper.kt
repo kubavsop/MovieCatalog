@@ -1,10 +1,10 @@
 package com.example.data.common.mapper
 
-import com.example.data.feature_user_auth.local.TokenResponseEntity
+import com.example.data.common.local.TokenResponseEntity
 import com.example.data.common.dto.LoginRequestDto
 import com.example.data.common.dto.UserRegistrationDto
 import com.example.data.common.dto.TokenResponseDto
-import com.example.data.feature_user_auth.local.UserEntity
+import com.example.data.common.local.UserEntity
 import com.example.domain.common.model.LoginRequest
 import com.example.domain.common.model.UserRegistration
 import com.example.domain.common.model.TokenResponse

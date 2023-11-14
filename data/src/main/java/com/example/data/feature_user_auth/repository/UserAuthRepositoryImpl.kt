@@ -7,7 +7,7 @@ import com.example.data.common.mapper.toUser
 import com.example.data.common.mapper.toUserEntity
 import com.example.data.common.mapper.toUserRegistrationDto
 import com.example.data.common.remote.MovieCatalogApi
-import com.example.data.feature_user_auth.local.UserStorage
+import com.example.data.common.local.UserStorage
 import com.example.domain.feature_user_auth.repositroy.UserAuthRepository
 import com.example.domain.common.model.LoginRequest
 import com.example.domain.common.model.TokenResponse

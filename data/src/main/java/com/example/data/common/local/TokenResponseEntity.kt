@@ -1,4 +1,4 @@
-package com.example.data.feature_user_auth.local
+package com.example.data.common.local
 
 data class TokenResponseEntity(
     val token: String
