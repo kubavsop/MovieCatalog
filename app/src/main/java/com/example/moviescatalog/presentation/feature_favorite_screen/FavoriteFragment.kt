@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.domain.model.MovieElement
+import com.example.domain.common.model.MovieElement
 import com.example.moviescatalog.databinding.FragmentFavoriteBinding
 
 class FavoriteFragment : Fragment() {

@@ -3,9 +3,9 @@ package com.example.data.common.mapper
 import com.example.data.common.dto.MovieDetailsDto
 import com.example.data.common.dto.ReviewDto
 import com.example.data.common.dto.UserShortDto
-import com.example.domain.model.MovieDetails
-import com.example.domain.model.Review
-import com.example.domain.model.UserShort
+import com.example.domain.common.model.MovieDetails
+import com.example.domain.common.model.Review
+import com.example.domain.common.model.UserShort
 
 fun MovieDetailsDto.toMovieDetails() = MovieDetails(
     ageLimit = ageLimit,

@@ -14,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.SimpleItemAnimator
-import com.example.domain.model.MovieElement
+import com.example.domain.common.model.MovieElement
 import com.example.moviescatalog.databinding.FragmentMainBinding
 import com.example.moviescatalog.presentation.feature_main_screen.recycler_view.MovieListAdapter
 import kotlinx.coroutines.flow.collectLatest

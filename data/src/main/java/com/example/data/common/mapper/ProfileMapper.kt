@@ -1,7 +1,7 @@
 package com.example.data.common.mapper
 
 import com.example.data.common.dto.ProfileDto
-import com.example.domain.model.Profile
+import com.example.domain.common.model.Profile
 
 fun Profile.toProfileDto() = ProfileDto(
     avatarLink = avatarLink,

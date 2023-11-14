@@ -1,4 +1,4 @@
-package com.example.domain.model
+package com.example.domain.common.model
 
 data class Review(
     val author: UserShort?,

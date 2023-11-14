@@ -1,12 +1,10 @@
 package com.example.domain.feature_main_screen.usecase
 
 import com.example.domain.feature_favorite_screen.usecase.MovieInFavoriteUseCase
-import com.example.domain.model.MovieDetails
 import com.example.domain.feature_main_screen.repository.MoviesRepository
-import com.example.domain.feature_profile_screen.usecase.GetProfileUseCase
-import com.example.domain.feature_user_auth.usecase.GetUserIdUseCase
-import com.example.domain.model.ModifiedMoviesDetails
-import com.example.domain.model.ModifiedReview
+import com.example.domain.common.usecase.GetUserIdUseCase
+import com.example.domain.common.model.ModifiedMoviesDetails
+import com.example.domain.common.model.ModifiedReview
 import java.text.SimpleDateFormat
 
 class GetMovieDetailsByIdUseCase(

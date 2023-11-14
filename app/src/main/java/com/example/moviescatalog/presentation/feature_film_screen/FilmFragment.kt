@@ -18,7 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
-import com.example.domain.model.ModifiedMoviesDetails
+import com.example.domain.common.model.ModifiedMoviesDetails
 import com.example.moviescatalog.databinding.FragmentFilmBinding
 import com.example.moviescatalog.databinding.ReviewDialogBinding
 import com.example.moviescatalog.databinding.ReviewToolsLayoutBinding

@@ -8,25 +8,25 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 
 
-interface ReviewApi {
-
-    @POST("{movieId}/review/add")
-    suspend fun addMovieReview(@Body reviewModifyDto: ReviewModifyDto, @Path("movieId") movieId: String)
-
-    @PUT("{movieId}/review/{id}/edit")
-    suspend fun editMovieReview(
-        @Body reviewModifyDto: ReviewModifyDto,
-        @Path("movieId") movieId: String,
-        @Path("id") id: String
-    )
-
-    @DELETE("{movieId}/review/{id}/delete")
-    suspend fun deleteMovieReview(
-        @Path("movieId") movieId: String,
-        @Path("id") id: String
-    )
-
-    companion object {
-        const val BASE_URL = "https://react-midterm.kreosoft.space/api/movie/"
-    }
-}
+//interface ReviewApi {
+//
+//    @POST("movie/{movieId}/review/add")
+//    suspend fun addMovieReview(@Body reviewModifyDto: ReviewModifyDto, @Path("movieId") movieId: String)
+//
+//    @PUT("movie/{movieId}/review/{id}/edit")
+//    suspend fun editMovieReview(
+//        @Body reviewModifyDto: ReviewModifyDto,
+//        @Path("movieId") movieId: String,
+//        @Path("id") id: String
+//    )
+//
+//    @DELETE("movie/{movieId}/review/{id}/delete")
+//    suspend fun deleteMovieReview(
+//        @Path("movieId") movieId: String,
+//        @Path("id") id: String
+//    )
+//
+//    companion object {
+//        const val BASE_URL = "https://react-midterm.kreosoft.space/api/movie/"
+//    }
+//}

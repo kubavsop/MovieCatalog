@@ -6,9 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.NavHostFragment
-import com.example.domain.feature_user_auth.usecase.GetTokenUseCase
-import com.example.moviescatalog.R
+import com.example.domain.common.usecase.GetTokenUseCase
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

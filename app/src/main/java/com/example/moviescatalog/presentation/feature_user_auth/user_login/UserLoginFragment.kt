@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.domain.model.User
+import com.example.domain.common.model.User
 import com.example.moviescatalog.databinding.FragmentUserLoginBinding
 import com.example.moviescatalog.presentation.util.setClearFocusOnDoneClick
 

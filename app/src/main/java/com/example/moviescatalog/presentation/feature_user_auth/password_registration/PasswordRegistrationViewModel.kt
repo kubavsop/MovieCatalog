@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.model.UserRegistration
+import com.example.domain.common.model.UserRegistration
 import com.example.domain.feature_user_auth.usecase.RegisterUserUseCase
 import com.example.domain.feature_user_auth.usecase.ValidatePasswordUseCase
 import com.example.domain.feature_user_auth.usecase.ValidateRepeatedPasswordUseCase

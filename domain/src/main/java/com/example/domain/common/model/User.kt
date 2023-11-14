@@ -1,4 +1,4 @@
-package com.example.domain.model
+package com.example.domain.common.model
 
 import java.util.UUID
 

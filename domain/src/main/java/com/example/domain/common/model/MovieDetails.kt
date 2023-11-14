@@ -1,9 +1,8 @@
-package com.example.domain.model
+package com.example.domain.common.model
 
-data class ModifiedMoviesDetails (
+data class MovieDetails(
     val ageLimit: Int,
     val budget: Int,
-    val haveReview: Boolean,
     val country: String,
     val description: String,
     val director: String,
@@ -12,10 +11,8 @@ data class ModifiedMoviesDetails (
     val id: String,
     val name: String,
     val poster: String,
-    val reviews: List<ModifiedReview>,
+    val reviews: List<Review>,
     val tagline: String,
     val time: Int,
-    val year: Int,
-    val inFavorite: Boolean,
-    val averageRating: Double,
+    val year: Int
 )

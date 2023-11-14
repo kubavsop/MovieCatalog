@@ -1,4 +1,4 @@
-package com.example.domain.model
+package com.example.domain.common.model
 
 data class ReviewModify(
     val isAnonymous: Boolean,

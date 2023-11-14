@@ -6,9 +6,9 @@ import com.example.data.common.dto.MovieElementDto
 import com.example.data.common.dto.MoviesPagedListDto
 import com.example.data.common.dto.PageInfoDto
 import com.example.data.common.dto.ReviewShortDto
-import com.example.domain.model.MovieElement
-import com.example.domain.model.MoviesPagedList
-import com.example.domain.model.PageInfo
+import com.example.domain.common.model.MovieElement
+import com.example.domain.common.model.MoviesPagedList
+import com.example.domain.common.model.PageInfo
 
 fun MoviesPagedListDto.toMoviesPagedList() = MoviesPagedList(
     movies = movies.map { it.toMovieElement() },

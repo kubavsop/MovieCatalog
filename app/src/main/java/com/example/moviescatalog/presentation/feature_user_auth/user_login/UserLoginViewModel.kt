@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.model.LoginRequest
+import com.example.domain.common.model.LoginRequest
 import com.example.domain.feature_user_auth.usecase.LoginUserUseCase
 import com.example.moviescatalog.R
 import com.example.moviescatalog.presentation.UiText

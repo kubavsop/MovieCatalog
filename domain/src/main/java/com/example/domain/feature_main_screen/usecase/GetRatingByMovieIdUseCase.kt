@@ -1,8 +1,7 @@
 package com.example.domain.feature_main_screen.usecase
 
 import com.example.domain.feature_main_screen.repository.MoviesRepository
-import com.example.domain.feature_user_auth.usecase.GetUserIdUseCase
-import java.util.UUID
+import com.example.domain.common.usecase.GetUserIdUseCase
 
 class GetRatingByMovieIdUseCase(
     private val repository: MoviesRepository,

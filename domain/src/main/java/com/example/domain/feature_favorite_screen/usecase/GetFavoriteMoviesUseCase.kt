@@ -2,7 +2,7 @@ package com.example.domain.feature_favorite_screen.usecase
 
 import com.example.domain.feature_favorite_screen.repository.FavoriteRepository
 import com.example.domain.feature_main_screen.usecase.GetRatingByMovieIdUseCase
-import com.example.domain.model.MovieElement
+import com.example.domain.common.model.MovieElement
 
 class GetFavoriteMoviesUseCase(
     private val repository: FavoriteRepository,

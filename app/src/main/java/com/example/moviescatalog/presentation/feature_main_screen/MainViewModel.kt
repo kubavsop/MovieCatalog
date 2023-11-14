@@ -12,7 +12,7 @@ import com.example.data.feature_main_screen.local.entity.MovieElementEntity
 import com.example.data.common.mapper.toMovieElement
 import com.example.domain.feature_main_screen.usecase.GetMoviesByPageUseCase
 import com.example.domain.feature_main_screen.usecase.GetRatingByMovieIdUseCase
-import com.example.domain.model.MovieElement
+import com.example.domain.common.model.MovieElement
 import com.example.moviescatalog.presentation.feature_main_screen.recycler_view.MainRecyclerViewItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

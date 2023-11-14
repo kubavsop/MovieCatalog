@@ -1,6 +1,6 @@
 package com.example.moviescatalog.presentation.feature_favorite_screen
 
-import com.example.domain.model.MovieElement
+import com.example.domain.common.model.MovieElement
 
 
 sealed interface FavoriteState {

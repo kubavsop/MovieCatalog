@@ -1,5 +1,6 @@
 package com.example.moviescatalog.di
 
+import com.example.domain.common.repository.UserRepository
 import com.example.domain.feature_favorite_screen.repository.FavoriteRepository
 import com.example.domain.feature_favorite_screen.usecase.AddFavoriteMovieUseCase
 import com.example.domain.feature_favorite_screen.usecase.DeleteFavoriteMovieUseCase
@@ -19,7 +20,9 @@ import com.example.domain.feature_profile_screen.usecase.GetProfileUseCase
 import com.example.domain.feature_profile_screen.usecase.LogoutUseCase
 import com.example.domain.feature_user_auth.repositroy.UserAuthRepository
 import com.example.domain.feature_user_auth.usecase.FormatDateUseCase
-import com.example.domain.feature_user_auth.usecase.GetUserIdUseCase
+import com.example.domain.common.usecase.GetUserIdUseCase
+import com.example.domain.common.usecase.SaveTokenUseCase
+import com.example.domain.common.usecase.SaveUserUseCase
 import com.example.domain.feature_user_auth.usecase.LoginUserUseCase
 import com.example.domain.feature_user_auth.usecase.RegisterUserUseCase
 import com.example.domain.feature_user_auth.usecase.ValidateEmailUseCase
@@ -39,17 +42,31 @@ class DomainModule {
     @Provides
     fun provideLoginUserUseCase(
         repository: UserAuthRepository,
-        getProfileUseCase: GetProfileUseCase
+        getProfileUseCase: GetProfileUseCase,
+        saveUserUseCase: SaveUserUseCase,
+        saveTokenUseCase: SaveTokenUseCase
     ): LoginUserUseCase {
-        return LoginUserUseCase(repository = repository, getProfileUseCase = getProfileUseCase)
+        return LoginUserUseCase(
+            repository = repository,
+            getProfileUseCase = getProfileUseCase,
+            saveUserUseCase = saveUserUseCase,
+            saveTokenUseCase = saveTokenUseCase
+        )
     }
 
     @Provides
     fun provideRegisterUserUseCase(
         repository: UserAuthRepository,
-        getProfileUseCase: GetProfileUseCase
+        getProfileUseCase: GetProfileUseCase,
+        saveTokenUseCase: SaveTokenUseCase,
+        saveUserUseCase: SaveUserUseCase
     ): RegisterUserUseCase {
-        return RegisterUserUseCase(repository = repository, getProfileUseCase = getProfileUseCase)
+        return RegisterUserUseCase(
+            repository = repository,
+            getProfileUseCase = getProfileUseCase,
+            saveTokenUseCase = saveTokenUseCase,
+            saveUserUseCase = saveUserUseCase
+        )
     }
 
     @Provides
@@ -142,13 +159,23 @@ class DomainModule {
     }
 
     @Provides
-    fun provideGetUserIdUseCase(repository: UserAuthRepository): GetUserIdUseCase {
+    fun provideGetUserIdUseCase(repository: UserRepository): GetUserIdUseCase {
         return GetUserIdUseCase(repository = repository)
     }
 
     @Provides
     fun movieInFavoriteUseCase(repository: FavoriteRepository): MovieInFavoriteUseCase {
         return MovieInFavoriteUseCase(repository = repository)
+    }
+
+    @Provides
+    fun saveTokenUseCase(repository: UserRepository): SaveTokenUseCase {
+        return SaveTokenUseCase(repository = repository)
+    }
+
+    @Provides
+    fun saveUserUseCase(repository: UserRepository): SaveUserUseCase {
+        return SaveUserUseCase(repository = repository)
     }
 
     @Provides

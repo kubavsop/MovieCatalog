@@ -1,7 +1,7 @@
 package com.example.domain.feature_film_screen.usecase
 
 import com.example.domain.feature_film_screen.repository.FilmRepository
-import com.example.domain.model.ReviewModify
+import com.example.domain.common.model.ReviewModify
 
 class EditMovieReviewUseCase(
     private val repository: FilmRepository

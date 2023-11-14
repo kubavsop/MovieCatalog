@@ -8,6 +8,7 @@ import androidx.room.withTransaction
 import com.example.data.feature_main_screen.local.MovieDatabase
 import com.example.data.feature_main_screen.local.entity.MovieElementEntity
 import com.example.data.common.mapper.toMovieElementEntity
+import com.example.data.common.remote.MovieCatalogApi
 import com.example.data.feature_user_auth.local.UserStorage
 import kotlinx.coroutines.CancellationException
 import java.util.UUID
@@ -16,7 +17,7 @@ import java.util.UUID
 class MovieRemoteMediator(
     private val movieDatabase: MovieDatabase,
     private val userStorage: UserStorage,
-    private val moviesApi: MoviesApi
+    private val moviesApi: MovieCatalogApi
 ) : RemoteMediator<Int, MovieElementEntity>() {
 
     override suspend fun load(

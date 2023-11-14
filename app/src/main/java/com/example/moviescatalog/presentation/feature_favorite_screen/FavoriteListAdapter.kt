@@ -8,7 +8,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.domain.model.MovieElement
+import com.example.domain.common.model.MovieElement
 import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.FavoriteListItemBinding
 import com.example.moviescatalog.presentation.util.getRatingColor

@@ -1,6 +1,6 @@
 package com.example.moviescatalog.presentation.feature_film_screen.recycler_view
 
-import com.example.domain.model.UserShort
+import com.example.domain.common.model.UserShort
 
 sealed interface FilmRecyclerViewItem {
     data class HeaderItem(

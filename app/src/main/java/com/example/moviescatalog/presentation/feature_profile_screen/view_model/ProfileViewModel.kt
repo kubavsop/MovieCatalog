@@ -11,7 +11,7 @@ import com.example.domain.feature_profile_screen.usecase.LogoutUseCase
 import com.example.domain.feature_user_auth.usecase.FormatDateUseCase
 import com.example.domain.feature_user_auth.usecase.ValidateEmailUseCase
 import com.example.domain.feature_user_auth.usecase.ValidateFirstNameUseCase
-import com.example.domain.model.Profile
+import com.example.domain.common.model.Profile
 import com.example.moviescatalog.R
 import com.example.moviescatalog.presentation.UiText
 import com.example.moviescatalog.presentation.feature_film_screen.FilmState

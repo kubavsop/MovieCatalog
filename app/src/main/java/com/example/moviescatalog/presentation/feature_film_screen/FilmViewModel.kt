@@ -10,7 +10,7 @@ import com.example.domain.feature_film_screen.usecase.AddMovieReviewUseCase
 import com.example.domain.feature_film_screen.usecase.DeleteMovieReviewUseCase
 import com.example.domain.feature_film_screen.usecase.EditMovieReviewUseCase
 import com.example.domain.feature_main_screen.usecase.GetMovieDetailsByIdUseCase
-import com.example.domain.model.ModifiedMoviesDetails
+import com.example.domain.common.model.ModifiedMoviesDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
