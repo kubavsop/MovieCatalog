@@ -125,10 +125,9 @@ class ProfileViewModel @Inject constructor(
     private fun showProfile() {
         viewModelScope.launch {
             try {
+                _state.value = ProfileState.Loading
                 profileSimilarity = ProfileSimilarity()
                 isNotEmptyState = ProfileIsNotEmptyState()
-
-                _state.value = ProfileState.Loading
 
                 profile = getProfileUseCase()
                 _state.value = ProfileState.Profile(
