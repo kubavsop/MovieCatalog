@@ -66,7 +66,7 @@ class MovieRemoteMediator(
                 })
             }
             MediatorResult.Success(
-                endOfPaginationReached = moviesPagedList.pageInfo.currentPage > moviesPagedList.pageInfo.pageCount
+                endOfPaginationReached = moviesPagedList.pageInfo.currentPage >= moviesPagedList.pageInfo.pageCount
             )
         } catch (e: CancellationException) {
             throw e

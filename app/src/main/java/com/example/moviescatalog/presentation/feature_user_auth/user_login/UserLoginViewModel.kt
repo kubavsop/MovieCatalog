@@ -53,7 +53,7 @@ class UserLoginViewModel @Inject constructor(
             ),
             isValid = false
         )
-        if (isSuccess) checkError()
+        checkError()
     }
 
     private fun loginChanged(login: String) {
@@ -71,7 +71,7 @@ class UserLoginViewModel @Inject constructor(
             ),
             isValid = false
         )
-        if (isSuccess) checkError()
+        checkError()
     }
 
     private fun checkError() {
@@ -108,6 +108,7 @@ class UserLoginViewModel @Inject constructor(
 
     private fun initial() {
         _state.value = UserLoginState.UserLogin()
+        isNotEmptyState = LoginIsNotEmptyState()
     }
 
     private companion object {

@@ -12,6 +12,6 @@ class LogoutUseCase(
     suspend operator fun invoke() {
         repository.logout()
         removeTokenUseCase()
-        removeTokenUseCase()
+        removeUserUseCase()
     }
 }

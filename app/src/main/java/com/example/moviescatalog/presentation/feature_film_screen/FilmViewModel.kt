@@ -145,7 +145,6 @@ class FilmViewModel @Inject constructor(
     private fun favoriteChanged(isAdd: Boolean) {
         viewModelScope.launch {
             try {
-
                 if (isAdd) {
                     addFavoriteMovieUseCase(movieDetails.id)
                 } else {

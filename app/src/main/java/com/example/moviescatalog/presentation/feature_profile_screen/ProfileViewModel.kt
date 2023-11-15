@@ -125,9 +125,9 @@ class ProfileViewModel @Inject constructor(
     private fun showProfile() {
         viewModelScope.launch {
             try {
-                profileSimilarity = ProfileSimilarity()
-
                 _state.value = ProfileState.Loading
+                profileSimilarity = ProfileSimilarity()
+                isNotEmptyState = ProfileIsNotEmptyState()
 
                 profile = getProfileUseCase()
                 _state.value = ProfileState.Profile(
@@ -151,22 +151,22 @@ class ProfileViewModel @Inject constructor(
     private fun genderChanged(gender: Gender) {
         if (_state.value !is ProfileState.ProfileChanged) setProfileChanged()
 
-        profileSimilarity.gender = gender.ordinal == profile.gender
+        profileSimilarity = profileSimilarity.copy(gender = gender.ordinal == profile.gender)
 
         _state.value = (_state.value as ProfileState.ProfileChanged).copy(
             gender = gender,
             isValid = false
         )
 
-        if (!profileSimilarity.gender) checkError()
+        checkError()
     }
 
 
     private fun avatarChanged(avatarLink: String) {
         if (_state.value !is ProfileState.ProfileChanged) setProfileChanged()
 
-        profileSimilarity.avatarLink =
-            avatarLink == profile.avatarLink || (avatarLink.isBlank() && profile.avatarLink == null)
+        profileSimilarity = profileSimilarity.copy(avatarLink =
+            avatarLink == profile.avatarLink || (avatarLink.isBlank() && profile.avatarLink == null))
         val isSuccess = validateUrlUseCase(avatarLink)
 
         _state.value = (_state.value as ProfileState.ProfileChanged).copy(
@@ -187,19 +187,19 @@ class ProfileViewModel @Inject constructor(
             monthOfYear,
             dayOfMonth
         )
-        profileSimilarity.birthDate = birthDate == profile.birthDate
+        profileSimilarity = profileSimilarity.copy(birthDate = birthDate == profile.birthDate)
 
         _state.value = (_state.value as ProfileState.ProfileChanged).copy(
             birthDate = birthDate,
             isValid = false
         )
-        if (!profileSimilarity.birthDate) checkError()
+        checkError()
     }
 
     private fun firstNameChanged(firstName: String) {
         if (_state.value !is ProfileState.ProfileChanged) setProfileChanged()
 
-        profileSimilarity.name = firstName == profile.name
+        profileSimilarity = profileSimilarity.copy(name = firstName == profile.name)
         isNotEmptyState = isNotEmptyState.copy(firstName = firstName.isNotBlank())
 
         val isSuccess = validateFirstNameUseCase(firstName)
@@ -212,13 +212,13 @@ class ProfileViewModel @Inject constructor(
             isValid = false
         )
 
-        if (isSuccess) checkError()
+        checkError()
     }
 
     private fun emailChanged(email: String) {
         if (_state.value !is ProfileState.ProfileChanged) setProfileChanged()
 
-        profileSimilarity.email = email == profile.email
+        profileSimilarity = profileSimilarity.copy(email = email == profile.email)
         isNotEmptyState = isNotEmptyState.copy(email = email.isNotBlank())
 
         val isSuccess = validateEmailUseCase(email)
@@ -229,7 +229,7 @@ class ProfileViewModel @Inject constructor(
             isValid = false
         )
 
-        if (isSuccess) checkError()
+        checkError()
     }
 
     private fun checkError() {
