@@ -126,6 +126,7 @@ class ProfileViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 profileSimilarity = ProfileSimilarity()
+                isNotEmptyState = ProfileIsNotEmptyState()
 
                 _state.value = ProfileState.Loading
 

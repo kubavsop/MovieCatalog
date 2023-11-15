@@ -108,6 +108,7 @@ class UserLoginViewModel @Inject constructor(
 
     private fun initial() {
         _state.value = UserLoginState.UserLogin()
+        isNotEmptyState = LoginIsNotEmptyState()
     }
 
     private companion object {

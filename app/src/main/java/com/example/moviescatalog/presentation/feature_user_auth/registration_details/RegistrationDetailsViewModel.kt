@@ -28,17 +28,28 @@ class RegistrationDetailsViewModel @Inject constructor(
 
     fun onEvent(event: RegistrationDetailsEvent) {
         when (event) {
-            is RegistrationDetailsEvent.BirthdayChanged -> birthdayChanged(event.year, event.monthOfYear, event.dayOfMonth)
+            is RegistrationDetailsEvent.BirthdayChanged -> birthdayChanged(
+                event.year,
+                event.monthOfYear,
+                event.dayOfMonth
+            )
+
             is RegistrationDetailsEvent.LoginChanged -> loginChanged(event.login)
             is RegistrationDetailsEvent.EmailChanged -> emailChanged(event.email)
             is RegistrationDetailsEvent.FirstNameChanged -> firstNameChanged(event.firstName)
-            is RegistrationDetailsEvent.RegistrationDetails -> _state.value = RegistrationDetailsState()
+            is RegistrationDetailsEvent.RegistrationDetails -> {
+                _state.value = RegistrationDetailsState()
+                emptyState = DetailsIsNotEmptyState()
+            }
         }
     }
 
     private fun birthdayChanged(year: Int, monthOfYear: Int, dayOfMonth: Int) {
         emptyState = emptyState.copy(birthday = true)
-        _state.value = _state.value?.copy(birthday = formatDateUseCase(year, monthOfYear, dayOfMonth))
+        _state.value = _state.value?.copy(
+            birthday = formatDateUseCase(year, monthOfYear, dayOfMonth),
+            isValid = false
+        )
         checkError()
     }
 
