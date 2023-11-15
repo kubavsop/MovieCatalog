@@ -1,17 +1,13 @@
 package com.example.moviescatalog.presentation.feature_film_screen.recycler_view
 
-import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.graphics.Shader
 import android.text.Spannable
 import android.text.SpannableString
-import android.text.SpannableStringBuilder
 import android.text.TextPaint
 import android.text.style.CharacterStyle
-import android.text.style.ForegroundColorSpan
-import android.text.style.UpdateAppearance
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +23,6 @@ import coil.load
 import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.FilmScreenHeaderBinding
 import com.example.moviescatalog.databinding.ReviewListItemBinding
-import com.example.moviescatalog.presentation.util.getAverageRatingColor
 import com.example.moviescatalog.presentation.util.getRatingColor
 
 class ReviewListAdapter(
@@ -93,8 +88,6 @@ class ReviewListAdapter(
                 description.text = headerItem.description
                 description.maxLines = MAX_COLLAPSED_LINES
 
-
-
                 description.viewTreeObserver.addOnPreDrawListener(object :
                     ViewTreeObserver.OnPreDrawListener {
                     override fun onPreDraw(): Boolean {
@@ -102,14 +95,13 @@ class ReviewListAdapter(
 
                         if (description.lineCount > MAX_COLLAPSED_LINES) {
                             moreDetailsButton.isVisible = true
-//                            formatDescriptionText()
+                            formatDescriptionText()
                         } else {
                             moreDetailsButton.isVisible = false
                         }
                         return true
                     }
                 })
-
 
                 yearDescription.text = headerItem.year.asString(context)
                 countryDescription.text = headerItem.country.asString(context)
@@ -125,11 +117,10 @@ class ReviewListAdapter(
                 moreDetailsButton.setOnClickListener {
                     if (moreDetailsButton.isChecked) {
                         description.maxLines = Int.MAX_VALUE
-//                        formatDescriptionCheckedText()
-
+                        formatDescriptionCheckedText()
                     } else {
+                        formatDescriptionText()
                         description.maxLines = MAX_COLLAPSED_LINES
-//                        formatDescriptionText()
                     }
                 }
             }
@@ -156,100 +147,77 @@ class ReviewListAdapter(
             }
         }
 
-//        private fun formatDescriptionDefaultText() {
-//            val context = binding.root.context.applicationContext
-//            with(binding) {
-//                val textColor = getColor(context, R.color.white)
-//                val spannableString = SpannableString(description.text)
-//                val startOfLine = description.layout.getLineStart(MAX_COLLAPSED_LINES - 1)
-//                val endOfLine = description.layout.getLineEnd(MAX_COLLAPSED_LINES - 1)
-//
-//                spannableString.setSpan(
-//                    ForegroundColorSpan(textColor),
-//                    startOfLine,
-//                    endOfLine,
-//                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-//                )
-//
-//                description.text = spannableString
-//            }
-//        }
-//
-//        private fun formatDescriptionText() {
-//            val context = binding.root.context.applicationContext
-//            val textColor = getColor(context,R.color.white)
-//            val backgroundColor = getColor(context,R.color.background_color)
-//            with(binding) {
-//
-//                val defaultLinearGradient: Shader = LinearGradient(
-//                    0f,
-//                    0f,
-//                    0f,
-//                    description.textSize,
-//                    intArrayOf(
-//                        textColor,
-//                        backgroundColor,
-//                        backgroundColor,
-//                    ),
-//                    floatArrayOf(0f, 2f, 50f), Shader.TileMode.CLAMP
-//                )
-//
-//                val spannableString = SpannableString(description.text)
-//                val startOfLine = description.layout.getLineStart(MAX_COLLAPSED_LINES - 1)
-//                val endOfLine = description.layout.getLineEnd(MAX_COLLAPSED_LINES - 1)
-//
-//                spannableString.setSpan(
-//                    ShaderSpan(defaultLinearGradient),
-//                    startOfLine,
-//                    endOfLine,
-//                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-//                )
-//
-//                description.text = spannableString
-//            }
-//        }
-//
-//        private fun formatDescriptionCheckedText() {
-//            val context = binding.root.context.applicationContext
-//            val textColor = getColor(context,R.color.white)
-//            val backgroundColor = getColor(context,R.color.background_color)
-//            with(binding) {
-//
-//                val defaultLinearGradient: Shader = LinearGradient(
-//                    0f,
-//                    0f,
-//                    0f,
-//                    description.textSize,
-//                    intArrayOf(
-//                        textColor,
-//                        textColor,
-//                        textColor,
-//                    ),
-//                    floatArrayOf(0f, 78f, 100f), Shader.TileMode.CLAMP
-//                )
-//
-//                val spannableString = SpannableString(description.text)
-//                val startOfLine = description.layout.getLineStart(MAX_COLLAPSED_LINES - 1)
-//                val endOfLine = description.layout.getLineEnd(MAX_COLLAPSED_LINES - 1)
-//
-//                spannableString.setSpan(
-//                    ShaderSpan(defaultLinearGradient),
-//                    startOfLine,
-//                    endOfLine,
-//                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-//                )
-//
-//                description.text = spannableString
-//            }
-//        }
+        private fun formatDescriptionText() {
+            val context = binding.root.context.applicationContext
+            val textColor = getColor(context,R.color.white)
+            val backgroundColor = getColor(context,R.color.background_color)
+            with(binding) {
 
-        inner class ShaderSpan(private val shader: Shader) : CharacterStyle(), UpdateAppearance {
+                val defaultLinearGradient: Shader = LinearGradient(
+                    0f,
+                    0f,
+                    0f,
+                    description.lineHeight * (MAX_COLLAPSED_LINES).toFloat(),
+                    intArrayOf(
+                        textColor,
+                        backgroundColor,
+                    ),
+                    floatArrayOf(0f, 100f), Shader.TileMode.CLAMP
+                )
+
+                val spannableString = SpannableString(description.text)
+                val startOfLine = description.layout.getLineStart(MAX_COLLAPSED_LINES - 1)
+                val endOfLine = description.layout.getLineEnd(MAX_COLLAPSED_LINES - 1)
+
+                spannableString.setSpan(
+                    ShaderSpan(defaultLinearGradient),
+                    startOfLine,
+                    endOfLine,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+
+                description.text = spannableString
+            }
+        }
+
+        private fun formatDescriptionCheckedText() {
+            val context = binding.root.context.applicationContext
+            val textColor = getColor(context,R.color.white)
+            with(binding) {
+
+                val defaultLinearGradient: Shader = LinearGradient(
+                    0f,
+                    0f,
+                    0f,
+                    description.lineHeight * (MAX_COLLAPSED_LINES).toFloat(),
+                    intArrayOf(
+                        textColor,
+                        textColor
+                    ),
+                    floatArrayOf(0f, 50f), Shader.TileMode.CLAMP
+                )
+
+                val spannableString = SpannableString(description.text)
+                val startOfLine = description.layout.getLineStart(MAX_COLLAPSED_LINES - 1)
+                val endOfLine = description.layout.getLineEnd(MAX_COLLAPSED_LINES - 1)
+
+                spannableString.setSpan(
+                    ShaderSpan(defaultLinearGradient),
+                    startOfLine,
+                    endOfLine,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+
+                description.text = spannableString
+            }
+        }
+
+        inner class ShaderSpan(private val shader: Shader) : CharacterStyle() {
 
             override fun updateDrawState(tp: TextPaint) {
                 tp.shader = shader
             }
         }
-
     }
 
     inner class ReviewViewHolder(private val binding: ReviewListItemBinding) :
