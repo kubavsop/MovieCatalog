@@ -8,7 +8,6 @@ import com.example.data.feature_main_screen.local.entity.MovieElementEntity
 
 @Dao
 interface MovieDao {
-
     @Upsert
     suspend fun upsertAll(movies: List<MovieElementEntity>)
 
