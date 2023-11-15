@@ -241,8 +241,6 @@ class ProfileViewModel @Inject constructor(
             profileSimilarity.nickName,
         ).any { !it }
 
-        Log.d("maksim", profileSimilarity.avatarLink.toString())
-
         if (!hasError && hasDifferences && isNotEmptyState.email && isNotEmptyState.firstName) {
             _state.value = (_state.value as ProfileState.ProfileChanged).copy(
                 isValid = true

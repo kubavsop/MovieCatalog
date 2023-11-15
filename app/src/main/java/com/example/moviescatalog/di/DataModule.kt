@@ -25,6 +25,7 @@ import com.example.domain.feature_favorite_screen.repository.FavoriteRepository
 import com.example.domain.feature_film_screen.repository.FilmRepository
 import com.example.domain.feature_main_screen.repository.MoviesRepository
 import com.example.domain.feature_profile_screen.repository.ProfileRepository
+import com.example.domain.feature_profile_screen.usecase.GetProfileUseCase
 import com.example.domain.feature_user_auth.repositroy.UserAuthRepository
 import com.example.domain.feature_user_auth.validator.EmailPatternValidator
 import dagger.Module
@@ -112,6 +113,10 @@ class DataModule {
         return GetTokenUseCase(repository = userRepository)
     }
 
+    @Provides
+    fun provideGetProfileUseCase(profileRepository: ProfileRepository): GetProfileUseCase {
+        return GetProfileUseCase(repository = profileRepository)
+    }
 
     @Singleton
     @Provides

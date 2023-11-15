@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
 
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
 
-        val hasToken = intent.getBooleanExtra(HAS_TOKEN, false)
+        val hasToken = intent.getBooleanExtra(IS_TOKEN_ALIVE, false)
         if (hasToken) {
             openMainScreenFromAuthSelection()
         }
@@ -175,6 +175,6 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
     }
 
     private companion object {
-        const val HAS_TOKEN = "token"
+        const val IS_TOKEN_ALIVE = "token"
     }
 }

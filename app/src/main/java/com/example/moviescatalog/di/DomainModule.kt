@@ -108,11 +108,6 @@ class DomainModule {
     }
 
     @Provides
-    fun provideGetProfileUseCase(profileRepository: ProfileRepository): GetProfileUseCase {
-        return GetProfileUseCase(repository = profileRepository)
-    }
-
-    @Provides
     fun provideChangeProfileUseCase(profileRepository: ProfileRepository): ChangeProfileUseCase {
         return ChangeProfileUseCase(repository = profileRepository)
     }

@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MoviesCatalog">
         <activity
-            android:name=".presentation.SplashScreenActivity"
+            android:name=".feature_splas_screen.SplashScreenActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/SplashScreenTheme">
