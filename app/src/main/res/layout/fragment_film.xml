@@ -32,7 +32,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/collapse_toolbar_layout_margin"
-                android:padding="@dimen/padding_16"
+                android:paddingStart="@dimen/padding_16"
+                android:paddingEnd="@dimen/padding_16"
+                android:paddingTop="@dimen/padding_16"
                 android:background="@color/background_color">
                 <TextView
                     android:id="@+id/average_rating"

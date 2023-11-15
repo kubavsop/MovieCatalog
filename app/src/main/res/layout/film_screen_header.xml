@@ -10,19 +10,34 @@
         style="@style/BodyTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_20"
         android:textSize="@dimen/text_size_14"
         app:layout_constrainedWidth="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ToggleButton
+        android:id="@+id/more_details_button"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/margin_4"
+        android:layout_height="@dimen/default_icon_size"
+        android:textAppearance="@style/SubTitleTextStyle"
+        android:background="@android:color/transparent"
+        android:textColor="@color/accent_color"
+        android:drawableEnd="@drawable/read_more_selector"
+        android:drawablePadding="@dimen/padding_8"
+        android:text="@string/more"
+        android:textOn="@string/hide"
+        android:textOff="@string/more"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <TextView
         android:id="@+id/genres_title"
         style="@style/DescriptionHeaderStyle"
         android:text="@string/genres"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/description" />
+        app:layout_constraintTop_toBottomOf="@id/more_details_button" />
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/genres"

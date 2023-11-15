@@ -70,4 +70,6 @@
     <string name="cancellation">Отмена</string>
     <string name="edit">Редактировать</string>
     <string name="delete">Удалить</string>
+    <string name="more">Подробнее</string>
+    <string name="hide">Скрыть</string>
 </resources>
