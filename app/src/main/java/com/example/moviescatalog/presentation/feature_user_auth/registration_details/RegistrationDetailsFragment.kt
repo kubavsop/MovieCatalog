@@ -13,6 +13,8 @@ import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.moviescatalog.databinding.FragmentRegistrationDetailsBinding
+import com.example.moviescatalog.presentation.feature_user_auth.registration_details.state.DetailsEditTextChanged
+import com.example.moviescatalog.presentation.feature_user_auth.registration_details.state.RegistrationDetailsState
 import com.example.moviescatalog.presentation.util.setClearFocusOnDoneClick
 import com.example.moviescatalog.presentation.util.setContainerError
 
@@ -36,7 +38,7 @@ class RegistrationDetailsFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        fragmentCallBack = context as FragmentCallBack
+        fragmentCallBack = context as? FragmentCallBack
     }
 
     override fun onCreateView(
@@ -55,7 +57,8 @@ class RegistrationDetailsFragment : Fragment() {
 
         with(binding) {
             emailEditText.addTextChangedListener(getAfterTextChangedListener(DetailsEditTextChanged.EMAIL_CHANGED))
-            firstNameEditText.addTextChangedListener(getAfterTextChangedListener(DetailsEditTextChanged.FIRST_NAME_CHANGED))
+            firstNameEditText.addTextChangedListener(getAfterTextChangedListener(
+                DetailsEditTextChanged.FIRST_NAME_CHANGED))
             loginEditText.addTextChangedListener(getAfterTextChangedListener(DetailsEditTextChanged.LOGIN_CHANGED))
             birthdayText.setOnClickListener { datePicker.show() }
             backspace.setOnClickListener { fragmentCallBack?.openAuthSelectionFromRegistration() }
@@ -73,22 +76,21 @@ class RegistrationDetailsFragment : Fragment() {
             singIn.setOnClickListener { fragmentCallBack?.openUserLoginFromRegistrationDetails() }
             emailEditText.setClearFocusOnDoneClick()
         }
+        viewModel.onEvent(RegistrationDetailsEvent.RegistrationDetails)
     }
 
 
     private fun handleState(state: RegistrationDetailsState) {
-        binding.loginEditTextContainer.setContainerError(state.loginError, requireContext())
-        binding.emailEditTextContainer.setContainerError(state.emailError, requireContext())
-        binding.firstNameEditTextContainer.setContainerError(state.firstNameError, requireContext())
-        binding.birthdayText.text = state.birthday
-
-        val hasEmpty = listOf(
-            binding.loginEditText.text.toString(),
-            binding.emailEditText.text.toString(),
-            binding.loginEditText.text.toString(),
-            state.birthday
-        ).any { it.isEmpty() }
-        binding.continueRegistration.isEnabled = state.isValid && !hasEmpty
+        with(binding){
+            loginEditTextContainer.setContainerError(state.loginError, requireContext())
+            emailEditTextContainer.setContainerError(state.emailError, requireContext())
+            firstNameEditTextContainer.setContainerError(
+                state.firstNameError,
+                requireContext()
+            )
+            birthdayText.text = state.birthday
+            continueRegistration.isEnabled = state.isValid
+        }
     }
 
     private fun createDatePickerDialog(): DatePickerDialog {

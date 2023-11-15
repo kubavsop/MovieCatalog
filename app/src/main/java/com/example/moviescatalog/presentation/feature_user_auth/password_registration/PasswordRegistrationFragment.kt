@@ -12,7 +12,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.moviescatalog.databinding.FragmentPasswordRegistrationBinding
-import com.example.moviescatalog.presentation.UiText
+import com.example.moviescatalog.presentation.util.UiText
 import com.example.moviescatalog.presentation.util.setClearFocusOnDoneClick
 import com.example.moviescatalog.presentation.util.setContainerError
 
@@ -32,7 +32,7 @@ class PasswordRegistrationFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        fragmentCallBack = context as FragmentCallBack
+        fragmentCallBack = context as? FragmentCallBack
     }
 
     override fun onCreateView(
@@ -48,40 +48,50 @@ class PasswordRegistrationFragment : Fragment() {
         viewModel.state.observe(viewLifecycleOwner, ::handleState)
 
         val afterTextPasswordChangedListener = getAfterTextPasswordChangedListener()
-        binding.passwordEditText.addTextChangedListener(afterTextPasswordChangedListener)
-        binding.repeatedPasswordEditText.addTextChangedListener(afterTextPasswordChangedListener)
-        binding.backspace.setOnClickListener { fragmentCallBack?.openDetailedUserRegistrationFromPasswordRegistration() }
-        binding.register.setOnClickListener {
-            viewModel.onEvent(
-                PasswordRegistrationEvent.Register(
-                    userName = args.userName,
-                    name = args.name,
-                    email = args.email,
-                    password = binding.passwordEditText.text.toString(),
-                    birthDate = args.birthDate,
-                    gender = args.gender
+
+        with(binding) {
+            passwordEditText.addTextChangedListener(afterTextPasswordChangedListener)
+            repeatedPasswordEditText.addTextChangedListener(afterTextPasswordChangedListener)
+            backspace.setOnClickListener { fragmentCallBack?.openDetailedUserRegistrationFromPasswordRegistration() }
+            register.setOnClickListener {
+                viewModel.onEvent(
+                    PasswordRegistrationEvent.Register(
+                        userName = args.userName,
+                        name = args.name,
+                        email = args.email,
+                        password = passwordEditText.text.toString(),
+                        birthDate = args.birthDate,
+                        gender = args.gender
+                    )
                 )
-            )
+            }
+            signIn.setOnClickListener { fragmentCallBack?.openUserLoginFromPasswordRegistration() }
+            repeatedPasswordEditText.setClearFocusOnDoneClick()
         }
-        binding.signIn.setOnClickListener { fragmentCallBack?.openUserLoginFromPasswordRegistration() }
-        binding.repeatedPasswordEditText.setClearFocusOnDoneClick()
+
+        viewModel.onEvent(PasswordRegistrationEvent.Content)
     }
 
     private fun handleState(state: PasswordRegistrationState) {
-        binding.passwordEditTextContainer.setContainerError(state.passwordError, requireContext())
-        binding.repeatedPasswordEditTextContainer.setContainerError(state.repeatedPasswordError, requireContext())
+        when (state) {
+            PasswordRegistrationState.Initial -> Unit
+            PasswordRegistrationState.Loading -> showProgressBar()
+            is PasswordRegistrationState.RegistrationError -> showError(state.msg)
+            is PasswordRegistrationState.Registered -> goToMainScreen()
+            is PasswordRegistrationState.PasswordRegistration -> showPasswordRegistration(state)
+        }
 
-        val hasEmpty = listOf(
-            binding.passwordEditText.text.toString(),
-            binding.repeatedPasswordEditText.text.toString()
-        ).any { it.isEmpty() }
-
-        binding.register.isEnabled = state.isValid && !hasEmpty
-
-        if (state.isLoading) showProgressBar()
-        if (state.isRegistered) goToMainScreen()
-        if (state.registrationError != null) showError(state.registrationError)
     }
+
+    private fun showPasswordRegistration(state: PasswordRegistrationState.PasswordRegistration) {
+        with(binding) {
+            progressBar.isVisible = false
+            passwordEditTextContainer.setContainerError(state.passwordError, requireContext())
+            repeatedPasswordEditTextContainer.setContainerError(state.repeatedPasswordError, requireContext())
+            register.isEnabled = state.isValid
+        }
+    }
+
 
     private fun goToMainScreen() {
         binding.progressBar.isVisible = false
@@ -98,6 +108,7 @@ class PasswordRegistrationFragment : Fragment() {
             repeatedPasswordEditTextContainer.error = msg.asString(requireContext())
         }
     }
+
     private fun showProgressBar() {
         binding.progressBar.isVisible = true
     }
@@ -122,6 +133,7 @@ class PasswordRegistrationFragment : Fragment() {
         const val EMPTY_ERROR = " "
         const val ERROR_MESSAGE_INDEX = 1
     }
+
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()

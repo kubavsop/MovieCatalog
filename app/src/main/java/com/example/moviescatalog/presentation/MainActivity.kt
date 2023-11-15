@@ -8,8 +8,14 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.moviescatalog.R
 import com.example.moviescatalog.databinding.ActivityMainBinding
-import com.example.moviescatalog.presentation.feature_profile_screen.screen.ProfileFragment
-import com.example.moviescatalog.presentation.feature_profile_screen.screen.ProfileFragmentDirections
+import com.example.moviescatalog.presentation.feature_favorite_screen.FavoriteFragment
+import com.example.moviescatalog.presentation.feature_favorite_screen.FavoriteFragmentDirections
+import com.example.moviescatalog.presentation.feature_film_screen.FilmFragment
+import com.example.moviescatalog.presentation.feature_film_screen.FilmFragmentDirections
+import com.example.moviescatalog.presentation.feature_main_screen.MainFragment
+import com.example.moviescatalog.presentation.feature_main_screen.MainFragmentDirections
+import com.example.moviescatalog.presentation.feature_profile_screen.ProfileFragment
+import com.example.moviescatalog.presentation.feature_profile_screen.ProfileFragmentDirections
 import com.example.moviescatalog.presentation.feature_user_auth.auth_selection.AuthSelectionFragment
 import com.example.moviescatalog.presentation.feature_user_auth.auth_selection.AuthSelectionFragmentDirections
 import com.example.moviescatalog.presentation.feature_user_auth.password_registration.PasswordRegistrationFragment
@@ -19,14 +25,15 @@ import com.example.moviescatalog.presentation.feature_user_auth.registration_det
 import com.example.moviescatalog.presentation.feature_user_auth.registration_details.RegistrationDetailsFragmentDirections
 import com.example.moviescatalog.presentation.feature_user_auth.user_login.UserLoginFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import java.lang.Thread.sleep
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
     RegistrationDetailsFragment.FragmentCallBack, PasswordRegistrationFragment.FragmentCallBack,
-    AuthSelectionFragment.FragmentCallBack, ProfileFragment.FragmentCallBack {
+    AuthSelectionFragment.FragmentCallBack, ProfileFragment.FragmentCallBack,
+    MainFragment.FragmentCallBack, FilmFragment.FragmentCallBack,
+    FavoriteFragment.FragmentCallBack {
     private lateinit var binding: ActivityMainBinding
+
     private val navController: NavController
         get() {
             val navHostFragment =
@@ -36,22 +43,31 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.mainFragment -> showBottomNav()
-                R.id.favoriteFragment -> showBottomNav()
-                R.id.profileFragment -> showBottomNav()
+                R.id.mainFragment, R.id.favoriteFragment, R.id.profileFragment -> showBottomNav()
                 else -> hideBottomNav()
             }
         }
 
-        setContentView(binding.root)
-
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
+
+        val isTokenAlive = intent.getBooleanExtra(IS_TOKEN_ALIVE, false)
+        if (isTokenAlive) {
+            openMainScreenFromAuthSelection()
+        }
+
+        setContentView(binding.root)
     }
 
+
+    private fun openMainScreenFromAuthSelection() {
+        val action = AuthSelectionFragmentDirections.actionAuthSelectionFragmentToMainFragment()
+        navController.navigate(action)
+    }
 
     override fun openAuthSelectionFromLogin() {
         val action = UserLoginFragmentDirections.actionUserLoginFragmentToAuthSelectionFragment()
@@ -112,15 +128,12 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
     }
 
     override fun openAuthSelectionScreenFromProfile() {
-        Unit
+        val action = ProfileFragmentDirections.actionProfileFragmentToAuthSelectionFragment()
+        navController.navigate(action)
     }
 
     override fun openPasswordRegistration(
-        userName: String,
-        name: String,
-        email: String,
-        birthDate: String,
-        gender: String
+        userName: String, name: String, email: String, birthDate: String, gender: String
     ) {
         val action =
             RegistrationDetailsFragmentDirections.actionRegistrationDetailsFragmentToPasswordRegistrationFragment(
@@ -133,6 +146,26 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
         navController.navigate(action)
     }
 
+    override fun openMainFromFilmScreen() {
+        val action = FilmFragmentDirections.actionFilmFragmentToMainFragment()
+        navController.navigate(action)
+    }
+
+    override fun openAuthSelectionFromFilm() {
+        val action = FilmFragmentDirections.actionFilmFragmentToAuthSelectionFragment()
+        navController.navigate(action)
+    }
+
+    override fun openFilmScreen(id: String) {
+        val action = MainFragmentDirections.actionMainFragmentToFilmFragment(id)
+        navController.navigate(action)
+    }
+
+    override fun openAuthSelectionFromFavorite() {
+        val action = FavoriteFragmentDirections.actionFavoriteFragmentToAuthSelectionFragment()
+        navController.navigate(action)
+    }
+
 
     private fun showBottomNav() {
         binding.bottomNavigationView.visibility = View.VISIBLE
@@ -140,5 +173,9 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
 
     private fun hideBottomNav() {
         binding.bottomNavigationView.visibility = View.GONE
+    }
+
+    private companion object {
+        const val IS_TOKEN_ALIVE = "token"
     }
 }

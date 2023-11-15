@@ -38,16 +38,57 @@
         <item name="android:layout_width">@dimen/average_rating_width</item>
     </style>
 
-    <style name="GenreStyle" parent="BodyTextStyle">
+
+    <style name="AverageRatingStyleTitle" parent="SubTitleTextStyle">
+        <item name="android:textColor">@color/gray_900</item>
+        <item name="android:layout_height">@dimen/average_rating_height_title</item>
+        <item name="android:layout_width">@dimen/average_rating_width_title</item>
+    </style>
+
+    <style name="GenreStyleMainScreen" parent="BodyTextStyle">
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:background">@drawable/genre_background</item>
+        <item name="android:background">@drawable/genre_background_main_screen</item>
         <item name="android:textSize">@dimen/text_size_13</item>
         <item name="android:textAlignment">center</item>
         <item name="android:paddingBottom">@dimen/padding_2</item>
         <item name="android:paddingTop">@dimen/padding_2</item>
         <item name="android:paddingStart">@dimen/padding_8</item>
         <item name="android:paddingEnd">@dimen/padding_8</item>
+    </style>
+
+    <style name="GenreStyleMovieScreen" parent="SubTitleTextStyle">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:background">@drawable/genre_background_movie_screen</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:paddingBottom">@dimen/padding_5</item>
+        <item name="android:paddingTop">@dimen/padding_5</item>
+        <item name="android:paddingStart">@dimen/padding_10</item>
+        <item name="android:paddingEnd">@dimen/padding_10</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    
+    <style name="DescriptionHeaderStyle" parent="TitleTextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_20</item>
+    </style>
+    
+    <style name="DescriptionSubHeaderStyle" parent="BodyTextStyle">
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textColor">@color/gray_400</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_10</item>
+    </style>
+
+    <style name="DescriptionStyle" parent="BodyTextStyle">
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
     </style>
 
     <style name="Circular">
@@ -63,12 +104,12 @@
         <item name="boxStrokeColor">@color/stroke_selector</item>
         <item name="boxStrokeWidth">@dimen/stroke_width</item>
         <item name="android:layout_marginTop">@dimen/margin_8</item>
-        <item name="boxStrokeErrorColor">@color/error_color</item>
+        <item name="boxStrokeErrorColor">@color/red</item>
     </style>
 
     <style name="ErrorTextStyle" parent="BodyTextStyle">
         <item name="android:textSize">@dimen/text_size_14</item>
-        <item name="android:textColor">@color/error_color</item>
+        <item name="android:textColor">@color/red</item>
     </style>
 
     <style name="HintTextStyle" parent="SubTitleTextStyle">
@@ -83,6 +124,14 @@
         <item name="android:background">@drawable/toggle_background_selector</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">@drawable/toggle_text_color_selector</item>
+    </style>
+
+    <style name="ReviewStarButtonStyle">
+        <item name="android:background">@drawable/review_star_selector</item>
+        <item name="android:textOff">""</item>
+        <item name="android:textOn">""</item>
+        <item name="android:layout_height">@dimen/review_star_size</item>
+        <item name="android:layout_width">@dimen/review_star_size</item>
     </style>
 
     <style name="ButtonStyle" parent="LabelTextStyle">

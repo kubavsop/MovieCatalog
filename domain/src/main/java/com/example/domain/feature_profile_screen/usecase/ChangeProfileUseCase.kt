@@ -1,8 +1,7 @@
 package com.example.domain.feature_profile_screen.usecase
 
-import com.example.domain.model.Profile
+import com.example.domain.common.model.Profile
 import com.example.domain.feature_profile_screen.repository.ProfileRepository
-import com.example.domain.feature_user_auth.usecase.RegisterUserUseCase
 import java.text.SimpleDateFormat
 
 class ChangeProfileUseCase(

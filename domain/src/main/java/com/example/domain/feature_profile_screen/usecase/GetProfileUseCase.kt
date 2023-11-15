@@ -1,6 +1,6 @@
 package com.example.domain.feature_profile_screen.usecase
 
-import com.example.domain.model.Profile
+import com.example.domain.common.model.Profile
 import com.example.domain.feature_profile_screen.repository.ProfileRepository
 import java.text.SimpleDateFormat
 
