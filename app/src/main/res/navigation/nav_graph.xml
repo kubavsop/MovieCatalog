@@ -9,24 +9,32 @@
         android:id="@+id/authSelectionFragment"
         android:name="com.example.moviescatalog.presentation.feature_user_auth.auth_selection.AuthSelectionFragment"
         android:label="fragment_auth_selection"
-        tools:layout="@layout/fragment_auth_selection" >
+        tools:layout="@layout/fragment_auth_selection">
         <action
             android:id="@+id/action_authSelectionFragment_to_userLoginFragment"
-            app:destination="@id/userLoginFragment" />
+            app:destination="@id/userLoginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_authSelectionFragment_to_registrationDetailsFragment"
-            app:destination="@id/registrationDetailsFragment" />
+            app:destination="@id/registrationDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_authSelectionFragment_to_mainFragment"
             app:destination="@id/mainFragment"
             app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/userLoginFragment"
         android:name="com.example.moviescatalog.presentation.feature_user_auth.user_login.UserLoginFragment"
         android:label="fragment_user_login"
-        tools:layout="@layout/fragment_user_login" >
+        tools:layout="@layout/fragment_user_login">
         <action
             android:id="@+id/action_userLoginFragment_to_authSelectionFragment"
             app:destination="@id/authSelectionFragment" />
@@ -36,14 +44,18 @@
         <action
             android:id="@+id/action_userLoginFragment_to_mainFragment"
             app:destination="@id/mainFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/passwordRegistrationFragment"
         android:name="com.example.moviescatalog.presentation.feature_user_auth.password_registration.PasswordRegistrationFragment"
         android:label="fragment_password_registration"
-        tools:layout="@layout/fragment_password_registration" >
+        tools:layout="@layout/fragment_password_registration">
         <argument
             android:name="userName"
             app:argType="string" />
@@ -73,16 +85,20 @@
             android:id="@+id/action_passwordRegistrationFragment_to_mainFragment"
             app:destination="@id/mainFragment"
             app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/registrationDetailsFragment"
         android:name="com.example.moviescatalog.presentation.feature_user_auth.registration_details.RegistrationDetailsFragment"
         android:label="fragment_registration_details"
-        tools:layout="@layout/fragment_registration_details" >
+        tools:layout="@layout/fragment_registration_details">
         <action
             android:id="@+id/action_registrationDetailsFragment_to_passwordRegistrationFragment"
-            app:destination="@id/passwordRegistrationFragment" />
+            app:destination="@id/passwordRegistrationFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_registrationDetailsFragment_to_authSelectionFragment"
             app:destination="@id/authSelectionFragment" />
@@ -94,7 +110,7 @@
         android:id="@+id/profileFragment"
         android:name="com.example.moviescatalog.presentation.feature_profile_screen.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_authSelectionFragment"
             app:destination="@id/authSelectionFragment"
@@ -105,28 +121,28 @@
         android:id="@+id/mainFragment"
         android:name="com.example.moviescatalog.presentation.feature_main_screen.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_filmFragment"
             app:destination="@id/filmFragment"
-            app:exitAnim="@anim/open_film_screen_anim"/>
+            app:exitAnim="@anim/open_film_screen_anim" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.example.moviescatalog.presentation.feature_favorite_screen.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" >
+        tools:layout="@layout/fragment_favorite">
         <action
             android:id="@+id/action_favoriteFragment_to_authSelectionFragment"
             app:destination="@id/authSelectionFragment"
             app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/filmFragment"
         android:name="com.example.moviescatalog.presentation.feature_film_screen.FilmFragment"
         android:label="fragment_film"
-        tools:layout="@layout/fragment_film" >
+        tools:layout="@layout/fragment_film">
         <argument
             android:name="id"
             app:argType="string" />
@@ -137,6 +153,6 @@
             android:id="@+id/action_filmFragment_to_authSelectionFragment"
             app:destination="@id/authSelectionFragment"
             app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

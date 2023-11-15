@@ -1,5 +1,6 @@
 package com.example.moviescatalog.presentation.feature_film_screen
 
+import androidx.annotation.StringRes
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,6 +12,8 @@ import com.example.domain.feature_film_screen.usecase.DeleteMovieReviewUseCase
 import com.example.domain.feature_film_screen.usecase.EditMovieReviewUseCase
 import com.example.domain.feature_main_screen.usecase.GetMovieDetailsByIdUseCase
 import com.example.domain.common.model.ModifiedMoviesDetails
+import com.example.moviescatalog.R
+import com.example.moviescatalog.presentation.util.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -25,7 +28,7 @@ class FilmViewModel @Inject constructor(
     private val addFavoriteMovieUseCase: AddFavoriteMovieUseCase,
     private val deleteFavoriteMovieUseCase: DeleteFavoriteMovieUseCase,
 ) : ViewModel() {
-    private lateinit var movieDetails: ModifiedMoviesDetails
+    private lateinit var movieDetails: FilmState.Content
 
     private var currentReviewState = FilmState.ReviewDialog()
     private var reviewState = FilmState.ReviewDialog()
@@ -153,7 +156,7 @@ class FilmViewModel @Inject constructor(
                     inFavorite = isAdd
                 )
 
-                _state.value = FilmState.Content(movieDetails = movieDetails)
+                _state.value = movieDetails
             } catch (e: HttpException) {
                 if (e.code() == UNAUTHORIZED) {
                     _state.value = FilmState.AuthorisationError
@@ -164,12 +167,21 @@ class FilmViewModel @Inject constructor(
         }
     }
 
+    private fun setString(@StringRes resId: Int, value: String): UiText {
+        return if (value == "-") {
+            UiText.DynamicString(value)
+        } else {
+            UiText.StringResource(resId, value)
+        }
+    }
+
+
     private fun movieDetails(id: String) {
         viewModelScope.launch {
             try {
                 _state.value = FilmState.Loading
-                movieDetails = getMovieDetailsByIdUseCase(id)
-                _state.value = FilmState.Content(movieDetails)
+                movieDetails = getMovieDetailsByIdUseCase(id).toFilmState()
+                _state.value = movieDetails
 
             } catch (e: HttpException) {
                 if (e.code() == UNAUTHORIZED) {
@@ -190,6 +202,26 @@ class FilmViewModel @Inject constructor(
         _state.value =
             FilmState.ReviewDialogChanged(isSaveActive = comparisons && currentReviewState.rating != ZERO && currentReviewState.reviewText.isNotBlank())
     }
+
+    private fun ModifiedMoviesDetails.toFilmState() = FilmState.Content(
+        ageLimit = UiText.StringResource(R.string.age_limit, ageLimit),
+        budget = UiText.StringResource(R.string.money, budget),
+        haveReview = haveReview,
+        country = UiText.DynamicString(country),
+        description = description,
+        director = UiText.DynamicString(director),
+        fees = UiText.StringResource(R.string.money, fees),
+        genres = genres,
+        id = id,
+        name = name,
+        poster = poster,
+        reviews = reviews,
+        tagline = setString(R.string.tagline_ui, tagline),
+        time = UiText.StringResource(R.string.film_time, time),
+        year = UiText.DynamicString(year.toString()),
+        inFavorite = inFavorite,
+        averageRating = averageRating
+    )
 
     private companion object {
         const val ZERO = 0

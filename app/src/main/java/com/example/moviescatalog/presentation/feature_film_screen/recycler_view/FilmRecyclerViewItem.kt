@@ -1,24 +1,25 @@
 package com.example.moviescatalog.presentation.feature_film_screen.recycler_view
 
 import com.example.domain.common.model.UserShort
+import com.example.moviescatalog.presentation.util.UiText
 
 sealed interface FilmRecyclerViewItem {
     data class HeaderItem(
-        val ageLimit: Int,
+        val ageLimit: UiText,
         val id: String,
         val inFavorite: Boolean,
-        val budget: Int,
+        val budget: UiText,
         val haveReview: Boolean,
-        val country: String,
+        val country: UiText,
         val description: String,
-        val director: String,
-        val fees: Int,
+        val director: UiText,
+        val fees: UiText,
         val genres: List<String>,
         val name: String,
         val poster: String,
-        val tagline: String,
-        val time: Int,
-        val year: Int,
+        val tagline: UiText,
+        val time: UiText,
+        val year: UiText,
         val averageRating: Double
     ) : FilmRecyclerViewItem
 

@@ -111,14 +111,14 @@ class ReviewListAdapter(
                 })
 
 
-                yearDescription.text = headerItem.year.toString()
-                countryDescription.text = headerItem.country
-                taglineDescription.text = headerItem.tagline
-                directorDescription.text = headerItem.director
-                budgetDescription.text = headerItem.budget.toString()
-                collectionDescription.text = headerItem.fees.toString()
-                ageDescription.text = headerItem.ageLimit.toString()
-                durationDescription.text = headerItem.time.toString()
+                yearDescription.text = headerItem.year.asString(context)
+                countryDescription.text = headerItem.country.asString(context)
+                taglineDescription.text = headerItem.tagline.asString(context)
+                directorDescription.text = headerItem.director.asString(context)
+                budgetDescription.text = headerItem.budget.asString(context)
+                collectionDescription.text = headerItem.fees.asString(context)
+                ageDescription.text = headerItem.ageLimit.asString(context)
+                durationDescription.text = headerItem.time.asString(context)
                 addReviewButton.isVisible = !headerItem.haveReview
                 addReviewButton.setOnClickListener { onAddClick() }
 

@@ -170,7 +170,7 @@ class ProfileViewModel @Inject constructor(
         val isSuccess = validateUrlUseCase(avatarLink)
 
         _state.value = (_state.value as ProfileState.ProfileChanged).copy(
-            avatarLinkError = if (isSuccess || avatarLink.isBlank()) null else UiText(
+            avatarLinkError = if (isSuccess || avatarLink.isBlank()) null else UiText.StringResource(
                 R.string.url_error
             ),
             isValid = false
@@ -205,7 +205,7 @@ class ProfileViewModel @Inject constructor(
         val isSuccess = validateFirstNameUseCase(firstName)
 
         _state.value = (_state.value as ProfileState.ProfileChanged).copy(
-            firstNameError = if (isSuccess) null else UiText(
+            firstNameError = if (isSuccess) null else UiText.StringResource(
                 R.string.min_first_name_length_error,
                 MIN_FIRST_NAME_LENGTH
             ),
@@ -223,7 +223,7 @@ class ProfileViewModel @Inject constructor(
 
         val isSuccess = validateEmailUseCase(email)
         _state.value = (_state.value as ProfileState.ProfileChanged).copy(
-            emailError = if (isSuccess) null else UiText(
+            emailError = if (isSuccess) null else UiText.StringResource(
                 R.string.email_error
             ),
             isValid = false

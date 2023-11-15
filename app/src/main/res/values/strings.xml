@@ -3,6 +3,14 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
+    <string name="film_time">%s мин.</string>
+    <string name="age_limit">%d+</string>
+    <string name="money">$%d</string>
+    <string name="tagline_ui">«%s»</string>
+    <string name="min_login_length_error">Логин содержит не менее %d символов.</string>
+    <string name="min_first_name_length_error">Имя содержит не менее %d символов.</string>
+    <string name="min_password_length_error">Пароль содержит не менее %d символов</string>
     <string name="url_error">Некорректная ссылка</string>
     <string name="no_account">Еще нет аккаунта?</string>
     <string name="cinema_world">Погрузись в мир кино</string>
@@ -25,9 +33,6 @@
     <string name="have_account">Уже есть аккаунт?</string>
     <string name="sign_in">Войдите</string>
     <string name="repeat_password">Повторите пароль</string>
-    <string name="min_login_length_error">Логин содержит не менее %d символов.</string>
-    <string name="min_first_name_length_error">Имя содержит не менее %d символов.</string>
-    <string name="min_password_length_error">Пароль содержит не менее %d символов</string>
     <string name="email_error">Некорректный адрес электронной почты</string>
     <string name="password_error">Некорректный пароль.</string>
     <string name="repeated_password_error">Пароли не совпадают.</string>

@@ -74,7 +74,7 @@ class PasswordRegistrationViewModel @Inject constructor(
                 throw e
             } catch (e: Exception) {
                 _state.value =
-                    PasswordRegistrationState.RegistrationError(UiText(R.string.registration_error))
+                    PasswordRegistrationState.RegistrationError(UiText.StringResource(R.string.registration_error))
             }
         }
     }
@@ -84,10 +84,10 @@ class PasswordRegistrationViewModel @Inject constructor(
         val isPasswordSuccess = validatePasswordUseCase(password)
         val isRepeatedPasswordSuccess = validateRepeatedPasswordUseCase(password, repeatedPassword)
         _state.value = PasswordRegistrationState.PasswordRegistration(
-            repeatedPasswordError = if (isRepeatedPasswordSuccess && repeatedPassword.isNotBlank()) null else UiText(
+            repeatedPasswordError = if (isRepeatedPasswordSuccess && repeatedPassword.isNotBlank()) null else UiText.StringResource(
                 R.string.repeated_password_error
             ),
-            passwordError = if (isPasswordSuccess && password.isNotBlank()) null else UiText(
+            passwordError = if (isPasswordSuccess && password.isNotBlank()) null else UiText.StringResource(
                 R.string.password_error
             ),
             isValid = isPasswordSuccess && isRepeatedPasswordSuccess,

@@ -144,7 +144,7 @@ class FilmFragment : Fragment() {
             FilmState.Initial -> Unit
             FilmState.Loading -> showProgress()
             FilmState.AuthorisationError -> fragmentCallBack?.openAuthSelectionFromFilm()
-            is FilmState.Content -> showContent(state.movieDetails)
+            is FilmState.Content -> showContent(state)
             is FilmState.ReviewDialogChanged -> updateReviewDialog(state.isSaveActive)
 
             is FilmState.ReviewDialog -> showReviewDialog(
@@ -171,7 +171,7 @@ class FilmFragment : Fragment() {
         dialogBinding.save.isEnabled = isSaveActive
     }
 
-    private fun showContent(movieDetails: ModifiedMoviesDetails) {
+    private fun showContent(movieDetails: FilmState.Content) {
 
         val averageRatingBackground =
             AppCompatResources.getDrawable(requireContext(), R.drawable.average_rating_background)
@@ -339,7 +339,7 @@ class FilmFragment : Fragment() {
         }
     }
 
-    private fun ModifiedMoviesDetails.toFilmItem(): List<FilmRecyclerViewItem> {
+    private fun FilmState.Content.toFilmItem(): List<FilmRecyclerViewItem> {
         return listOf(
             FilmRecyclerViewItem.HeaderItem(
                 ageLimit = ageLimit,

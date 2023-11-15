@@ -47,7 +47,7 @@ class UserLoginViewModel @Inject constructor(
 
         val isSuccess = validatePasswordUseCase(password)
         _state.value = (_state.value as UserLoginState.UserLogin).copy(
-            passwordError = if (isSuccess) null else UiText(
+            passwordError = if (isSuccess) null else UiText.StringResource(
                 R.string.min_password_length_error,
                 MIN_PASSWORD_LENGTH
             ),
@@ -65,7 +65,7 @@ class UserLoginViewModel @Inject constructor(
 
         val isSuccess = validateLoginUseCase(login)
         _state.value = (_state.value as UserLoginState.UserLogin).copy(
-            loginError = if (isSuccess) null else UiText(
+            loginError = if (isSuccess) null else UiText.StringResource(
                 R.string.min_login_length_error,
                 MIN_LOGIN_LENGTH
             ),
@@ -101,7 +101,7 @@ class UserLoginViewModel @Inject constructor(
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                _state.value = UserLoginState.LoginError(msg = UiText(R.string.login_failed))
+                _state.value = UserLoginState.LoginError(msg = UiText.StringResource(R.string.login_failed))
             }
         }
     }
