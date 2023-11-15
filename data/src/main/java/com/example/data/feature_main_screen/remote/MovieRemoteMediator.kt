@@ -7,13 +7,17 @@ import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.example.data.feature_main_screen.local.MovieDatabase
 import com.example.data.feature_main_screen.local.entity.MovieElementEntity
-import com.example.data.mapper.toMovieElementEntity
+import com.example.data.common.mapper.toMovieElementEntity
+import com.example.data.common.remote.MovieCatalogApi
+import com.example.data.common.local.UserStorage
 import kotlinx.coroutines.CancellationException
+import java.util.UUID
 
 @OptIn(ExperimentalPagingApi::class)
 class MovieRemoteMediator(
     private val movieDatabase: MovieDatabase,
-    private val moviesApi: MoviesApi
+    private val userStorage: UserStorage,
+    private val moviesApi: MovieCatalogApi
 ) : RemoteMediator<Int, MovieElementEntity>() {
 
     override suspend fun load(
@@ -34,21 +38,31 @@ class MovieRemoteMediator(
                 }
             }
 
-            var moviesPagedList = moviesApi.getMoviesByPage(loadKey)
-
-            if (loadKey == FIRST_PAGE) {
-                moviesPagedList = moviesPagedList.copy(
-                    movies = moviesPagedList.movies.drop(MOVIES_TO_SKIP)
-                )
-            }
+            val moviesPagedList = moviesApi.getMoviesByPage(loadKey)
+            val currentPage = moviesPagedList.pageInfo.currentPage
 
             movieDatabase.withTransaction {
+
                 if (loadType == LoadType.REFRESH) {
                     movieDatabase.dao.clearAll()
                 }
-                val currentPage = moviesPagedList.pageInfo.currentPage
-                movieDatabase.dao.upsertAll(movies = moviesPagedList.movies.map {
-                    it.toMovieElementEntity(currentPage)
+
+                movieDatabase.dao.upsertAll(movies = moviesPagedList.movies.map { movie ->
+
+                    val reviews = moviesApi.getMovieDetailsById(movie.id).reviews
+                    var userRating: Int? = null
+
+                    for (review in reviews) {
+                        if (review.author == null) continue
+                        if (review.author.userId == userStorage.getUser()
+                                ?.let { UUID.fromString(it.id) }
+                        ) {
+                            userRating = review.rating
+                            break
+                        }
+                    }
+
+                    movie.toMovieElementEntity(currentPage, userRating)
                 })
             }
             MediatorResult.Success(
@@ -56,14 +70,10 @@ class MovieRemoteMediator(
             )
         } catch (e: CancellationException) {
             throw e
-        } catch (e: Exception) {
-            MediatorResult.Error(e)
         }
     }
 
     private companion object {
-        const val FIRST_PAGE = 1
-        const val MOVIES_TO_SKIP = 4
+        const val FIRST_PAGE = 2
     }
-
 }

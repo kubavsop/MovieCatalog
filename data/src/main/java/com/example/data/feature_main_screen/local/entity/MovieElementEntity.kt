@@ -10,6 +10,7 @@ data class MovieElementEntity (
     val page: Int,
     val country: String,
     val genres: List<String>,
+    val userRating: Int?,
     val averageRating: Double,
     val name: String,
     val poster: String,

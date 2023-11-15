@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_15">
+
+    <TextView
+        android:id="@+id/description"
+        style="@style/BodyTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_14"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ToggleButton
+        android:id="@+id/more_details_button"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/margin_4"
+        android:layout_height="@dimen/default_icon_size"
+        android:textAppearance="@style/SubTitleTextStyle"
+        android:background="@android:color/transparent"
+        android:textColor="@color/accent_color"
+        android:drawableEnd="@drawable/read_more_selector"
+        android:drawablePadding="@dimen/padding_8"
+        android:text="@string/more"
+        android:textOn="@string/hide"
+        android:textOff="@string/more"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/genres_title"
+        style="@style/DescriptionHeaderStyle"
+        android:text="@string/genres"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/more_details_button" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/genres"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        app:flow_horizontalBias="0"
+        app:flow_horizontalGap="@dimen/margin_8"
+        app:flow_horizontalStyle="packed"
+        app:flow_verticalGap="@dimen/margin_8"
+        app:flow_verticalStyle="packed"
+        app:flow_wrapMode="chain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/genres_title" />
+
+    <TextView
+        android:id="@+id/about_film"
+        style="@style/DescriptionHeaderStyle"
+        android:text="@string/about_film"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/genres" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/description_start"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/margin_108" />
+
+    <TextView
+        android:id="@+id/year"
+        style="@style/DescriptionSubHeaderStyle"
+        android:text="@string/year"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/about_film" />
+
+    <TextView
+        android:id="@+id/year_description"
+        style="@style/DescriptionStyle"
+        android:layout_width="0dp"
+        android:text="@string/empty"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBaseline_toBaselineOf="@+id/year"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/description_start" />
+
+    <TextView
+        android:id="@+id/country"
+        style="@style/DescriptionSubHeaderStyle"
+        android:text="@string/country"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/year_description" />
+
+    <TextView
+        android:id="@+id/country_description"
+        style="@style/DescriptionStyle"
+        android:layout_width="0dp"
+        android:text="@string/empty"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBaseline_toBaselineOf="@+id/country"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/description_start" />
+
+    <TextView
+        android:id="@+id/tagline"
+        style="@style/DescriptionSubHeaderStyle"
+        android:text="@string/tagline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/country_description" />
+
+    <TextView
+        android:id="@+id/tagline_description"
+        style="@style/DescriptionStyle"
+        android:layout_width="0dp"
+        android:text="@string/empty"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tagline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/description_start" />
+
+    <TextView
+        android:id="@+id/director"
+        style="@style/DescriptionSubHeaderStyle"
+        android:text="@string/director"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tagline_description" />
+
+    <TextView
+        android:id="@+id/director_description"
+        style="@style/DescriptionStyle"
+        android:layout_width="0dp"
+        android:text="@string/empty"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBaseline_toBaselineOf="@+id/director"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/description_start" />
+
+    <TextView
+        android:id="@+id/budget"
+        style="@style/DescriptionSubHeaderStyle"
+        android:text="@string/budget"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/director_description" />
+
+    <TextView
+        android:id="@+id/budget_description"
+        style="@style/DescriptionStyle"
+        android:layout_width="0dp"
+        android:text="@string/empty"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBaseline_toBaselineOf="@+id/budget"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/description_start" />
+
+    <TextView
+        android:id="@+id/collection"
+        style="@style/DescriptionSubHeaderStyle"
+        android:text="@string/collection"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/budget_description" />
+
+    <TextView
+        android:id="@+id/collection_description"
+        style="@style/DescriptionStyle"
+        android:layout_width="0dp"
+        android:text="@string/empty"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBaseline_toBaselineOf="@+id/collection"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/description_start" />
+
+    <TextView
+        android:id="@+id/age"
+        style="@style/DescriptionSubHeaderStyle"
+        android:text="@string/age"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/collection_description" />
+
+    <TextView
+        android:id="@+id/age_description"
+        style="@style/DescriptionStyle"
+        android:layout_width="0dp"
+        android:text="@string/empty"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBaseline_toBaselineOf="@+id/age"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/description_start" />
+
+    <TextView
+        android:id="@+id/duration"
+        style="@style/DescriptionSubHeaderStyle"
+        android:text="@string/duration"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/age_description" />
+
+    <TextView
+        android:id="@+id/duration_description"
+        style="@style/DescriptionStyle"
+        android:layout_width="0dp"
+        android:text="@string/empty"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBaseline_toBaselineOf="@+id/duration"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/description_start" />
+
+    <TextView
+        android:id="@+id/reviews"
+        style="@style/DescriptionHeaderStyle"
+        android:text="@string/reviews"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/duration_description" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/add_review_button"
+        android:layout_width="@dimen/add_review_button_size"
+        android:layout_height="@dimen/add_review_button_size"
+        android:src="@drawable/add_review_button"
+        app:layout_constraintBottom_toBottomOf="@id/reviews"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/reviews" />
+</androidx.constraintlayout.widget.ConstraintLayout>

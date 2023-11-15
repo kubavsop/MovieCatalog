@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/review_tools_width"
+        android:layout_height="@dimen/review_tools_height"
+        android:layout_marginTop="@dimen/margin_8"
+        android:layout_marginEnd="@dimen/margin_16"
+        android:background="@drawable/review_tools_shape">
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/stroke_width"
+            android:background="@color/divider_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/edit"
+            style="@style/SubTitleTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginEnd="@dimen/margin_8"
+            android:text="@string/edit"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_14"
+            app:drawableEndCompat="@drawable/edit_review_icon"
+            app:layout_constraintBottom_toTopOf="@id/divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/delete"
+            style="@style/SubTitleTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_8"
+            android:layout_marginEnd="@dimen/margin_8"
+            android:text="@string/delete"
+            android:textColor="@color/red"
+            android:textSize="@dimen/text_size_14"
+            app:drawableEndCompat="@drawable/delete_review_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

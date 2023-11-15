@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:width="@dimen/default_icon_size" android:height="@dimen/default_icon_size"
+        android:drawable="@drawable/more" />
+</layer-list>

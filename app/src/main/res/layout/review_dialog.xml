@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/background_color"
+    android:padding="@dimen/padding_10">
+
+    <TextView
+        android:id="@+id/leave_review"
+        style="@style/TitleTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/leave_review"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/star_start"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/margin_40" />
+
+    <ToggleButton
+        android:id="@+id/first_star"
+        style="@style/ReviewStarButtonStyle"
+        app:layout_constraintEnd_toStartOf="@id/second_star"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/star_start" />
+
+    <ToggleButton
+        android:id="@+id/second_star"
+        style="@style/ReviewStarButtonStyle"
+        app:layout_constraintEnd_toStartOf="@id/third_star"
+        app:layout_constraintStart_toEndOf="@id/first_star"
+        app:layout_constraintTop_toBottomOf="@id/star_start" />
+
+    <ToggleButton
+        android:id="@+id/third_star"
+        style="@style/ReviewStarButtonStyle"
+        app:layout_constraintEnd_toStartOf="@id/fourth_star"
+        app:layout_constraintStart_toEndOf="@id/second_star"
+        app:layout_constraintTop_toBottomOf="@id/star_start" />
+
+    <ToggleButton
+        android:id="@+id/fourth_star"
+        style="@style/ReviewStarButtonStyle"
+        app:layout_constraintEnd_toStartOf="@id/fifth_star"
+        app:layout_constraintStart_toEndOf="@id/third_star"
+        app:layout_constraintTop_toBottomOf="@id/star_start" />
+
+    <ToggleButton
+        android:id="@+id/fifth_star"
+        style="@style/ReviewStarButtonStyle"
+        app:layout_constraintEnd_toStartOf="@id/sixth_star"
+        app:layout_constraintStart_toEndOf="@id/fourth_star"
+        app:layout_constraintTop_toBottomOf="@id/star_start" />
+
+    <ToggleButton
+        android:id="@+id/sixth_star"
+        style="@style/ReviewStarButtonStyle"
+        app:layout_constraintEnd_toStartOf="@id/seventh_star"
+        app:layout_constraintStart_toEndOf="@id/fifth_star"
+        app:layout_constraintTop_toBottomOf="@id/star_start" />
+
+    <ToggleButton
+        android:id="@+id/seventh_star"
+        style="@style/ReviewStarButtonStyle"
+        app:layout_constraintEnd_toStartOf="@id/eighth_star"
+        app:layout_constraintStart_toEndOf="@id/sixth_star"
+        app:layout_constraintTop_toBottomOf="@id/star_start" />
+
+    <ToggleButton
+        android:id="@+id/eighth_star"
+        style="@style/ReviewStarButtonStyle"
+        app:layout_constraintEnd_toStartOf="@id/ninth_star"
+        app:layout_constraintStart_toEndOf="@id/seventh_star"
+        app:layout_constraintTop_toBottomOf="@id/star_start" />
+
+    <ToggleButton
+        android:id="@+id/ninth_star"
+        style="@style/ReviewStarButtonStyle"
+        app:layout_constraintEnd_toStartOf="@id/tenth_star"
+        app:layout_constraintStart_toEndOf="@id/eighth_star"
+        app:layout_constraintTop_toBottomOf="@id/star_start" />
+
+    <ToggleButton
+        android:id="@+id/tenth_star"
+        style="@style/ReviewStarButtonStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/ninth_star"
+        app:layout_constraintTop_toBottomOf="@id/star_start" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/review_star"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="first_star,second_star,third_star,fourth_star,fifth_star,sixth_star,seventh_star,eighth_star,ninth_star,tenth_star" />
+
+    <EditText
+        android:id="@+id/review_edit_text"
+        style="@style/BodyTextStyle"
+        android:layout_width="@dimen/review_text_layout_width"
+        android:layout_height="@dimen/review_text_layout_height"
+        android:layout_marginTop="@dimen/margin_8"
+        android:background="@drawable/review_edit_text_background"
+        android:gravity="top|start"
+        android:hint="@string/write_review"
+        android:paddingStart="@dimen/padding_12"
+        android:paddingTop="@dimen/padding_4"
+        android:paddingEnd="@dimen/padding_12"
+        android:paddingBottom="@dimen/padding_4"
+        android:textColorHint="@color/gray_400"
+        android:textSize="@dimen/text_size_14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/review_star" />
+
+    <ToggleButton
+        android:id="@+id/checkbox"
+        android:layout_width="@dimen/checkbox_size"
+        android:layout_height="@dimen/checkbox_size"
+        android:layout_marginTop="@dimen/margin_15"
+        android:background="@drawable/checkbox_selector"
+        android:textOff=""
+        android:textOn=""
+        app:layout_constraintTop_toBottomOf="@+id/review_edit_text" />
+
+    <TextView
+        style="@style/SubTitleTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_8"
+        android:text="@string/anonymous"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/checkbox"
+        app:layout_constraintStart_toEndOf="@id/checkbox"
+        app:layout_constraintTop_toTopOf="@id/checkbox" />
+
+
+    <Button
+        android:id="@+id/save"
+        style="@style/AccentButtonStyle"
+        android:layout_width="0dp"
+        android:layout_marginTop="@dimen/margin_25"
+        android:text="@string/save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkbox" />
+
+    <Button
+        android:id="@+id/cancellation"
+        style="@style/BaseButtonStyle"
+        android:layout_width="0dp"
+        android:layout_marginTop="@dimen/margin_8"
+        android:text="@string/cancellation"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/save" />
+</androidx.constraintlayout.widget.ConstraintLayout>

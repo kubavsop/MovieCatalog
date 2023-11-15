@@ -1,3 +1,4 @@
+
 plugins {
     kotlin("kapt")
     id("com.android.application")
@@ -79,6 +80,11 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.0")
     kapt("androidx.room:room-compiler:2.6.0")
     implementation("androidx.room:room-paging:2.6.0")
+
+    //Carousel
+    implementation("me.relex:circleindicator:2.1.6")
+    implementation("org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.1.0")
+
 }
 
 kapt {

@@ -1,19 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/padding_8"
     tools:context=".presentation.feature_favorite_screen.FavoriteFragment">
 
     <TextView
-        android:id="@+id/test"
+        android:id="@+id/favorite"
+        style="@style/TitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:padding="@dimen/padding_8"
+        android:text="@string/favorite"
+        android:textSize="@dimen/text_size_24"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Favorite fragment" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/favorite_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_12"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/favorite"
+        tools:listitem="@layout/favorite_list_item" />
+
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/empty_info"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:constraint_referenced_ids="no_favorite_movies,add_to_favorite" />
+
+    <TextView
+        android:id="@+id/no_favorite_movies"
+        style="@style/TitleTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/padding_8"
+        android:paddingEnd="@dimen/padding_8"
+        android:text="@string/no_favorite_movies"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/add_to_favorite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.23"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/add_to_favorite"
+        style="@style/BodyTextStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_5"
+        android:paddingStart="@dimen/padding_8"
+        android:paddingEnd="@dimen/padding_8"
+        android:text="@string/add_to_favorites"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/no_favorite_movies" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

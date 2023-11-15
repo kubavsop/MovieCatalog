@@ -12,4 +12,6 @@ sealed interface PasswordRegistrationEvent {
         val birthDate: String,
         val gender: String
     ): PasswordRegistrationEvent
+
+    data object Content: PasswordRegistrationEvent
 }

@@ -1,6 +1,7 @@
 package com.example.domain.feature_film_screen.repository
 
-import com.example.domain.model.ReviewModify
+import com.example.domain.common.model.MovieDetails
+import com.example.domain.common.model.ReviewModify
 
 interface FilmRepository {
 
