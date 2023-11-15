@@ -27,4 +27,12 @@ class UserRepositoryImpl(
     override fun getUser(): User? {
         return userStorage.getUser()?.toUser()
     }
+
+    override fun removeToken() {
+        userStorage.removeToken()
+    }
+
+    override fun removeUser() {
+        userStorage.removeUser()
+    }
 }

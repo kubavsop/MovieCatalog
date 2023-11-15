@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
     MainFragment.FragmentCallBack, FilmFragment.FragmentCallBack,
     FavoriteFragment.FragmentCallBack {
     private lateinit var binding: ActivityMainBinding
+
     private val navController: NavController
         get() {
             val navHostFragment =
@@ -54,8 +55,8 @@ class MainActivity : AppCompatActivity(), UserLoginFragment.FragmentCallBack,
 
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController)
 
-        val hasToken = intent.getBooleanExtra(IS_TOKEN_ALIVE, false)
-        if (hasToken) {
+        val isTokenAlive = intent.getBooleanExtra(IS_TOKEN_ALIVE, false)
+        if (isTokenAlive) {
             openMainScreenFromAuthSelection()
         }
 

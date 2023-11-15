@@ -10,4 +10,6 @@ interface UserRepository {
 
     fun saveUser(user: User)
     fun getUser(): User?
+    fun removeToken()
+    fun removeUser()
 }

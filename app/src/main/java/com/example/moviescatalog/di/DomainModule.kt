@@ -21,6 +21,8 @@ import com.example.domain.feature_profile_screen.usecase.LogoutUseCase
 import com.example.domain.feature_user_auth.repositroy.UserAuthRepository
 import com.example.domain.feature_user_auth.usecase.FormatDateUseCase
 import com.example.domain.common.usecase.GetUserIdUseCase
+import com.example.domain.common.usecase.RemoveTokenUseCase
+import com.example.domain.common.usecase.RemoveUserUseCase
 import com.example.domain.common.usecase.SaveTokenUseCase
 import com.example.domain.common.usecase.SaveUserUseCase
 import com.example.domain.feature_user_auth.usecase.LoginUserUseCase
@@ -113,8 +115,16 @@ class DomainModule {
     }
 
     @Provides
-    fun provideLogoutUseCase(profileRepository: ProfileRepository): LogoutUseCase {
-        return LogoutUseCase(repository = profileRepository)
+    fun provideLogoutUseCase(
+        profileRepository: ProfileRepository,
+        removeTokenUseCase: RemoveTokenUseCase,
+        removeUserUseCase: RemoveUserUseCase
+    ): LogoutUseCase {
+        return LogoutUseCase(
+            repository = profileRepository,
+            removeUserUseCase = removeUserUseCase,
+            removeTokenUseCase = removeTokenUseCase
+        )
     }
 
     @Provides
@@ -159,18 +169,28 @@ class DomainModule {
     }
 
     @Provides
-    fun movieInFavoriteUseCase(repository: FavoriteRepository): MovieInFavoriteUseCase {
+    fun provideMovieInFavoriteUseCase(repository: FavoriteRepository): MovieInFavoriteUseCase {
         return MovieInFavoriteUseCase(repository = repository)
     }
 
     @Provides
-    fun saveTokenUseCase(repository: UserRepository): SaveTokenUseCase {
+    fun provideSaveTokenUseCase(repository: UserRepository): SaveTokenUseCase {
         return SaveTokenUseCase(repository = repository)
     }
 
     @Provides
-    fun saveUserUseCase(repository: UserRepository): SaveUserUseCase {
+    fun provideSaveUserUseCase(repository: UserRepository): SaveUserUseCase {
         return SaveUserUseCase(repository = repository)
+    }
+
+    @Provides
+    fun provideRemoveTokenUseCase(repository: UserRepository): RemoveTokenUseCase {
+        return RemoveTokenUseCase(repository = repository)
+    }
+
+    @Provides
+    fun provideRemoveUserUseCase(repository: UserRepository): RemoveUserUseCase {
+        return RemoveUserUseCase(repository = repository)
     }
 
     @Provides

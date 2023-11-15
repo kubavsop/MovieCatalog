@@ -1,11 +1,13 @@
-package com.example.moviescatalog.feature_splas_screen
+package com.example.moviescatalog.presentation.feature_splas_screen
 
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LOGGER
 import com.example.domain.common.usecase.GetTokenUseCase
 import com.example.domain.feature_profile_screen.usecase.GetProfileUseCase
 import com.example.moviescatalog.presentation.MainActivity
@@ -25,6 +27,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         lifecycleScope.launch {
 
             val isTokenAlive = try {

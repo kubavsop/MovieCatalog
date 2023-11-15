@@ -6,4 +6,7 @@ interface UserStorage {
 
     fun saveUser(user: UserEntity)
     fun getUser(): UserEntity?
+
+    fun removeToken()
+    fun removeUser()
 }

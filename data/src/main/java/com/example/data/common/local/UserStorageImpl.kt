@@ -3,7 +3,6 @@ package com.example.data.common.local
 import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
-import java.util.UUID
 
 class UserStorageImpl(context: Context) : UserStorage {
 
@@ -37,6 +36,14 @@ class UserStorageImpl(context: Context) : UserStorage {
     override fun getUser(): UserEntity? {
         val userId = sharedPreferences.getString(USER_ID_KEY, null)
         return userId?.let { UserEntity(id = userId) }
+    }
+
+    override fun removeToken() {
+        sharedPreferences.edit().remove(TOKEN_KEY).apply()
+    }
+
+    override fun removeUser() {
+        sharedPreferences.edit().remove(USER_ID_KEY).apply()
     }
 
 
