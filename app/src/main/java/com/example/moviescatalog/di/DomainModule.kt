@@ -25,6 +25,8 @@ import com.example.domain.common.usecase.RemoveTokenUseCase
 import com.example.domain.common.usecase.RemoveUserUseCase
 import com.example.domain.common.usecase.SaveTokenUseCase
 import com.example.domain.common.usecase.SaveUserUseCase
+import com.example.domain.feature_profile_screen.usecase.ValidateUrlUseCase
+import com.example.domain.feature_profile_screen.validator.UrlValidator
 import com.example.domain.feature_user_auth.usecase.LoginUserUseCase
 import com.example.domain.feature_user_auth.usecase.RegisterUserUseCase
 import com.example.domain.feature_user_auth.usecase.ValidateEmailUseCase
@@ -191,6 +193,11 @@ class DomainModule {
     @Provides
     fun provideRemoveUserUseCase(repository: UserRepository): RemoveUserUseCase {
         return RemoveUserUseCase(repository = repository)
+    }
+
+    @Provides
+    fun provideValidateUrlUseCase(validator: UrlValidator): ValidateUrlUseCase {
+        return ValidateUrlUseCase(validator = validator)
     }
 
     @Provides

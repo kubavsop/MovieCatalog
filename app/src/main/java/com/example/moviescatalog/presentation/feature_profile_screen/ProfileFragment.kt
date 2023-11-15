@@ -115,6 +115,7 @@ class ProfileFragment : Fragment() {
                 state.firstNameError,
                 requireContext()
             )
+            avatarLinkEditTextContainer.setContainerError(state.avatarLinkError, requireContext())
 
             birthdayText.text = state.birthDate
             maleButton.isChecked = state.gender == Gender.MALE

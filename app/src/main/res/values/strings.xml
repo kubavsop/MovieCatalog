@@ -3,6 +3,7 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="url_error">Некорректная ссылка</string>
     <string name="no_account">Еще нет аккаунта?</string>
     <string name="cinema_world">Погрузись в мир кино</string>
     <string name="enjoy_movies_on_mobile">Мы предлагаем удобный и легкий способ насладиться любимыми фильмами прямо с Вашего мобильного устройства.</string>

@@ -19,6 +19,7 @@ sealed interface ProfileState {
         val gender: Gender,
         val emailError: UiText? = null,
         val firstNameError: UiText? = null,
+        val avatarLinkError: UiText? = null,
         val isValid: Boolean = false
     ) : ProfileState
 

@@ -17,6 +17,7 @@ import com.example.data.feature_main_screen.repository.MoviesRepositoryImpl
 import com.example.data.feature_profile_screen.repository.ProfileRepositoryImpl
 import com.example.data.common.local.UserStorage
 import com.example.data.common.local.UserStorageImpl
+import com.example.data.feature_profile_screen.validator.UrlValidatorImpl
 import com.example.data.feature_user_auth.repository.UserAuthRepositoryImpl
 import com.example.data.feature_user_auth.validator.EmailPatternValidatorImpl
 import com.example.domain.common.repository.UserRepository
@@ -26,6 +27,7 @@ import com.example.domain.feature_film_screen.repository.FilmRepository
 import com.example.domain.feature_main_screen.repository.MoviesRepository
 import com.example.domain.feature_profile_screen.repository.ProfileRepository
 import com.example.domain.feature_profile_screen.usecase.GetProfileUseCase
+import com.example.domain.feature_profile_screen.validator.UrlValidator
 import com.example.domain.feature_user_auth.repositroy.UserAuthRepository
 import com.example.domain.feature_user_auth.validator.EmailPatternValidator
 import dagger.Module
@@ -100,6 +102,12 @@ class DataModule {
     @Provides
     fun provideEmailPatternValidator(): EmailPatternValidator {
         return EmailPatternValidatorImpl()
+    }
+
+    @Singleton
+    @Provides
+    fun provideUrlValidator(): UrlValidator {
+        return UrlValidatorImpl()
     }
 
     @Singleton

@@ -12,6 +12,7 @@ import com.example.domain.feature_user_auth.usecase.FormatDateUseCase
 import com.example.domain.feature_user_auth.usecase.ValidateEmailUseCase
 import com.example.domain.feature_user_auth.usecase.ValidateFirstNameUseCase
 import com.example.domain.common.model.Profile
+import com.example.domain.feature_profile_screen.usecase.ValidateUrlUseCase
 import com.example.moviescatalog.R
 import com.example.moviescatalog.presentation.util.UiText
 import com.example.moviescatalog.presentation.feature_profile_screen.state.Gender
@@ -31,6 +32,7 @@ class ProfileViewModel @Inject constructor(
     private val logoutUseCase: LogoutUseCase,
     private val validateEmailUseCase: ValidateEmailUseCase,
     private val validateFirstNameUseCase: ValidateFirstNameUseCase,
+    private val validateUrlUseCase: ValidateUrlUseCase,
     private val formatDateUseCase: FormatDateUseCase
 ) : ViewModel() {
     private lateinit var profile: Profile
@@ -159,15 +161,22 @@ class ProfileViewModel @Inject constructor(
         if (!profileSimilarity.gender) checkError()
     }
 
+
     private fun avatarChanged(avatarLink: String) {
         if (_state.value !is ProfileState.ProfileChanged) setProfileChanged()
 
-        profileSimilarity.avatarLink = avatarLink == profile.avatarLink || (avatarLink.isBlank() && profile.avatarLink == null)
+        profileSimilarity.avatarLink =
+            avatarLink == profile.avatarLink || (avatarLink.isBlank() && profile.avatarLink == null)
+        val isSuccess = validateUrlUseCase(avatarLink)
 
         _state.value = (_state.value as ProfileState.ProfileChanged).copy(
+            avatarLinkError = if (isSuccess || avatarLink.isBlank()) null else UiText(
+                R.string.url_error
+            ),
             isValid = false
         )
-        if (!profileSimilarity.avatarLink) checkError()
+
+        checkError()
     }
 
 
@@ -226,9 +235,12 @@ class ProfileViewModel @Inject constructor(
     private fun checkError() {
         if (_state.value !is ProfileState.ProfileChanged) setProfileChanged()
 
+        val profileState = (_state.value as ProfileState.ProfileChanged)
+
         val hasError = listOf(
-            (_state.value as ProfileState.ProfileChanged).emailError,
-            (_state.value as ProfileState.ProfileChanged).firstNameError,
+            profileState.emailError,
+            profileState.firstNameError,
+            profileState.avatarLinkError
         ).any { it != null }
 
 
