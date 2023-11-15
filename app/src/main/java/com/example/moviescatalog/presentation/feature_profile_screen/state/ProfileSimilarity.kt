@@ -1,10 +1,10 @@
 package com.example.moviescatalog.presentation.feature_profile_screen.state
 
 data class ProfileSimilarity(
-    var avatarLink: Boolean = true,
-    var birthDate: Boolean = true,
-    var email: Boolean = true,
-    var gender: Boolean = true,
-    var name: Boolean = true,
-    var nickName: Boolean = true,
+    val avatarLink: Boolean = true,
+    val birthDate: Boolean = true,
+    val email: Boolean = true,
+    val gender: Boolean = true,
+    val name: Boolean = true,
+    val nickName: Boolean = true,
 )

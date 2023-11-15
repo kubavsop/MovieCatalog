@@ -55,7 +55,7 @@ class RegistrationDetailsViewModel @Inject constructor(
             isValid = false
         )
 
-        if (isSuccess) checkError()
+        checkError()
     }
 
     private fun loginChanged(login: String) {
@@ -71,7 +71,7 @@ class RegistrationDetailsViewModel @Inject constructor(
             isValid = false
         )
 
-        if (isSuccess) checkError()
+        checkError()
     }
 
     private fun emailChanged(email: String) {
@@ -86,7 +86,7 @@ class RegistrationDetailsViewModel @Inject constructor(
             isValid = false
         )
 
-        if (isSuccess) checkError()
+        checkError()
     }
 
     private fun checkError() {
