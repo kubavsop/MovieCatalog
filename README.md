@@ -1,4 +1,4 @@
-# 🎥 MovieCatalog
+# 🎥 MoviesCatalog
 
 ![Static Badge](https://img.shields.io/badge/platform-Android-deep_green)
 ![Static Badge](https://img.shields.io/badge/kotlin-v1.9.0-purple)
@@ -24,6 +24,7 @@
     <image src="images/home2.png" width=200>
     <image src="images/movie1.png" width=200>
     <image src="images/movie2.png" width=200>
+    <image src="images/movie3.png" width=200>
     <image src="images/review.png" width=200>
     <image src="images/favorite.png" width=200>
     <image src="images/profile.png" width=200>
